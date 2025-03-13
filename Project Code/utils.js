@@ -39,6 +39,19 @@ const utils = {
     }
     return "up";
   },
+
+  wait(ms) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve()
+      }, ms)
+    })
+  },
+
+  randomFromArray(array) {
+    return array[ Math.floor(Math.random()*array.length) ]
+  },
+  
   // starts an event based on the argument
   emitEvent(name, detail) {
     const event = new CustomEvent(name, {
