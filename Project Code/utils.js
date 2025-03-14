@@ -49,9 +49,9 @@ const utils = {
   },
 
   randomFromArray(array) {
-    return array[ Math.floor(Math.random()*array.length) ]
+    return array[Math.floor(Math.random() * array.length)]
   },
-  
+
   // starts an event based on the argument
   emitEvent(name, detail) {
     const event = new CustomEvent(name, {

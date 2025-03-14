@@ -81,40 +81,38 @@ class Combatant {
 
         //Update status
         const statusElement = this.hudElement.querySelector(".Combatant_status");
-        if(this.status) {
+        if (this.status) {
             statusElement.innerText = this.status.type;
             statusElement.style.display = "block";
         } else {
             statusElement.innerText = "";
             statusElement.style.display = "none";
-
         }
     }
 
     getReplacedEvents(originalEvents) {
 
-      if (this.status?.type === "clumsy" && utils.randomFromArray([true, false, false])) {
-        return [
-          { type: "textMessage", text: `${this.name} flops over!` },
-        ]
-      }
-  
-      return originalEvents;
+        if (this.status?.type === "clumsy" && utils.randomFromArray([true, false, false])) {
+            return [
+                { type: "textMessage", text: `${this.name} flops over!` },
+            ]
+        }
+
+        return originalEvents;
     }
 
     getPostEvents() {
-      
         if (this.status?.type === "saucy") {
             return [
-                { type: "textMessage", text: "Feelin' saucy!"},
-                { type: "stateChange", recover: 5, onCaster: true}
+                { type: "textMessage", text: "Feelin' saucy!" },
+                { type: "stateChange", recover: 5, onCaster: true }
             ]
         }
         return [];
     }
 
     decrementStatus() {
-        if(this.status?.expiresIn > 0) {
+        if (this.status?.expiresIn > 0) {
             this.status.expiresIn -= 1;
             if (this.status.expiresIn === 0) {
                 this.update({
@@ -122,7 +120,7 @@ class Combatant {
                 })
                 return {
                     type: "textMessage",
-                    text:"Status Expired!"
+                    text: "Status expired!"
                 }
             }
         }

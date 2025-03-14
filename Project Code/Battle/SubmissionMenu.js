@@ -1,9 +1,8 @@
 class SubmissionMenu {
-    constructor( { caster, enemy, onComplete}) {
+    constructor({ caster, enemy, onComplete }) {
         this.caster = caster;
         this.enemy = enemy;
         this.onComplete = onComplete;
-
     }
 
     getPages() {
@@ -70,7 +69,9 @@ class SubmissionMenu {
 
         this.onComplete({
             action,
-            target: action.targetType === "friendly" ? this.caster : this.enemy
+            target: action.targetType === "friendly" ? this.caster : this.enemy,
+            action: Actions[this.caster.actions[0]],
+            target: this.enemy
         })
     }
 
