@@ -24,10 +24,6 @@ class BattleEvent {
       const {caster, target, damage, recover, action} = this.event;
       let who = this.event.onCaster ? caster : target;
 
-      if (action.TargetType === "friendly") {
-        who = caster;
-      }
-
       if (damage) {
         //modify the target to have less HP
         target.update({

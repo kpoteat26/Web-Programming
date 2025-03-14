@@ -6,14 +6,93 @@ class SubmissionMenu {
 
     }
 
-    decide() {
+    getPages() {
+
+        const backOption = {
+            label: "Go Back",
+            description: "Return to previous page",
+            handler: () => {
+                this.keyboardMenu.setOptions(this.getPages().root)
+            }
+        }
+        return {
+            root: [ {
+                label: "Attack",
+                description: "Choose an attack",
+                handler: () => {
+                    //Do something when chosen...
+                    this.keyboardMenu.setOptions( this.getPages().attacks )
+                }
+            },
+
+            {
+                label: "Items",
+                description: "Choose an item",
+                handler: () => {
+                    //Go to items page...
+                    this.keyboardMenu.setOptions( this.getPages().items )
+                }
+            },
+            {
+                label: "Swap",
+                description: "Change to another creature",
+                handler: () => {
+                    //See pizza options
+                }
+            },
+
+            ],
+
+            attacks: [
+               ...this.caster.actions.map(key => {
+                const action = Actions[key];
+                return {
+                    label: action.name,
+                    description: action.description,
+                    handler: () => {
+                        this.menuSubmit(action)
+                    }
+                }
+               }),
+                backOption
+
+            ],
+            items: [
+                //Items will go here..
+                backOption
+            ]
+        }
+    }
+
+    menuSubmit(action, instanceID=null) {
+
+        this.keyboardMenu?.end();
+
         this.onComplete({
-            action: Actions[ this.caster.actions[0] ],
-            target: this.enemy
+            action,
+            target: action.targetType === "friendly" ? this.caster : this.enemy
         })
     }
 
+    decide() {
+        //TODO: Enemies randomly decide what to do...
+        this.menuSubmit(Actions[ this.caster.actions[0] ]);
+    }
+
+    showMenu(container) {
+        this.keyboardMenu = new KeyboardMenu();
+        this.keyboardMenu.init(container);
+        this.keyboardMenu.setOptions( this.getPages().root )
+
+    }
+
     init(container) {
+
+        if(this.caster.isPlayerControlled) {
+            //Show some UI
+            this.showMenu(container)
+        } else {
         this.decide()
+        }
     }
 }
