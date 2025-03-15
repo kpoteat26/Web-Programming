@@ -8,18 +8,29 @@ class Battle {
             "player1": new Combatant({
                 ...Pizzas.s001,
                 team: "player",
-                hp: 50,
+                hp: 30,
+                maxHp: 50,
+                xp: 75,
+                maxXp: 100,
+                level: 1,
+                status: { type: "saucy" },
+                isPlayerControlled: true
+            }, this),
+            "player2": new Combatant({
+                ...Pizzas.s002,
+                team: "player",
+                hp: 30,
                 maxHp: 50,
                 xp: 75,
                 maxXp: 100,
                 level: 1,
                 status: null,
-                isPlayerControlled: true,
+                isPlayerControlled: true
             }, this),
             "enemy1": new Combatant({
                 ...Pizzas.v001,
                 team: "enemy",
-                hp: 50,
+                hp: 1,
                 maxHp: 50,
                 xp: 20,
                 maxXp: 100,
@@ -28,17 +39,24 @@ class Battle {
             "enemy2": new Combatant({
                 ...Pizzas.f001,
                 team: "enemy",
-                hp: 50,
+                hp: 25,
                 maxHp: 50,
                 xp: 30,
                 maxXp: 100,
                 level: 1,
-            }, this),
+            }, this)
         };
         this.activeCombatants = {
             player: "player1",
             enemy: "enemy1",
         };
+        this.items = [
+            { actionId: "item_recoverStatus", instanceId: "p1", team: "player" },
+            { actionId: "item_recoverStatus", instanceId: "p2", team: "player" },
+            { actionId: "item_recoverStatus", instanceId: "p3", team: "enemy" },
+
+            { actionId: "item_recoverHp", instanceId: "p4", team: "player" },
+        ]
     }
 
     // draw the battle element (hero and enemy)
