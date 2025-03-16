@@ -1,7 +1,7 @@
 window.Actions = {
     //Attacks
     phantomCharge: {
-        name: "Phantom Charge!",
+        name: "Phantom Charge",
         description: "The user calls upon their powers of Shadow to travel at high speeds towards the enemy, dealing damage.",
         success: [
             { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
@@ -28,7 +28,7 @@ window.Actions = {
         ]
     },
     astralCoil: {
-        name: "Astral Coil!",
+        name: "Astral Coil",
         description: "The user wraps their body around the enemy squeezing them tightly and dealing damage.",
         success: [
             { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
