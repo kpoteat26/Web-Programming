@@ -6,6 +6,7 @@ class Combatant {
         Object.keys(config).forEach(key => {
             this[key] = config[key];
         });
+        this.hp =typeof(this.hp) === "undefined" ? this.maxHp : this.hp;
         this.battle = battle;
     }
 
@@ -23,6 +24,10 @@ class Combatant {
     // getter for active combatant
     get isActive() {
         return this.battle.activeCombatants[this.team] === this.id;
+    }
+
+    get givesXp() {
+        return this.level * 20;
     }
 
     // create the element
@@ -92,9 +97,9 @@ class Combatant {
 
     getReplacedEvents(originalEvents) {
 
-        if (this.status?.type === "clumsy" && utils.randomFromArray([true, false, false])) {
+        if (this.status?.type === "dazed" && utils.randomFromArray([true, false, false])) {
             return [
-                { type: "textMessage", text: `${this.name} flops over!` },
+                { type: "textMessage", text: `${this.name} is dazed!` },
             ]
         }
 

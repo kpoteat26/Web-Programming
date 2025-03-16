@@ -7,39 +7,41 @@ window.PizzaTypes = {
     veggie: "veggie",
     fungi: "fungi",
     chill: "chill",
+    Shadow: "shadow",
+    Mythic: "mythic",
 }
 
 window.Pizzas = {
-    "s001": {
-        name: "Slice Samurai",
-        description: "Pizza desc here",
-        type: PizzaTypes.spicy,
-        src: "./images/characters/pizzas/s001.png",
-        icon: "./images/icons/spicy.png",
-        actions: ["saucyStatus", "clumsyStatus", "damage1"],
+    "ee001": {
+        name: "Luxigon",
+        description: "A dark but loyal Evolisk",
+        type: PizzaTypes.shadow,
+        src: "./images/characters/pizzas/LuxigonBattleEnemy.png",
+        icon: "./images/icons/Shadow.png",
+        actions: ["phantomCharge", "voidHowl", "starShatter"],
     },
-    "s002": {
-        name: "Bacon Brigade",
-        description: "A salty warrior who fears nothing",
-        type: PizzaTypes.spicy,
-        src: "./images/characters/pizzas/s002.png",
-        icon: "./images/icons/spicy.png",
-        actions: ["damage1", "saucyStatus", "clumsyStatus"],
+    "ee002": {
+        name: "Umbraik",
+        description: "A slightly unsettling Evolisk",
+        type: PizzaTypes.mythic,
+        src: "./images/characters/pizzas/UmbraikBattleEnemy.png",
+        icon: "./images/icons/Mythic.png",
+        actions: ["astralCoil", "ghostFang", "paralyzingSpit"],
     },
-    "v001": {
-        name: "Call Me Kale",
-        description: "Pizza desc here",
-        type: PizzaTypes.veggie,
-        src: "./images/characters/pizzas/v001.png",
-        icon: "./images/icons/veggie.png",
-        actions: ["damage1"],
+    "ep001": {
+        name: "Luxigon",
+        description: "A dark but loyal Evolisk",
+        type: PizzaTypes.shadow,
+        src: "./images/characters/pizzas/LuxigonBattleTamed.png",
+        icon: "./images/icons/Shadow.png",
+        actions: ["phantomCharge", "voidHowl", "starShatter"],
     },
-    "f001": {
-        name: "Portobello Express",
-        description: "Pizza desc here",
-        type: PizzaTypes.fungi,
-        src: "./images/characters/pizzas/f001.png",
-        icon: "./images/icons/fungi.png",
-        actions: ["damage1"],
+    "ep002": {
+        name: "Umbraik",
+        description: "A slightly unsettling Evolisk",
+        type: PizzaTypes.mythic,
+        src: "./images/characters/pizzas/UmbraikBattleTamed.png",
+        icon: "./images/icons/Mythic.png",
+        actions: ["astralCoil", "ghostFang", "paralyzingSpit"],
     }
 }

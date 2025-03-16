@@ -52,7 +52,7 @@ class SubmissionMenu {
                 },
                 {
                     label: "Swap",
-                    description: "Change to another pizza",
+                    description: "Change to another Evolisk",
                     handler: () => {
                         // See pizza options
                         this.keyboardMenu.setOptions(this.getPages().replacements)

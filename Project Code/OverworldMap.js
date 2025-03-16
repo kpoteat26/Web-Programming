@@ -178,15 +178,15 @@ window.OverworldMaps = {
       [utils.asGridCoord(5, 10)]: [
         {
           events: [
-            { type: "changeMap", map: "Kitchen" }
+            { type: "changeMap", map: "AlchemyRoom" }
           ]
         }
       ]
     }
   },
-  Kitchen: {
-    lowerSrc: "./images/maps/KitchenLower.png",
-    upperSrc: "./images/maps/KitchenUpper.png",
+  AlchemyRoom: {
+    lowerSrc: "./images/maps/AlchemyLower.png",
+    upperSrc: "./images/maps/AlchemyUpper.png",
     gameObjects: {
       hero: new Person({
         isPlayerControlled: true,
@@ -201,6 +201,7 @@ window.OverworldMaps = {
           {
             events: [
               { type: "textMessage", text: "You made it!", faceHero: "npcB" },
+              { type: "battle", enemyId: "Froggert"}
             ]
           }
         ]
