@@ -39,9 +39,11 @@ class Overworld {
       // draw upper layer
       this.map.drawUpperImage(this.ctx, cameraPerson);
 
-      requestAnimationFrame(() => {
-        step();
-      });
+      if (!this.map.isPaused) {
+        requestAnimationFrame(() => {
+          step();
+        });
+      }    
     };
     step();
   }
@@ -51,6 +53,13 @@ class Overworld {
     new KeyPressListener("Enter", () => {
       this.map.checkForActionCutscene();
     });
+    new KeyPressListener("Escape", () => {
+      if (!this.map.isCutscenePlaying) {
+        this.map.startCutscene([
+          { type: "pause" }
+        ])
+      }
+    })
   }
 
   // binds the hero position check
@@ -72,6 +81,10 @@ class Overworld {
 
   // initializes the overworld
   init() {
+
+    this.hud = new Hud();
+    this.hud.init(document.querySelector(".game-container"));
+
     this.startMap(window.OverworldMaps.AlchemyRoom);
 
     this.bindActionInput();

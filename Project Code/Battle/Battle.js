@@ -157,6 +157,9 @@ class Battle {
                         }
                     })
 
+                    // Send signal to update
+                    utils.emitEvent("PlayerStateUpdated");
+
 
                     //Get rid of items player used
                     playerState.items = playerState.items.filter(item => {
@@ -164,7 +167,7 @@ class Battle {
                     })
                 }
                 this.element.remove();
-                this.onComplete();
+                this.onComplete(winner === "player");
             }
         })
         this.turnCycle.init();

@@ -17,6 +17,7 @@ class OverworldMap {
 
     // determine if a cutscene is playing
     this.isCutscenePlaying = false;
+    this.isPaused = false;
   }
 
   // draw the lower half of the map
@@ -62,7 +63,10 @@ class OverworldMap {
         event: events[i],
         map: this,
       });
-      await eventHandler.init();
+      const result = await eventHandler.init();
+      if (result === "LOST_BATTLE") {
+        break;
+      }
     }
 
     console.log("Cutscene finished! Enabling movement.");
@@ -81,7 +85,14 @@ class OverworldMap {
     });
 
     if (!this.isCutscenePlaying && match && match.talking.length) {
-      this.startCutscene(match.talking[0].events);
+
+      const relevantScenario = match.talking.find(scenario => {
+        return (scenario.required || []).every(sf => {
+          return playerState.storyFlags[sf]
+        })
+      })
+
+      relevantScenario && this.startCutscene(relevantScenario.events);
     }
   }
 
@@ -193,18 +204,45 @@ window.OverworldMaps = {
         x: utils.withGrid(5),
         y: utils.withGrid(5),
       }),
+      npcA: new Person({
+        x: utils.withGrid(3),
+        y: utils.withGrid(5),
+        src: "./images/characters/people/npc1.png",
+        talking: [
+          {
+            events: [
+              { type: "textMessage", text: "Hi!", faceHero: "npcA" },
+              { type: "addStoryFlag", flag: "TALKED_TO_NPC1"}
+            ]
+          }
+        ]
+      }),
       npcB: new Person({
         x: utils.withGrid(10),
         y: utils.withGrid(8),
         src: "./images/characters/people/Froggert_Enemy.png",
         talking: [
           {
+            required: ["TALKED_TO_NPC1"],
             events: [
-              { type: "textMessage", text: "You made it!", faceHero: "npcB" },
-              { type: "battle", enemyId: "Froggert"}
+              { type: "textMessage", text: "Isn't she the coolest?", faceHero: "npcB" },
+            ]
+          },
+          {
+            events: [
+              { type: "textMessage", text: "Go talk to that girl over there!", faceHero: "npcB" },
+              { type: "battle", enemyId: "Froggert"},
+              { type: "addStoryFlag", flag: "DEFEATED_FROGGERT"},
+              { type: "textMessage", text: "You defeated me!", faceHero: "npcB" },
             ]
           }
         ]
+      }),
+      pizzaStone: new PizzaStone({
+        x: utils.withGrid(4),
+        y: utils.withGrid(8),
+        storyFlag: "USED_PIZZA_STONE",
+        pizzas: ["ep001", "ep002"]
       })
     }
   },
