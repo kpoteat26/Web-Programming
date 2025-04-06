@@ -45,20 +45,26 @@
   bottom: 0;
   left: 0;
   right: 0;
+  max-height: 40px;             /* smaller height to stay above the menu */
+  overflow-y: auto;
   color: var(--menu-font-color);
   border-top: 1px solid var(--border-color);
   background: var(--menu-background);
   padding: 2px;
+  z-index: 5;                   /* ensure it's above other background layers */
 }
 
 .DescriptionBox p {
   font-size: 10px;
   margin: 0;
+  white-space: normal;      /* allows wrapping */
+  word-wrap: break-word;    /* wraps long words too */
 }
 
 /* Battle specific */
 .Battle .KeyboardMenu {
   right: 0;
-  bottom: 0;
+  bottom: 40px;   /* push the menu UP so it's not sitting on top of DescriptionBox */
   width: 140px;
+  z-index: 10;
 }

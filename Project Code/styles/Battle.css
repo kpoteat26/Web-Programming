@@ -149,3 +149,74 @@
     top: 56px;
     animation: battle-glob-left 1s forwards;
 }
+
+@keyframes phantomCharge {
+    0% {
+      opacity: 1;
+      filter: brightness(1);
+      transform: translateX(0) scale(2);
+    }
+    25% {
+      opacity: 0.2;
+      filter: brightness(0.3) grayscale(1);
+      transform: scale(2.1);
+    }
+    50% {
+      opacity: 0.5;
+      transform: translateX(40px) scale(2.2);
+    }
+    100% {
+      opacity: 1;
+      filter: brightness(1);
+      transform: translateX(0) scale(2);
+    }
+  }
+  
+  .battle-phantom-charge {
+    animation: phantomCharge 0.8s ease-out;
+  }
+  
+
+  @keyframes voidPulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(100, 0, 200, 0.4);
+      transform: scale(2);
+    }
+    50% {
+      box-shadow: 0 0 15px 15px rgba(100, 0, 200, 0);
+      transform: scale(2.1);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(100, 0, 200, 0);
+      transform: scale(2);
+    }
+  }
+  
+  .battle-void-howl {
+    animation: voidPulse 0.8s ease-out;
+  }
+
+  .battle-star {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+    animation: star-shatter 0.7s ease-out forwards;
+  }
+  
+  @keyframes star-shatter {
+    0% {
+      transform: translate3d(0, 0, 0) scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: translate3d(60px, -40px, 0) scale(1.2);
+      opacity: 1;
+    }
+    100% {
+      transform: translate3d(120px, -10px, 0) scale(0.5);
+      opacity: 0;
+    }
+  }
+  
+  

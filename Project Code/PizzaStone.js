@@ -17,12 +17,12 @@ class PizzaStone extends GameObject {
             {
                 required: [this.storyFlag],
                 events: [
-                    { type: "textMessage", text: "You have already used this!"}
+                    { type: "textMessage", text: "You have already used this! You can't have ANOTHER Evolisk for free! Not in this economy..."}
                 ]
             },
             {
                 events: [
-                    { type: "textMessage", text: "Approaching the legendary pizza stone..."},
+                    { type: "textMessage", text: "You see two disks sitting on the stone, one appears to be calling your name..."},
                     { type: "craftingMenu", pizzas: this.pizzas },
                     { type: "addStoryFlag", flag: this.storyFlag }
                 ]

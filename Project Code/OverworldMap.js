@@ -213,11 +213,11 @@ window.OverworldMaps = {
       npcA: new Person({
         x: utils.withGrid(3),
         y: utils.withGrid(5),
-        src: "./images/characters/people/npc1.png",
+        src: "./images/characters/people/Squelchy_NPC.png",
         talking: [
           {
             events: [
-              { type: "textMessage", text: "Hi!", faceHero: "npcA" },
+              { type: "textMessage", text: "You should touch that weird stone over there!", faceHero: "npcA" },
               { type: "addStoryFlag", flag: "TALKED_TO_NPC1"}
             ]
           }
@@ -231,12 +231,12 @@ window.OverworldMaps = {
           {
             required: ["TALKED_TO_NPC1"],
             events: [
-              { type: "textMessage", text: "Isn't she the coolest?", faceHero: "npcB" },
+              { type: "textMessage", text: "Squelchy looks kinda funny...", faceHero: "npcB" },
             ]
           },
           {
             events: [
-              { type: "textMessage", text: "Go talk to that girl over there!", faceHero: "npcB" },
+              { type: "textMessage", text: "I'm bored, battle me!", faceHero: "npcB" },
               { type: "battle", enemyId: "Froggert"},
               { type: "addStoryFlag", flag: "DEFEATED_FROGGERT"},
               { type: "textMessage", text: "You defeated me!", faceHero: "npcB" },
@@ -253,7 +253,89 @@ window.OverworldMaps = {
     },
 
     walls: {
-      
+
+      //Objects
+      //Tables
+      [utils.asGridCoord(2,4)]: true,
+      [utils.asGridCoord(3,4)]: true,
+
+      [utils.asGridCoord(6,4)]: true,
+      [utils.asGridCoord(7,4)]: true,
+
+      [utils.asGridCoord(10,4)]: true,
+      [utils.asGridCoord(11,4)]: true,
+
+      //Counter
+      [utils.asGridCoord(1,5)]: true,
+      [utils.asGridCoord(1,6)]: true,
+      [utils.asGridCoord(1,7)]: true,
+
+      [utils.asGridCoord(6,7)]: true,
+      [utils.asGridCoord(7,7)]: true,
+
+      [utils.asGridCoord(9,7)]: true,
+      [utils.asGridCoord(10,7)]: true,
+
+      [utils.asGridCoord(9,9)]: true,
+      [utils.asGridCoord(10,9)]: true,
+
+      //Crates
+      [utils.asGridCoord(1,9)]: true,
+      [utils.asGridCoord(2,9)]: true,
+
+
+      //Walls
+      //Upper Wall
+      [utils.asGridCoord(1,3)]: true,
+      [utils.asGridCoord(2,3)]: true,
+      [utils.asGridCoord(3,3)]: true,
+      [utils.asGridCoord(4,3)]: true,
+      [utils.asGridCoord(5,3)]: true,
+      [utils.asGridCoord(6,3)]: true,
+      [utils.asGridCoord(7,3)]: true,
+      [utils.asGridCoord(8,3)]: true,
+      [utils.asGridCoord(9,3)]: true,
+      [utils.asGridCoord(10,3)]: true,
+      [utils.asGridCoord(11,3)]: true,
+      [utils.asGridCoord(12,3)]: true,
+
+      //Left Wall
+      [utils.asGridCoord(0,0)]: true,
+      [utils.asGridCoord(0,1)]: true,
+      [utils.asGridCoord(0,2)]: true,
+      [utils.asGridCoord(0,3)]: true,
+      [utils.asGridCoord(0,4)]: true,
+      [utils.asGridCoord(0,5)]: true,
+      [utils.asGridCoord(0,6)]: true,
+      [utils.asGridCoord(0,7)]: true,
+      [utils.asGridCoord(0,8)]: true,
+      [utils.asGridCoord(0,9)]: true,
+
+      //Right Wall
+      [utils.asGridCoord(13,0)]: true,
+      [utils.asGridCoord(13,1)]: true,
+      [utils.asGridCoord(13,2)]: true,
+      [utils.asGridCoord(13,3)]: true,
+      [utils.asGridCoord(13,4)]: true,
+      [utils.asGridCoord(13,5)]: true,
+      [utils.asGridCoord(13,6)]: true,
+      [utils.asGridCoord(13,7)]: true,
+      [utils.asGridCoord(13,8)]: true,
+      [utils.asGridCoord(13,9)]: true,
+
+      //Bottom
+      [utils.asGridCoord(1,10)]: true,
+      [utils.asGridCoord(2,10)]: true,
+      [utils.asGridCoord(3,10)]: true,
+      [utils.asGridCoord(4,10)]: true,
+      [utils.asGridCoord(5,11)]: true,
+      [utils.asGridCoord(6,10)]: true,
+      [utils.asGridCoord(7,10)]: true,
+      [utils.asGridCoord(8,10)]: true,
+      [utils.asGridCoord(9,10)]: true,
+      [utils.asGridCoord(10,10)]: true,
+      [utils.asGridCoord(11,10)]: true,
+      [utils.asGridCoord(12,10)]: true,
 
     },
 
@@ -286,6 +368,22 @@ window.OverworldMaps = {
 
       })
     },
+    walls: function() {
+      let walls = {};
+      ["4,9", "5,8", "6,9", "7,9", "8,9", "9,9", "10,9", "11,9", "12,9", "13,8", "14,8", "15,7",
+        "16,7", "17,7", "18,7", "19,7", "20,7", "21,7", "22,7", "23,7", "24,7", "24,6", "24,5", "26,5", "26,6", "26,7", "27,7", "28,8", "28,9", "29,8", "30,9", "31,9", "32,9", "33,9",
+        "16,9", "17,9", "25,9", "26,9", "16,10", "17,10", "25,10", "26,10", "16,11", "17,11", "25,11", "26,11",
+        "18,11","19,11",
+        "4,14", "5,14", "6,14", "7,14", "8,14", "9,14", "10,14", "11,14", "12,14", "13,14", "14,14", "15,14", "16,14", "17,14", "18,14", "19,14", "20,14", "21,14", "22,14", "23,14",
+        "24,14", "25,14", "26,14", "27,14", "28,14", "29,14", "30,14", "31,14", "32,14", "33,14",
+        "3,10", "3,11", "3,12", "3,13", "34,10", "34,11", "34,12", "34,13",
+          "29,8","25,4",
+      ].forEach(coord => {
+        let [x,y] = coord.split(",");
+        walls[utils.asGridCoord(x,y)] = true;
+      })
+      return walls;
+    }(),
     cutsceneSpaces: {
       [utils.asGridCoord(29,9)]: [
         {

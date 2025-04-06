@@ -36,5 +36,68 @@ window.BattleAnimations = {
 
     await utils.wait(820);
     onComplete();
+  },
+
+  async phantomCharge(event, onComplete) {
+    const element = event.caster.pizzaElement;
+    element.classList.add("battle-phantom-charge");
+  
+    element.addEventListener("animationend", () => {
+      element.classList.remove("battle-phantom-charge");
+      onComplete();
+    }, { once: true });
+  },
+  
+  async voidHowl(event, onComplete) {
+    const element = event.caster.pizzaElement;
+    element.classList.add("battle-void-howl");
+  
+    element.addEventListener("animationend", () => {
+      element.classList.remove("battle-void-howl");
+      onComplete();
+    }, { once: true });
+  },
+
+  async starShatter(event, onComplete) {
+    const { caster } = event;
+  
+    const container = document.querySelector(".Battle");
+  
+    for (let i = 0; i < 5; i++) {
+      const star = document.createElement("div");
+      star.classList.add("battle-star");
+  
+      // Offset starting positions slightly for variety
+      const offsetX = Math.random() * 10 - 5;
+      const offsetY = Math.random() * 10 - 5;
+  
+      star.style.left = `${caster.team === "player" ? 70 + offsetX : 180 + offsetX}px`;
+      star.style.top = `${caster.team === "player" ? 105 + offsetY : 65 + offsetY}px`;
+  
+      // Add a star shape (use emoji or SVG for now)
+      star.innerHTML = `
+        <svg viewBox="0 0 24 24" width="16" height="16">
+          <path fill="#331944" d="M12 0L14.8 7H22L16 11.2L18.8 18.5L12 14.3L5.2 18.5L8 11.2L2 7H9.2L12 0Z" />
+        </svg>
+      `;
+  
+      container.appendChild(star);
+  
+      // Clean up after animation
+      star.addEventListener("animationend", () => {
+        star.remove();
+      });
+      
+      // Stagger star launch timing a bit
+      await utils.wait(80);
+    }
+  
+    // Wait until the last star would hit, then continue
+    await utils.wait(700);
+    onComplete();
   }
+  
+  
+
 }
+

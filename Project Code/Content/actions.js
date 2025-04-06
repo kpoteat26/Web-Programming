@@ -5,7 +5,7 @@ window.Actions = {
         description: "The user calls upon their powers of Shadow to travel at high speeds towards the enemy, dealing damage.",
         success: [
             { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
-            { type: "animation", animation: "spin" },
+            { type: "animation", animation: "phantomCharge" },
             { type: "stateChange", damage: 10 }
         ]
     },
@@ -14,15 +14,16 @@ window.Actions = {
         description: "The user lets out a screeching howl channeling the depths of the void to deal heavy damage to the enemy.",
         success: [
             { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
+            { type: "animation", animation: "voidHowl"},
             { type: "stateChange", damage: 30 }
         ]
     },
     starShatter: {
         name: "Star Shatter",
-        description: "The user sends forth a whirl of starts from the shadow realm dealing damage to the enemy and leaving them dazzed.",
+        description: "The user sends forth a whirl of starts from the shadow realm dealing damage to the enemy and leaving them dazed.",
         success: [
             { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
-            { type: "animation", animation: "glob", color: "#dafd2a" },
+            { type: "animation", animation: "starShatter", },
             { type: "stateChange", status: { type: "dazed", expiresIn: 3 } },
             { type: "textMessage", text: "{TARGET} is dazed! They may be unable to move." },
         ]
@@ -46,7 +47,7 @@ window.Actions = {
     },
     paralyzingSpit: {
         name: "Paralyzing Spit",
-        description: "The user spits violently at the enemy, leaving the enemy dazed.",
+        description: "The user spits poison at the enemy, leaving the enemy dazed.",
         success: [
             { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
             { type: "animation", animation: "glob", color: "#dafd2a" },
