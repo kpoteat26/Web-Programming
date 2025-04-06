@@ -5,7 +5,9 @@ class OverworldMap {
   constructor(config) {
     // set up the map and objects
     this.overworld = null;
-    this.gameObjects = config.gameObjects;
+    this.gameObjects = {}; // Live Objects are in here
+    this.configObjects = config.configObjects; //Configuration content
+
     this.cutsceneSpaces = config.cutsceneSpaces || {};
     this.walls = config.walls || {};
 
@@ -41,16 +43,40 @@ class OverworldMap {
   // collision detection
   isSpaceTaken(currentX, currentY, direction) {
     const { x, y } = utils.nextPosition(currentX, currentY, direction);
-    return this.walls[`${x},${y}`] || false;
+    if (this.walls[`${x},${y}`]) {
+      return true;
+    }
+
+    //Check for Game Objects at this Position
+    return Object.values(this.gameObjects).find(obj => {
+      if (obj.x === x && obj.y === y) {
+        return true;
+      }
+        if (obj.intentPosition && obj.intentPosition[0] === x && obj.intentPosition[0] === y) {
+          return true;
+        }
+      return false;
+    })
+  
   }
 
   mountObjects() {
-    Object.keys(this.gameObjects).forEach(key => {
-      let object = this.gameObjects[key];
+    Object.keys(this.configObjects).forEach(key => {
+      let object = this.configObjects[key];
       object.id = key;
 
-      // TODO: determine if this object should actually mount
-      object.mount(this);
+      let instance;
+      if (object.type === "Person") {
+        instance = new Person(object);
+      }
+
+      if (object.type === "PizzaStone") {
+        instance = new PizzaStone(object);
+      }
+
+      this.gameObjects[key] = instance;
+      this.gameObjects[key].id = key;
+      instance.mount(this);
     });
   }
 
@@ -105,22 +131,7 @@ class OverworldMap {
     }
   }
 
-  // adds a wall to the map
-  addWall(x, y) {
-    this.walls[`${x},${y}`] = true;
-  }
 
-  // removes a wall from the map
-  removeWall(x, y) {
-    delete this.walls[`${x},${y}`];
-  }
-
-  // moves a wall from one position to another
-  moveWall(wasX, wasY, direction) {
-    this.removeWall(wasX, wasY);
-    const { x, y } = utils.nextPosition(wasX, wasY, direction);
-    this.addWall(x, y);
-  }
 }
 
 // collection of overworld maps
@@ -129,13 +140,16 @@ window.OverworldMaps = {
     id: "DemoRoom",
     lowerSrc: "./images/maps/DemoLower.png",
     upperSrc: "./images/maps/DemoUpper.png",
-    gameObjects: {
-      hero: new Person({
+    gameObjects: {},
+    configObjects: {
+      hero: {
+        type: "Person",
         isPlayerControlled: true,
         x: utils.withGrid(5),
         y: utils.withGrid(6),
-      }),
-      npcA: new Person({
+      },
+      npcA: {
+        type: "Person",
         x: utils.withGrid(7),
         y: utils.withGrid(9),
         src: "./images/characters/people/Squelchy_NPC.png",
@@ -154,8 +168,9 @@ window.OverworldMaps = {
             ]
           }
         ]
-      }),
-      npcB: new Person({
+      },
+      npcB: {
+        type: "Person",
         x: utils.withGrid(8),
         y: utils.withGrid(5),
         src: "./images/characters/people/Froggert_Enemy.png",
@@ -166,7 +181,7 @@ window.OverworldMaps = {
           { type: "walk", direction: "right" },
           { type: "walk", direction: "down" },
         ] */
-      }),
+      },
     },
     walls: {
       [utils.asGridCoord(7, 6)]: true,
@@ -200,17 +215,21 @@ window.OverworldMaps = {
       ]
     }
   },
+
   AlchemyRoom: {
     id: "AlchemyRoom",
     lowerSrc: "./images/maps/AlchemyLower.png",
     upperSrc: "./images/maps/AlchemyUpper.png",
-    gameObjects: {
-      hero: new Person({
+    gameObjects: {},
+    configObjects: {
+      hero: {
+        type: "Person",
         isPlayerControlled: true,
         x: utils.withGrid(5),
         y: utils.withGrid(5),
-      }),
-      npcA: new Person({
+      },
+      npcA: {
+        type: "Person",
         x: utils.withGrid(3),
         y: utils.withGrid(5),
         src: "./images/characters/people/Squelchy_NPC.png",
@@ -222,8 +241,9 @@ window.OverworldMaps = {
             ]
           }
         ]
-      }),
-      npcB: new Person({
+      },
+      npcB:{
+        type: "Person",
         x: utils.withGrid(10),
         y: utils.withGrid(8),
         src: "./images/characters/people/Froggert_Enemy.png",
@@ -243,13 +263,14 @@ window.OverworldMaps = {
             ]
           }
         ]
-      }),
-      pizzaStone: new PizzaStone({
+      },
+      pizzaStone: {
+        type: "PizzaStone",
         x: utils.withGrid(4),
         y: utils.withGrid(8),
         storyFlag: "USED_PIZZA_STONE",
-        pizzas: ["ep001", "ep002"]
-      })
+        pizzas: ["ep002", "ep003"]
+      }
     },
 
     walls: {
@@ -360,14 +381,17 @@ window.OverworldMaps = {
     id: "Street",
     lowerSrc: "./images/maps/StreetLower.png",
     upperSrc: "./images/maps/StreetUpper.png",
-    gameObjects: {
-      hero: new Person({
+    gameObjects: {},
+    configObjects: {
+      hero: {
+        type: "Person",
         isPlayerControlled: true,
         x: utils.withGrid(30),
         y: utils.withGrid(10),
 
-      })
+      }
     },
+
     walls: function() {
       let walls = {};
       ["4,9", "5,8", "6,9", "7,9", "8,9", "9,9", "10,9", "11,9", "12,9", "13,8", "14,8", "15,7",

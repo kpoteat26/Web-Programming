@@ -9,10 +9,8 @@ class Overworld {
     this.map = null;
   }
 
-  // starts the main game loop
-  startGameLoop() {
-    const step = () => {
-      // clear off the canvas
+  gameLoopStepWork(delta) {
+        // clear off the canvas
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
       // establish the camera person
@@ -21,6 +19,7 @@ class Overworld {
       // update all objects
       Object.values(this.map.gameObjects).forEach(object => {
         object.update({
+          delta,
           arrow: this.directionInput.direction,
           map: this.map,
         });
@@ -39,13 +38,36 @@ class Overworld {
       // draw upper layer
       this.map.drawUpperImage(this.ctx, cameraPerson);
 
-      if (!this.map.isPaused) {
-        requestAnimationFrame(() => {
-          step();
-        });
-      }    
+
+  }
+
+  // starts the main game loop
+  startGameLoop() {
+
+    let previousMs;
+    const step = 1/60;
+
+    const stepFn = (timestampMs) => {
+
+      if(this.map.isPaused) {
+        return;
+      }
+      if(previousMs === undefined) {
+        previousMs = timestampMs;
+      }
+
+      let delta = (timestampMs - previousMs) / 1000;
+      while (delta >= step) {
+        this.gameLoopStepWork(delta);
+        delta -= step;
+      }
+      previousMs = timestampMs - delta * 1000;
+
+      //Business as usual tick
+        requestAnimationFrame(stepFn)
     };
-    step();
+    //First kickoff tick
+    requestAnimationFrame(stepFn)  
   }
 
   // binds the action input
@@ -80,11 +102,9 @@ class Overworld {
 
     if (heroInitialState) {
       const {hero} = this.map.gameObjects;
-      this.map.removeWall(hero.x, hero.y);
       hero.x = heroInitialState.x;
       hero.y = heroInitialState.y;
       hero.direction = heroInitialState.direction;
-      this.map.addWall(hero.x, hero.y);
     }
 
     this.progress.mapId = mapConfig.id;

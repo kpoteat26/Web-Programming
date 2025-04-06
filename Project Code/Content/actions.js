@@ -55,6 +55,35 @@ window.Actions = {
             { type: "textMessage", text: "{TARGET} is dazed! They may be unable to move." },
         ]
     },
+    paralyzingDust: {
+        name: "Paralyzing Dust",
+        description: "The user flaps their wings, scattering dust around the environment and leaving the enemy dazed.",
+        success: [
+            { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
+            { type: "animation", animation: "glob", color: "#dafd2a" },
+            { type: "stateChange", status: { type: "dazed", expiresIn: 3 } },
+            { type: "textMessage", text: "{TARGET} is dazed! They may be unable to move." },
+        ]
+    },
+    windCutter: {
+        name: "Wind Cutter",
+        description: "The user flaps their wings violently in an X pattern to send gusts of waves at the enemy.",
+        success: [
+            { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
+            { type: "animation", animation: "spin" },
+            {type: "stateChange", damage: 30 }
+        ]
+    },
+    mesmerizingGaze: {
+        name: "Mesmerizing Gaze",
+        description: "The user users their psychic abilities to send harmful waves to the enemy.",
+        success: [
+            { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
+            { type: "animation", animation: "voidHowl" },
+            {type: "stateChange", damage: 20 }
+        ]
+    },
+
     // Items
     item_recoverStatus: {
         name: "Heating Lamp",
