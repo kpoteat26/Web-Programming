@@ -3,33 +3,33 @@ class PlayerState {
     this.pizzas = {
       "e1": {
         pizzaId: "ep001",
-        hp: 30,
+        hp: 50,
         maxHp: 50,
-        xp: 90,
+        xp: 0,
         maxXp: 100,
         level: 1,
         status: null,
       },
-      "e2": {
-        pizzaId: "ep002",
-        hp: 50,
-        maxHp: 50,
-        xp: 75,
-        maxXp: 100,
-        level: 1,
-        status: null,
-      },
-      "e3": {
-        pizzaId: "ep002",
-        hp: 50,
-        maxHp: 100,
-        xp: 75,
-        maxXp: 100,
-        level: 1,
-        status: null,
-      }
+      // "e2": {
+      //   pizzaId: "ep002",
+      //   hp: 50,
+      //   maxHp: 50,
+      //   xp: 75,
+      //   maxXp: 100,
+      //   level: 1,
+      //   status: null,
+      // },
+      // "e3": {
+      //   pizzaId: "ep002",
+      //   hp: 50,
+      //   maxHp: 100,
+      //   xp: 75,
+      //   maxXp: 100,
+      //   level: 1,
+      //   status: null,
+      //}
     }
-    this.lineup = ["e2", "e1"];
+    this.lineup = ["e1"];
     this.items = [
       { actionId: "item_recoverHp", instanceId: "item1" },
       { actionId: "item_recoverHp", instanceId: "item2" },

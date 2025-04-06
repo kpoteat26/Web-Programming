@@ -67,7 +67,7 @@ window.Actions = {
     },
     item_recoverHp: {
         name: "Red Potion",
-        description: "The user may drinks this potion to recover 40 lost health.",
+        description: "The user may drink this potion to recover 40 lost health.",
         targetType: "friendly",
         success: [
             { type: "textMessage", text: "{CASTER} drinks some {ACTION}!", },

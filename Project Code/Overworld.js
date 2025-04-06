@@ -73,26 +73,69 @@ class Overworld {
   }
 
   // starts the map
-  startMap(mapConfig) {
+  startMap(mapConfig, heroInitialState=null) {
     this.map = new OverworldMap(mapConfig);
     this.map.overworld = this;
     this.map.mountObjects();
+
+    if (heroInitialState) {
+      const {hero} = this.map.gameObjects;
+      this.map.removeWall(hero.x, hero.y);
+      hero.x = heroInitialState.x;
+      hero.y = heroInitialState.y;
+      hero.direction = heroInitialState.direction;
+      this.map.addWall(hero.x, hero.y);
+    }
+
+    this.progress.mapId = mapConfig.id;
+    this.progress.startingHeroX = this.map.gameObjects.hero.x;
+    this.progress.startingHeroY = this.map.gameObjects.hero.y;
+    this.progress.startingHeroDirection = this.map.gameObjects.hero.direction;
+
   }
 
   // initializes the overworld
-  init() {
+   async init() {
 
+    const container = document.querySelector(".game-container");
+
+    //Create a new Progress tracker
+    this.progress = new Progress();
+
+    //Show the Title Screen
+    this.titleScreen = new TitleScreen({
+      progress: this.progress
+    })
+    const useSaveFile = await this.titleScreen.init(container)
+
+    //Potentially Load Saved Data
+    let initialHeroState = null;
+    if (useSaveFile) {
+      this.progress.load();
+      initialHeroState = {
+        x: this.progress.startingHeroX,
+        y: this.progress.startingHeroY,
+        direction: this.progress.startingHeroDirection,
+      }
+    }
+
+
+    //Load the HUD
     this.hud = new Hud();
-    this.hud.init(document.querySelector(".game-container"));
+    this.hud.init(container);
 
-    this.startMap(window.OverworldMaps.AlchemyRoom);
+    //Start the First Map
+    this.startMap(window.OverworldMaps[this.progress.mapId], initialHeroState);
 
+    //Create Controls
     this.bindActionInput();
     this.bindHeroPositionCheck();
 
     this.directionInput = new DirectionInput();
     this.directionInput.init();
 
+
+    //Start The Game!!
     this.startGameLoop();
 
     // // cutscenes to play immediately

@@ -126,6 +126,7 @@ class OverworldMap {
 // collection of overworld maps
 window.OverworldMaps = {
   DemoRoom: {
+    id: "DemoRoom",
     lowerSrc: "./images/maps/DemoLower.png",
     upperSrc: "./images/maps/DemoUpper.png",
     gameObjects: {
@@ -189,13 +190,18 @@ window.OverworldMaps = {
       [utils.asGridCoord(5, 10)]: [
         {
           events: [
-            { type: "changeMap", map: "AlchemyRoom" }
+            { type: "changeMap", 
+              map: "AlchemyRoom",
+              x: utils.withGrid(2),
+              y: utils.withGrid(2), 
+              direction: "down" }
           ]
         }
       ]
     }
   },
   AlchemyRoom: {
+    id: "AlchemyRoom",
     lowerSrc: "./images/maps/AlchemyLower.png",
     upperSrc: "./images/maps/AlchemyUpper.png",
     gameObjects: {
@@ -244,6 +250,58 @@ window.OverworldMaps = {
         storyFlag: "USED_PIZZA_STONE",
         pizzas: ["ep001", "ep002"]
       })
+    },
+
+    walls: {
+      
+
+    },
+
+    cutsceneSpaces: {
+      [utils.asGridCoord(5,10)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "Street",
+              x: utils.withGrid(29),
+              y: utils.withGrid(9),
+              direction: "down"
+            }
+          ]
+        }
+      ]
     }
   },
+
+  Street: {
+    id: "Street",
+    lowerSrc: "./images/maps/StreetLower.png",
+    upperSrc: "./images/maps/StreetUpper.png",
+    gameObjects: {
+      hero: new Person({
+        isPlayerControlled: true,
+        x: utils.withGrid(30),
+        y: utils.withGrid(10),
+
+      })
+    },
+    cutsceneSpaces: {
+      [utils.asGridCoord(29,9)]: [
+        {
+          events: [
+            {
+            type: "changeMap",
+            map: "AlchemyRoom",
+            x: utils.withGrid(5),
+            y: utils.withGrid(10),
+            direction: "up",
+            }
+          ]
+        }
+      ]
+
+    }
+
+  }
 };
