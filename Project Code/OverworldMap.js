@@ -235,9 +235,16 @@ window.OverworldMaps = {
         src: "./images/characters/people/Squelchy_NPC.png",
         talking: [
           {
+            required: ["USED_PIZZA_STONE"],
+            events: [
+              {type: "textMessage", text: "Great Job! Now that you have your first Evolisk, why don't you go fight Froggert?", faceHero: "npcA"},
+            ],
+          },
+          {
             events: [
               { type: "textMessage", text: "You should touch that weird stone over there!", faceHero: "npcA" },
               { type: "addStoryFlag", flag: "TALKED_TO_NPC1"}
+
             ]
           }
         ]
@@ -249,17 +256,34 @@ window.OverworldMaps = {
         src: "./images/characters/people/Froggert_Enemy.png",
         talking: [
           {
-            required: ["TALKED_TO_NPC1"],
-            events: [
-              { type: "textMessage", text: "Squelchy looks kinda funny...", faceHero: "npcB" },
-            ]
-          },
-          {
+            required: ["USED_PIZZA_STONE", "TALKED_TO_NPC1"],
             events: [
               { type: "textMessage", text: "I'm bored, battle me!", faceHero: "npcB" },
               { type: "battle", enemyId: "Froggert"},
               { type: "addStoryFlag", flag: "DEFEATED_FROGGERT"},
               { type: "textMessage", text: "You defeated me!", faceHero: "npcB" },
+            ]
+          },
+
+          {
+            required: ["TALKED_TO_NPC1"],
+            events: [
+              { type: "textMessage", text: "Squelchy looks kinda funny, but you should listen to what he says!", faceHero: "npcB" },
+            ]
+
+          },
+
+          {
+
+            required: ["DEFEATED_FROGGERT"],
+            events: [
+              { type: "textMessage", text: "You see nothing but a pile of dust left after defeating Froggert...", faceHero: "npcB" },
+            ]
+          },
+
+          {
+            events: [
+              {type: "textMessage", text: "Hey! I'm Froggert! You should go talk to my buddy Squelchy!", faceHero: "npcB"}
             ]
           }
         ]
