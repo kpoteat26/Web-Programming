@@ -1,28 +1,32 @@
+/*
+  This file contains the styles for the Team component.
+*/
+
 .Team {
-    display: flex;
-    position: absolute;
-    top:4px;
-    gap: 4px;
-  }
-  .Team[data-team="player"] {
-    left:4px;
-  }
-  .Team[data-team="enemy"] {
-    right:4px;
-  }
-  
-  /* Start stateful paths as display:none */
-  .Team .dead-pizza {
-    display:none;
-  }
-  .Team .active-pizza-indicator {
-    display:none;
-  }
-  
-  /* Display them as opted in by data-attributes */
-  .Team [data-dead="true"] .dead-pizza {
-    display:block;
-  }
-  .Team [data-active="true"] .active-pizza-indicator {
-    display:block;
-  }
+  display: flex;
+  position: absolute;
+  top: 4px;
+  gap: 4px;
+}
+.Team[data-team="player"] {
+  left: 4px;
+}
+.Team[data-team="enemy"] {
+  right: 4px;
+}
+
+/* Start stateful paths as display:none */
+.Team .dead-evolisk {
+  display: none;
+}
+.Team .active-evolisk-indicator {
+  display: none;
+}
+
+/* Display them as opted in by data-attributes */
+.Team [data-dead="true"] .dead-evolisk {
+  display: block;
+}
+.Team [data-active="true"] .active-evolisk-indicator {
+  display: block;
+}

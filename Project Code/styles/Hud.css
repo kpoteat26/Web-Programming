@@ -1,15 +1,19 @@
+/*
+  This file contains the styles for the Hud component.
+*/
+
 .Hud {
-    position: absolute;
-    left: 2px;
-    top: 10px;
-    image-rendering: pixelated;
+  position: absolute;
+  left: 2px;
+  top: 10px;
+  image-rendering: pixelated;
 }
 
 .Hud .Combatant {
-    position: relative;
-    margin-bottom: 10px;
+  position: relative;
+  margin-bottom: 10px;
 }
 
 .Hud .Combatant_type {
-    display: none;
+  display: none;
 }

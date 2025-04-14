@@ -1,6 +1,7 @@
 /*
   This file contains the GameObject class, which is used to create game objects in the game.
 */
+
 class GameObject {
   constructor(config) {
     this.id = null;
@@ -9,7 +10,7 @@ class GameObject {
     this.y = config.y || 0;
     this.direction = config.direction || "down";
 
-    // sprite setup
+    // Sprite setup
     this.sprite = new Sprite({
       gameObject: this,
       src: config.src || "./images/characters/people/Kairo_Hero.png",
@@ -25,49 +26,46 @@ class GameObject {
     console.log("mounting!");
     this.isMounted = true;
 
-    // if we have a behavior, kick off after a short delay
+    // If we have a behavior, kick off after a short delay
     setTimeout(() => {
       this.doBehaviorEvent(map);
     }, 10);
   }
 
-  update() {
-  }
+  update() {}
 
   async doBehaviorEvent(map) {
- 
-    if ( this.behaviorLoop.length === 0) {
+    if (this.behaviorLoop.length === 0) {
       return;
     }
 
-    if(map.isCutscenePlaying) {
-
-      if(this.retryTimeout) {
+    if (map.isCutscenePlaying) {
+      if (this.retryTimeout) {
         clearTimeout(this.retryTimeout);
       }
 
       this.retryTimeout = setTimeout(() => {
         this.doBehaviorEvent(map);
-      }, 1000)
+      }, 1000);
 
       return;
     }
 
-    // setting up our event with relevant info
+    // Setting up our event with relevant info
     let eventConfig = this.behaviorLoop[this.behaviorLoopIndex];
     eventConfig.who = this.id;
 
-    // create an event instance out of our next event config
+    // Create an event instance out of our next event config
     const eventHandler = new OverworldEvent({ map, event: eventConfig });
     await eventHandler.init();
 
-    // setting the next event to fire
+    // Setting the next event to fire
     this.behaviorLoopIndex += 1;
     if (this.behaviorLoopIndex === this.behaviorLoop.length) {
       this.behaviorLoopIndex = 0;
     }
 
-    // do it again!
+    // Do it again!
     this.doBehaviorEvent(map);
   }
 }

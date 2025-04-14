@@ -1,41 +1,42 @@
 /*
-    This file contains the KeyPressListener class, which is used to listen for key presses in the game.
+  This file contains the KeyPressListener class, which is used to listen for key presses in the game.
 */
+
 class KeyPressListener {
-    constructor(keyCode, callback) {
-        // will be disabled until key is released
-        let keySafe = true;
+  constructor(keyCode, callback) {
+    // Will be disabled until key is released
+    let keySafe = true;
 
-        // key is pressed
-        this.keydownFunction = function (event) {
-            // if code matches the key code passed in
-            if (event.code === keyCode) {
-                // key is free
-                if (keySafe) {
-                    // disable
-                    keySafe = false;
-                    callback();
-                }
-            }
-        };
+    // Key is pressed
+    this.keydownFunction = function (event) {
+      // If code matches the key code passed in
+      if (event.code === keyCode) {
+        // Key is free
+        if (keySafe) {
+          // Disable
+          keySafe = false;
+          callback();
+        }
+      }
+    };
 
-        // key is released
-        this.keyupFunction = function (event) {
-            // if code matched the key code passed in
-            if (event.code === keyCode) {
-                // enable
-                keySafe = true;
-            }
-        };
+    // Key is released
+    this.keyupFunction = function (event) {
+      // If code matched the key code passed in
+      if (event.code === keyCode) {
+        // Enable
+        keySafe = true;
+      }
+    };
 
-        // event listeners
-        document.addEventListener("keydown", this.keydownFunction);
-        document.addEventListener("keyup", this.keyupFunction);
-    }
+    // Event listeners
+    document.addEventListener("keydown", this.keydownFunction);
+    document.addEventListener("keyup", this.keyupFunction);
+  }
 
-    // once finished, remove event listeners
-    unbind() {
-        document.removeEventListener("keydown", this.keydownFunction);
-        document.removeEventListener("keyup", this.keyupFunction);
-    }
+  // Once finished, remove event listeners
+  unbind() {
+    document.removeEventListener("keydown", this.keydownFunction);
+    document.removeEventListener("keyup", this.keyupFunction);
+  }
 }
