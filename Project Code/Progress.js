@@ -4,7 +4,7 @@
 
 class Progress {
   constructor() {
-    this.mapId = "AlchemyRoom";
+    this.mapId = "ForestVillage";
     this.startingHeroX = 0;
     this.startingHeroY = 0;
     this.startingHeroDirection = "down";
