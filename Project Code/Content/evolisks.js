@@ -36,6 +36,51 @@ window.Evolisks = {
     icon: "./images/icons/Naturalist.png",
     actions: ["astralCoil", "ghostFang", "paralyzingSpit"],
   },
+  ee004: {
+    name: "Ghobun",
+    description:
+      "A moth-like creature who senses the intentions of those around it.",
+    type: EvoliskTypes.shadow,
+    src: "./images/characters/evolisks/GhobunBattleTamed.png",
+    icon: "./images/icons/Shadow.png",
+    actions: [],
+  },
+  ee005: {
+    name: "Juzafrigi",
+    description:
+      "You're not entirely sure if this is an Evolisk or a fridge. But it does seem to have sentient thoughts, somehow.",
+    type: EvoliskTypes.naturalist,
+    src: "./images/characters/evolisks/JuzafrigiBattleTamed.png",
+    icon: "./images/icons/Naturalist.png",
+    actions: [],
+  },
+  ee006: {
+    name: "Jydistorm",
+    description:
+      "This Evolisk resembles a jellyfish, using its electric tentacles to swiftly knock out its opponents.",
+    type: EvoliskTypes.mythic,
+    src: "./images/characters/evolisks/JydiStormBattleTamed.png",
+    icon: "./images/icons/Mythic.png",
+    actions: [],
+  },
+  ee007: {
+    name: "Leaflin",
+    description:
+      "While this may just look like a pile of leaves, it's actually an Evolisk! It uses fallen leaves and sticks it finds to disguise its weak and frail body.",
+    type: EvoliskTypes.naturalist,
+    src: "./images/characters/evolisks/LeaflinBattleTamed.png",
+    icon: "./images/icons/Naturalist.png",
+    actions: [],
+  },
+  ee008: {
+    name: "Nimbz",
+    description:
+      "This angry storm cloud is not to be messed with, but it can be quite cute when tamed! It is known to shoot lightning at those it dislikes.",
+    type: EvoliskTypes.mythic,
+    src: "./images/characters/evolisks/NimbzBattleTamed.png",
+    icon: "./images/icons/Mythic.png",
+    actions: [],
+  },
 
   // Player Evolisks
   ep001: {
@@ -62,5 +107,50 @@ window.Evolisks = {
     src: "./images/characters/evolisks/LumivyreBattleTamed.png",
     icon: "./images/icons/Naturalist.png",
     actions: ["mesmerizingGaze", "windCutter", "paralyzingDust"],
+  },
+  ep004: {
+    name: "Ghobun",
+    description:
+      "A moth-like creature who senses the intentions of those around it.",
+    type: EvoliskTypes.shadow,
+    src: "./images/characters/evolisks/GhobunBattleTamed.png",
+    icon: "./images/icons/Shadow.png",
+    actions: [],
+  },
+  ep005: {
+    name: "Juzafrigi",
+    description:
+      "You're not entirely sure if this is an Evolisk or a fridge. But it does seem to have sentient thoughts, somehow.",
+    type: EvoliskTypes.naturalist,
+    src: "./images/characters/evolisks/JuzafrigiBattleTamed.png",
+    icon: "./images/icons/Naturalist.png",
+    actions: [],
+  },
+  ep006: {
+    name: "Jydistorm",
+    description:
+      "This Evolisk resembles a jellyfish, using its electric tentacles to swiftly knock out its opponents.",
+    type: EvoliskTypes.mythic,
+    src: "./images/characters/evolisks/JydiStormBattleTamed.png",
+    icon: "./images/icons/Mythic.png",
+    actions: [],
+  },
+  ep007: {
+    name: "Leaflin",
+    description:
+      "While this may just look like a pile of leaves, it's actually an Evolisk! It uses fallen leaves and sticks it finds to disguise its weak and frail body.",
+    type: EvoliskTypes.naturalist,
+    src: "./images/characters/evolisks/LeaflinBattleTamed.png",
+    icon: "./images/icons/Naturalist.png",
+    actions: [],
+  },
+  ep008: {
+    name: "Nimbz",
+    description:
+      "This angry storm cloud is not to be messed with, but it can be quite cute when tamed! It is known to shoot lightning at those it dislikes.",
+    type: EvoliskTypes.mythic,
+    src: "./images/characters/evolisks/NimbzBattleTamed.png",
+    icon: "./images/icons/Mythic.png",
+    actions: [],
   },
 };
