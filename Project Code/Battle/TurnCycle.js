@@ -2,10 +2,11 @@
   This file contains the TurnCycle class, which is used to manage the turn cycle in the game.
 */
 class TurnCycle {
-  constructor({ battle, onNewEvent, onWinner }) {
+  constructor({ battle, onNewEvent, onWinner, map }) {
     this.battle = battle;
     this.onNewEvent = onNewEvent;
     this.onWinner = onWinner;
+    this.map = map;
     this.currentTeam = "player"; // or "enemy"
   }
 
@@ -99,8 +100,8 @@ class TurnCycle {
       if (allFainted) {
         console.log(" All Evolisks fainted! Teleporting to healing area...");
       
-        // Assuming `this.battle.map` is the current map you're working with
-        this.battle.map.teleportToHealingArea();
+        this.map.teleportToHealingArea();
+        this.onWinner("enemy");
         return; // Stop the turn if all Evolisks faint
       }
 

@@ -9,6 +9,7 @@ class OverworldMap {
     this.gameObjects = {}; // Live Objects are in here
     this.configObjects = config.configObjects; //Configuration content
     this.wildEncounterAreas = config.wildEncounterAreas || []; //Encounter Tiles
+    this.healingSpot = config.healingSpot
 
 
     this.cutsceneSpaces = config.cutsceneSpaces || {};
@@ -141,49 +142,48 @@ class OverworldMap {
   }
 
   teleportToHealingArea() {
-    const healingSpot = this.battle.map.mapConfig.healingSpot;
+    const healingSpot = this.healingSpot || {
+      x: 5,
+      y: 5,
+      message: "You feel mysteriously refreshed.",
+      heal: "full"
+    };
   
-    // Teleport player to the healing spot
-    this.battle.map.gameObjects["hero"].x = healingSpot.x * 16;  // 16px per tile
-    this.battle.map.gameObjects["hero"].y = healingSpot.y * 16;  // 16px per tile
+    if (!this.gameObjects["hero"]) {
+      console.error("Hero object not found!");
+      return;
+    }
   
-    // Show the healing message (could be dynamic based on map)
+    this.gameObjects["hero"].x = healingSpot.x * 16;
+    this.gameObjects["hero"].y = healingSpot.y * 16;
+  
     const healingMessage = new TextMessage({
-      text: healingSpot.message, // Custom message from map config
+      text: healingSpot.message,
       onComplete: () => {
-        // Perform the healing action after the message
         this.healPlayerEvolisks(healingSpot.heal);
       },
     });
   
-    healingMessage.init(this.battle.element);
+    healingMessage.init(document.querySelector(".game-container"));
   }
+  
+  
 
   healPlayerEvolisks(healType) {
     const playerState = window.playerState;
   
-    // If healing type is "full", restore full HP
     if (healType === "full") {
-      Object.keys(playerState.evolisks).forEach((id) => {
-        const combatant = this.battle.combatants[id];
-        if (combatant) {
-          combatant.hp = combatant.maxHp; // Full restore
-        }
+      Object.values(playerState.evolisks).forEach(evolisk => {
+        evolisk.hp = evolisk.maxHp;
       });
       console.log(" All Evolisks healed to full HP!");
     }
-  
-    // If healing type is "partial", restore half HP (example for customization)
     else if (healType === "partial") {
-      Object.keys(playerState.evolisks).forEach((id) => {
-        const combatant = this.battle.combatants[id];
-        if (combatant) {
-          combatant.hp = Math.floor(combatant.maxHp / 2); // Partial restore
-        }
+      Object.values(playerState.evolisks).forEach(evolisk => {
+        evolisk.hp = Math.floor(evolisk.maxHp / 2);
       });
       console.log(" All Evolisks healed to 50% HP!");
     }
-  
   }
 
 }
@@ -205,6 +205,8 @@ window.OverworldMaps = {
       },
     },
   },
+
+
   MushroomWild: {
     id: "MushroomWild",
     lowerSrc: "./images/maps/MushroomLower.png",

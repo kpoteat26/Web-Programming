@@ -98,6 +98,7 @@ class OverworldEvent {
 
     const battle = new Battle({
       enemy: Enemies[this.event.enemyId],
+      map: this.map,
       onComplete: (didWin) => {
         resolve(didWin ? "WON_BATTLE" : "LOST_BATTLE");
       },
@@ -142,6 +143,7 @@ class OverworldEvent {
     const wildId = utils.randomFromArray(["ee001", "ee002", "ee003", "ee004", "ee005", "ee006", "ee007", "ee008"]);
 
     const battle = new Battle({
+      map: this.map,
       enemy: {
         name: "Wild " + window.Evolisks[wildId].name,
         src: window.Evolisks[wildId].src,

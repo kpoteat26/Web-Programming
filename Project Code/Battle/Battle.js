@@ -3,9 +3,10 @@
 */
 
 class Battle {
-  constructor({ enemy, onComplete, battleBackgroundSrc, isWildEncounter = false, }) {
+  constructor({ enemy, onComplete, battleBackgroundSrc, isWildEncounter = false, map }) {
     this.enemy = enemy;
     this.onComplete = onComplete;
+    this.map = map;
 
     this.isWildEncounter = isWildEncounter;
 
@@ -147,6 +148,7 @@ if (this.isWildEncounter) {
   
     this.turnCycle = new TurnCycle({
       battle: this,
+      map: this.map,
       onNewEvent: (event) => {
         return new Promise((resolve) => {
           const battleEvent = new BattleEvent(event, this);
