@@ -8,15 +8,19 @@ class OverworldMap {
     this.overworld = null;
     this.gameObjects = {}; // Live Objects are in here
     this.configObjects = config.configObjects; //Configuration content
+    this.wildEncounterAreas = config.wildEncounterAreas || []; //Encounter Tiles
+
 
     this.cutsceneSpaces = config.cutsceneSpaces || {};
     this.walls = config.walls || {};
+    
 
     // Load the images
     this.lowerImage = new Image();
     this.lowerImage.src = config.lowerSrc;
     this.upperImage = new Image();
     this.upperImage.src = config.upperSrc;
+    this.battleBackgroundSrc = config.battleBackgroundSrc;
 
     // Determine if a cutscene is playing
     this.isCutscenePlaying = false;
@@ -135,10 +139,58 @@ class OverworldMap {
       this.startCutscene(match[0].events);
     }
   }
+
+  teleportToHealingArea() {
+    const healingSpot = this.battle.map.mapConfig.healingSpot;
+  
+    // Teleport player to the healing spot
+    this.battle.map.gameObjects["hero"].x = healingSpot.x * 16;  // 16px per tile
+    this.battle.map.gameObjects["hero"].y = healingSpot.y * 16;  // 16px per tile
+  
+    // Show the healing message (could be dynamic based on map)
+    const healingMessage = new TextMessage({
+      text: healingSpot.message, // Custom message from map config
+      onComplete: () => {
+        // Perform the healing action after the message
+        this.healPlayerEvolisks(healingSpot.heal);
+      },
+    });
+  
+    healingMessage.init(this.battle.element);
+  }
+
+  healPlayerEvolisks(healType) {
+    const playerState = window.playerState;
+  
+    // If healing type is "full", restore full HP
+    if (healType === "full") {
+      Object.keys(playerState.evolisks).forEach((id) => {
+        const combatant = this.battle.combatants[id];
+        if (combatant) {
+          combatant.hp = combatant.maxHp; // Full restore
+        }
+      });
+      console.log(" All Evolisks healed to full HP!");
+    }
+  
+    // If healing type is "partial", restore half HP (example for customization)
+    else if (healType === "partial") {
+      Object.keys(playerState.evolisks).forEach((id) => {
+        const combatant = this.battle.combatants[id];
+        if (combatant) {
+          combatant.hp = Math.floor(combatant.maxHp / 2); // Partial restore
+        }
+      });
+      console.log(" All Evolisks healed to 50% HP!");
+    }
+  
+  }
+
 }
 
 // Collection of overworld maps
 window.OverworldMaps = {
+  
   ForestVillage: {
     id: "ForestVillage",
     lowerSrc: "./images/maps/ForestLower.png",
@@ -152,6 +204,269 @@ window.OverworldMaps = {
         y: utils.withGrid(30),
       },
     },
+  },
+  MushroomWild: {
+    id: "MushroomWild",
+    lowerSrc: "./images/maps/MushroomLower.png",
+    upperSrc: "./images/maps/MushroomUpper.png",
+    battleBackgroundSrc: "./images/maps/MushroomBattleMap.png",
+    gameObjects: {},
+
+    //Configure Objects in Map
+    configObjects: {
+
+      //Create Hero & NPCs
+      hero: {
+        type: "Person",
+        isPlayerControlled: true,
+        x: utils.withGrid(18),
+        y: utils.withGrid(1),
+      },
+      npcA: {
+        type:"Person",
+        x: utils.withGrid(12),
+        y: utils.withGrid(11),
+        src: "./images/characters/people/Squelchy_NPC.png",
+        talking: [
+          {
+            events: [
+              {type: "textMessage", text: "Hello!", faceHero: "npcA"},
+            ]
+          }
+        ]
+      },      
+    },
+    //Create Walls
+    walls: {
+
+      //Mushrooms
+      [utils.asGridCoord(16, 1)]: true,
+
+      [utils.asGridCoord(20, 2)]: true,
+
+      [utils.asGridCoord(13, 2)]: true,
+
+      [utils.asGridCoord(11, 3)]: true,
+      [utils.asGridCoord(12, 3)]: true,
+      [utils.asGridCoord(13, 3)]: true,
+      [utils.asGridCoord(11, 4)]: true,
+      [utils.asGridCoord(12, 4)]: true,
+
+      [utils.asGridCoord(21, 3)]: true,
+      [utils.asGridCoord(22, 3)]: true,
+      [utils.asGridCoord(23, 3)]: true,
+      [utils.asGridCoord(22, 4)]: true,
+      [utils.asGridCoord(23, 4)]: true,
+
+      [utils.asGridCoord(23, 7)]: true,
+
+      [utils.asGridCoord(6, 8)]: true,
+
+      [utils.asGridCoord(8, 13)]: true,
+
+      [utils.asGridCoord(10, 15)]: true,
+
+      [utils.asGridCoord(18, 15)]: true,
+
+      [utils.asGridCoord(23, 16)]: true,
+
+      [utils.asGridCoord(19, 8)]: true,
+
+      [utils.asGridCoord(16, 9)]: true,
+      [utils.asGridCoord(17, 9)]: true,
+      [utils.asGridCoord(18, 9)]: true,
+      [utils.asGridCoord(16, 10)]: true,
+      [utils.asGridCoord(17, 10)]: true,
+
+      [utils.asGridCoord(19, 11)]: true,
+      [utils.asGridCoord(20, 11)]: true,
+      [utils.asGridCoord(21, 11)]: true,
+      [utils.asGridCoord(20, 12)]: true,
+
+      [utils.asGridCoord(3, 13)]: true,
+      [utils.asGridCoord(4, 13)]: true,
+      [utils.asGridCoord(5, 13)]: true,
+      [utils.asGridCoord(4, 14)]: true,
+      [utils.asGridCoord(5, 14)]: true,
+
+      [utils.asGridCoord(13, 18)]: true,
+      [utils.asGridCoord(14, 18)]: true,
+      [utils.asGridCoord(15, 18)]: true,
+      [utils.asGridCoord(13, 19)]: true,
+      [utils.asGridCoord(14, 19)]: true,
+
+      [utils.asGridCoord(5, 18)]: true,
+      [utils.asGridCoord(6, 18)]: true,
+      [utils.asGridCoord(5, 19)]: true,
+      [utils.asGridCoord(6, 19)]: true,
+
+      [utils.asGridCoord(22, 19)]: true,
+      [utils.asGridCoord(23, 19)]: true,
+      [utils.asGridCoord(22, 20)]: true,
+      [utils.asGridCoord(23, 20)]: true,
+
+
+      //Rocks
+      [utils.asGridCoord(3, 4)]: true,
+      [utils.asGridCoord(3, 4)]: true,
+      [utils.asGridCoord(4, 3)]: true,
+      [utils.asGridCoord(4, 4)]: true,
+      [utils.asGridCoord(11, 6)]: true,
+      [utils.asGridCoord(12, 6)]: true,
+      [utils.asGridCoord(19, 17)]: true,
+      [utils.asGridCoord(19, 18)]: true,
+      [utils.asGridCoord(20, 17)]: true,
+      [utils.asGridCoord(20, 18)]: true,
+
+
+      //Left Wall
+      [utils.asGridCoord(0, 0)]: true,
+      [utils.asGridCoord(0, 1)]: true,
+      [utils.asGridCoord(0, 2)]: true,
+      [utils.asGridCoord(0, 3)]: true,
+      [utils.asGridCoord(0, 4)]: true,
+      [utils.asGridCoord(0, 5)]: true,
+      [utils.asGridCoord(0, 6)]: true,
+      [utils.asGridCoord(0, 7)]: true,
+      [utils.asGridCoord(0, 8)]: true,
+      [utils.asGridCoord(0, 9)]: true,
+      [utils.asGridCoord(0, 10)]: true,
+      [utils.asGridCoord(0, 11)]: true,
+      [utils.asGridCoord(0, 12)]: true,
+      [utils.asGridCoord(0, 13)]: true,
+      [utils.asGridCoord(0, 14)]: true,
+      [utils.asGridCoord(0, 15)]: true,
+      [utils.asGridCoord(0, 16)]: true,
+      [utils.asGridCoord(0, 17)]: true,
+      [utils.asGridCoord(0, 18)]: true,
+      [utils.asGridCoord(0, 19)]: true,
+      [utils.asGridCoord(0, 20)]: true,
+      [utils.asGridCoord(0, 21)]: true,
+      [utils.asGridCoord(0, 22)]: true,
+      [utils.asGridCoord(0, 23)]: true,
+      [utils.asGridCoord(0, 24)]: true,
+
+      //Top Wall
+      [utils.asGridCoord(1, 0)]: true,
+      [utils.asGridCoord(2, 0)]: true,
+      [utils.asGridCoord(3, 0)]: true,
+      [utils.asGridCoord(4, 0)]: true,
+      [utils.asGridCoord(5, 0)]: true,
+      [utils.asGridCoord(6, 0)]: true,
+      [utils.asGridCoord(7, 0)]: true,
+      [utils.asGridCoord(8, 0)]: true,
+      [utils.asGridCoord(9, 0)]: true,
+      [utils.asGridCoord(10, 0)]: true,
+      [utils.asGridCoord(11, 0)]: true,
+      [utils.asGridCoord(12, 0)]: true,
+      [utils.asGridCoord(13, 0)]: true,
+      [utils.asGridCoord(14, 0)]: true,
+      [utils.asGridCoord(15, 0)]: true,
+      [utils.asGridCoord(16, 0)]: true,
+      [utils.asGridCoord(17, 0)]: true,
+      [utils.asGridCoord(18, 0)]: true,
+      [utils.asGridCoord(19, 0)]: true,
+      [utils.asGridCoord(20, 0)]: true,
+      [utils.asGridCoord(21, 0)]: true,
+      [utils.asGridCoord(22, 0)]: true,
+      [utils.asGridCoord(23, 0)]: true,
+      [utils.asGridCoord(24, 0)]: true,
+      [utils.asGridCoord(25, 0)]: true,
+
+      //Bottom Wall
+      [utils.asGridCoord(0, 23)]: true,
+      [utils.asGridCoord(1, 23)]: true,
+      [utils.asGridCoord(2, 23)]: true,
+      [utils.asGridCoord(3, 23)]: true,
+      [utils.asGridCoord(4, 23)]: true,
+      [utils.asGridCoord(5, 23)]: true,
+      [utils.asGridCoord(6, 23)]: true,
+      [utils.asGridCoord(7, 23)]: true,
+      [utils.asGridCoord(8, 23)]: true,
+      [utils.asGridCoord(9, 23)]: true,
+      [utils.asGridCoord(10, 23)]: true,
+      [utils.asGridCoord(11, 23)]: true,
+      [utils.asGridCoord(12, 23)]: true,
+      [utils.asGridCoord(13, 23)]: true,
+      [utils.asGridCoord(14, 23)]: true,
+      [utils.asGridCoord(15, 23)]: true,
+      [utils.asGridCoord(16, 23)]: true,
+      [utils.asGridCoord(17, 23)]: true,
+      [utils.asGridCoord(18, 23)]: true,
+      [utils.asGridCoord(19, 23)]: true,
+      [utils.asGridCoord(20, 23)]: true,
+      [utils.asGridCoord(21, 23)]: true,
+      [utils.asGridCoord(22, 23)]: true,
+      [utils.asGridCoord(23, 23)]: true,
+      [utils.asGridCoord(24, 23)]: true,
+      [utils.asGridCoord(25, 23)]: true,
+      [utils.asGridCoord(26, 23)]: true,
+   
+
+      //Right Wall
+      [utils.asGridCoord(25, 0)]: true,
+      [utils.asGridCoord(25, 1)]: true,
+      [utils.asGridCoord(25, 2)]: true,
+      [utils.asGridCoord(25, 3)]: true,
+      [utils.asGridCoord(25, 4)]: true,
+      [utils.asGridCoord(25, 5)]: true,
+      [utils.asGridCoord(25, 6)]: true,
+      [utils.asGridCoord(25, 7)]: true,
+      [utils.asGridCoord(25, 8)]: true,
+      [utils.asGridCoord(25, 9)]: true,
+      [utils.asGridCoord(25, 10)]: true,
+      [utils.asGridCoord(25, 11)]: true,
+      [utils.asGridCoord(25, 12)]: true,
+      [utils.asGridCoord(25, 13)]: true,
+      [utils.asGridCoord(25, 14)]: true,
+      [utils.asGridCoord(25, 15)]: true,
+      [utils.asGridCoord(25, 16)]: true,
+      [utils.asGridCoord(25, 17)]: true,
+      [utils.asGridCoord(25, 18)]: true,
+      [utils.asGridCoord(25, 19)]: true,
+      [utils.asGridCoord(25, 20)]: true,
+      [utils.asGridCoord(25, 21)]: true,
+      [utils.asGridCoord(25, 22)]: true,
+      [utils.asGridCoord(25, 23)]: true,
+      [utils.asGridCoord(25, 24)]: true,
+    
+  
+  
+    },
+    cutsceneSpaces: {
+
+      [utils.asGridCoord(18, 1)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "ForestVillage",
+              x: utils.withGrid(53),
+              y: utils.withGrid(59),
+              direction: "up",
+            },
+          ],
+        },
+      ],
+
+    },
+
+    wildEncounterAreas: [
+      // Full encounter area from (1,1) to (24,22)
+      { xMin: 1, xMax: 24, yMin: 1, yMax: 22 },
+      
+      // Excluded area from (11,1) to (24,13)
+      // This won't be a valid encounter area
+      { xMin: 11, xMax: 24, yMin: 1, yMax: 13, exclude: true },
+    ],
+
+    healingSpot: {
+      x: 23,  // Healing area X-coordinate
+      y: 11,  // Healing area Y-coordinate
+      message: "You've been teleported to a healing area in the Mushroom Wild!",
+      heal: "partial",  // Healing type ("full" or "partial")
+    },
+
   },
 
   DemoRoom: {
@@ -234,6 +549,16 @@ window.OverworldMaps = {
         },
       ],
     },
+
+    wildEncounterAreas: [
+      {
+        xMin: utils.withGrid(0),
+        xMax: utils.withGrid(10),
+        yMin: utils.withGrid(0),
+        yMax: utils.withGrid(10),
+      },
+    ],
+
   },
 
   AlchemyRoom: {
@@ -393,148 +718,8 @@ window.OverworldMaps = {
       [utils.asGridCoord(12, 10)]: true,
     },
 
-    cutsceneSpaces: {
-      [utils.asGridCoord(5, 10)]: [
-        {
-          events: [
-            {
-              type: "changeMap",
-              map: "Street",
-              x: utils.withGrid(29),
-              y: utils.withGrid(9),
-              direction: "down",
-            },
-          ],
-        },
-      ],
-    },
+
   },
 
-  Street: {
-    id: "Street",
-    lowerSrc: "./images/maps/StreetLower.png",
-    upperSrc: "./images/maps/StreetUpper.png",
-    gameObjects: {},
-    configObjects: {
-      hero: {
-        type: "Person",
-        isPlayerControlled: true,
-        x: utils.withGrid(30),
-        y: utils.withGrid(10),
-      },
-    },
 
-    walls: (function () {
-      let walls = {};
-      [
-        "4,9",
-        "5,8",
-        "6,9",
-        "7,9",
-        "8,9",
-        "9,9",
-        "10,9",
-        "11,9",
-        "12,9",
-        "13,8",
-        "14,8",
-        "15,7",
-        "16,7",
-        "17,7",
-        "18,7",
-        "19,7",
-        "20,7",
-        "21,7",
-        "22,7",
-        "23,7",
-        "24,7",
-        "24,6",
-        "24,5",
-        "26,5",
-        "26,6",
-        "26,7",
-        "27,7",
-        "28,8",
-        "28,9",
-        "29,8",
-        "30,9",
-        "31,9",
-        "32,9",
-        "33,9",
-        "16,9",
-        "17,9",
-        "25,9",
-        "26,9",
-        "16,10",
-        "17,10",
-        "25,10",
-        "26,10",
-        "16,11",
-        "17,11",
-        "25,11",
-        "26,11",
-        "18,11",
-        "19,11",
-        "4,14",
-        "5,14",
-        "6,14",
-        "7,14",
-        "8,14",
-        "9,14",
-        "10,14",
-        "11,14",
-        "12,14",
-        "13,14",
-        "14,14",
-        "15,14",
-        "16,14",
-        "17,14",
-        "18,14",
-        "19,14",
-        "20,14",
-        "21,14",
-        "22,14",
-        "23,14",
-        "24,14",
-        "25,14",
-        "26,14",
-        "27,14",
-        "28,14",
-        "29,14",
-        "30,14",
-        "31,14",
-        "32,14",
-        "33,14",
-        "3,10",
-        "3,11",
-        "3,12",
-        "3,13",
-        "34,10",
-        "34,11",
-        "34,12",
-        "34,13",
-        "29,8",
-        "25,4",
-      ].forEach((coord) => {
-        let [x, y] = coord.split(",");
-        walls[utils.asGridCoord(x, y)] = true;
-      });
-      return walls;
-    })(),
-    cutsceneSpaces: {
-      [utils.asGridCoord(29, 9)]: [
-        {
-          events: [
-            {
-              type: "changeMap",
-              map: "AlchemyRoom",
-              x: utils.withGrid(5),
-              y: utils.withGrid(10),
-              direction: "up",
-            },
-          ],
-        },
-      ],
-    },
-  },
 };

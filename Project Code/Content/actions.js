@@ -62,7 +62,7 @@ window.Actions = {
     description: "The user spits poison at the enemy, leaving the enemy dazed.",
     success: [
       { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
-      { type: "animation", animation: "glob", color: "#dafd2a" },
+      { type: "animation", animation: "paralyzingSpit", color: "#dafd2a" },
       { type: "stateChange", status: { type: "dazed", expiresIn: 3 } },
       {
         type: "textMessage",
@@ -76,7 +76,7 @@ window.Actions = {
       "The user flaps their wings, scattering dust around the environment and leaving the enemy dazed.",
     success: [
       { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
-      { type: "animation", animation: "glob", color: "#dafd2a" },
+      { type: "animation", animation: "paralyzingDust" },
       { type: "stateChange", status: { type: "dazed", expiresIn: 3 } },
       {
         type: "textMessage",
@@ -104,6 +104,62 @@ window.Actions = {
       { type: "stateChange", damage: 20 },
     ],
   },
+  thunderJolt: {
+    name: "Thunder Jolt",
+    description: "The user releases a sudden jolt of electricity, shocking the enemy.",
+    success: [
+      { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
+      { type: "animation", animation: "electricZap" },
+      { type: "stateChange", damage: 25 },
+    ],
+  },
+  naturesGrasp: {
+    name: "Nature's Grasp",
+    description: "The user summons vines and roots from the ground to trap the enemy.",
+    success: [
+      { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
+      { type: "animation", animation: "vineWhip" },
+      { type: "stateChange", status: { type: "dazed", expiresIn: 2 } },
+      { type: "textMessage", text: "{TARGET} is entangled and dazed!" },
+    ],
+  },
+  shroudStep: {
+    name: "Shroud Step",
+    description: "The user fades into the shadows, dodging the next attack.",
+    success: [
+      { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
+      { type: "animation", animation: "shadowVanish" },
+      { type: "stateChange", status: { type: "evade", expiresIn: 1 } },
+      { type: "textMessage", text: "{CASTER} is ready to dodge the next attack!" },
+    ],
+  },
+  galeBurst: {
+    name: "Gale Burst",
+    description: "The user summons a powerful gust of wind to knock back the enemy.",
+    success: [
+      { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
+      { type: "animation", animation: "windBlast" },
+      { type: "stateChange", damage: 20 },
+    ],
+  },
+  recoverPulse: {
+    name: "Recover Pulse",
+    description: "The user surrounds themselves in healing energy, recovering some health over time.",
+    success: [
+      { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
+      { type: "stateChange", status: { type: "recover", expiresIn: 3 } },
+      { type: "textMessage", text: "{CASTER} will recover health for a while!" },
+    ],
+  },
+  grandRenewal: {
+    name: "Grand Renewal",
+    description: "The user invokes a greater healing aura, recovering large amounts of health over time.",
+    success: [
+      { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
+      { type: "stateChange", status: { type: "recover", expiresIn: 5 } },
+      { type: "textMessage", text: "{CASTER} will recover health for a long time!" },
+    ],
+  },
 
   // Items
   item_recoverStatus: {
@@ -127,4 +183,16 @@ window.Actions = {
       { type: "textMessage", text: "{CASTER} recovers health!" },
     ],
   },
+
+  //Atempt to Capture a Wild Evolisk
+  catchDisc: {
+    name: "Capture Disc",
+    description: "Throw a capture disc to try and catch the wild Evolisk.",
+    success: [
+      { type: "textMessage", text: "You throw a {ACTION}!" },
+      { type: "attemptCatch" },
+    ],
+    targetType: "enemy",
+  },
+  
 };

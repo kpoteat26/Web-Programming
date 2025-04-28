@@ -11,12 +11,20 @@ class Person extends GameObject {
 
     this.isPlayerControlled = config.isPlayerControlled || false;
 
+    this.isPerson = true;
+
     this.directionUpdate = {
       up: ["y", -1],
       down: ["y", 1],
       left: ["x", -1],
       right: ["x", 1],
     };
+  }
+
+  mount(map) {
+    this.map = map;
+    super.mount(map); // <--- call the parent GameObject's mount function too
+    console.log("mounting!");
   }
 
   // Updates the character's state
@@ -95,6 +103,15 @@ class Person extends GameObject {
       utils.emitEvent("PersonWalkingComplete", {
         whoId: this.id,
       });
+
+      if (this.isPlayerControlled) {
+        const heroTileX = Math.floor(this.x / 16);
+        const heroTileY = Math.floor(this.y / 16);
+        console.log(`📍 Hero is at tile (${heroTileX}, ${heroTileY})`);
+
+        this.checkForWildEncounter();
+      }
+      
     }
   }
 
@@ -106,4 +123,52 @@ class Person extends GameObject {
     }
     this.sprite.setAnimation("idle-" + this.direction);
   }
+
+  
+
+  checkForWildEncounter() {
+    const hero = this.map.gameObjects["hero"];
+    const heroTileX = Math.floor(hero.x / 16);
+    const heroTileY = Math.floor(hero.y / 16);
+  
+    if (!this.map.wildEncounterAreas) {
+      return;
+    }
+  
+    // Check if player is in any encounter area, excluding the forbidden zone
+    const isInWildEncounterArea = this.map.wildEncounterAreas.some(area => {
+      // Skip encounter if inside the exclusion area (11,1) to (24,13)
+      if (heroTileX >= 11 && heroTileX <= 24 && heroTileY >= 1 && heroTileY <= 13) {
+        return false; // Exclude this area from encounters
+      }
+      
+      // Proceed with the normal encounter check
+      return heroTileX >= area.xMin && heroTileX <= area.xMax &&
+             heroTileY >= area.yMin && heroTileY <= area.yMax;
+    });
+  
+    // If player is in a valid encounter area, trigger encounter
+    if (isInWildEncounterArea) {
+      console.log(`Player is inside an encounter zone!`);
+  
+      // If the player is in a valid zone, and the roll is under the 15% chance
+      if (Math.random() < 0.15) {
+        console.log("Wild Encounter triggered!");
+        utils.emitEvent("WildEncounter");
+      }
+    } else {
+      console.log("Player is not inside any encounter zone.");
+    }
+  }
+  
+  
+  
+  
+  
+  
+
+
+  
 }
+
+

@@ -34,7 +34,7 @@ window.Evolisks = {
     type: EvoliskTypes.naturalist,
     src: "./images/characters/evolisks/LumivyreBattleEnemy.png",
     icon: "./images/icons/Naturalist.png",
-    actions: ["astralCoil", "ghostFang", "paralyzingSpit"],
+    actions: ["mesmerizingGaze", "recoverPulse", "paralyzingDust"],
   },
   ee004: {
     name: "Ghobun",
@@ -43,7 +43,7 @@ window.Evolisks = {
     type: EvoliskTypes.shadow,
     src: "./images/characters/evolisks/GhobunBattleTamed.png",
     icon: "./images/icons/Shadow.png",
-    actions: [],
+    actions: ["phantomCharge", "recoverPulse", "shroudStep"],
   },
   ee005: {
     name: "Juzafrigi",
@@ -52,7 +52,7 @@ window.Evolisks = {
     type: EvoliskTypes.naturalist,
     src: "./images/characters/evolisks/JuzafrigiBattleTamed.png",
     icon: "./images/icons/Naturalist.png",
-    actions: [],
+    actions: ["naturesGrasp", "recoverPulse", "mesmerizingGaze"],
   },
   ee006: {
     name: "Jydistorm",
@@ -61,7 +61,7 @@ window.Evolisks = {
     type: EvoliskTypes.mythic,
     src: "./images/characters/evolisks/JydiStormBattleTamed.png",
     icon: "./images/icons/Mythic.png",
-    actions: [],
+    actions: ["mesmerizingGaze", "paralyzingDust", "thunderJolt"],
   },
   ee007: {
     name: "Leaflin",
@@ -70,7 +70,7 @@ window.Evolisks = {
     type: EvoliskTypes.naturalist,
     src: "./images/characters/evolisks/LeaflinBattleTamed.png",
     icon: "./images/icons/Naturalist.png",
-    actions: [],
+    actions: ["grandRenewal", "naturesGrasp", "galeBurst"],
   },
   ee008: {
     name: "Nimbz",
@@ -79,7 +79,7 @@ window.Evolisks = {
     type: EvoliskTypes.mythic,
     src: "./images/characters/evolisks/NimbzBattleTamed.png",
     icon: "./images/icons/Mythic.png",
-    actions: [],
+    actions: ["thunderJolt", "windCutter", "galeBurst"],
   },
 
   // Player Evolisks
@@ -106,7 +106,7 @@ window.Evolisks = {
     type: EvoliskTypes.naturalist,
     src: "./images/characters/evolisks/LumivyreBattleTamed.png",
     icon: "./images/icons/Naturalist.png",
-    actions: ["mesmerizingGaze", "windCutter", "paralyzingDust"],
+    actions: ["mesmerizingGaze", "recoverPulse", "paralyzingDust"],
   },
   ep004: {
     name: "Ghobun",
@@ -115,7 +115,7 @@ window.Evolisks = {
     type: EvoliskTypes.shadow,
     src: "./images/characters/evolisks/GhobunBattleTamed.png",
     icon: "./images/icons/Shadow.png",
-    actions: [],
+    actions: ["phantomCharge", "recoverPulse", "shroudStep"],
   },
   ep005: {
     name: "Juzafrigi",
@@ -124,7 +124,7 @@ window.Evolisks = {
     type: EvoliskTypes.naturalist,
     src: "./images/characters/evolisks/JuzafrigiBattleTamed.png",
     icon: "./images/icons/Naturalist.png",
-    actions: [],
+    actions: ["naturesGrasp", "recoverPulse", "mesmerizingGaze"],
   },
   ep006: {
     name: "Jydistorm",
@@ -133,7 +133,7 @@ window.Evolisks = {
     type: EvoliskTypes.mythic,
     src: "./images/characters/evolisks/JydiStormBattleTamed.png",
     icon: "./images/icons/Mythic.png",
-    actions: [],
+    actions: ["mesmerizingGaze", "paralyzingDust", "thunderJolt"],
   },
   ep007: {
     name: "Leaflin",
@@ -142,7 +142,7 @@ window.Evolisks = {
     type: EvoliskTypes.naturalist,
     src: "./images/characters/evolisks/LeaflinBattleTamed.png",
     icon: "./images/icons/Naturalist.png",
-    actions: [],
+    actions: ["grandRenewal", "naturesGrasp", "galeBurst"],
   },
   ep008: {
     name: "Nimbz",
@@ -151,6 +151,6 @@ window.Evolisks = {
     type: EvoliskTypes.mythic,
     src: "./images/characters/evolisks/NimbzBattleTamed.png",
     icon: "./images/icons/Mythic.png",
-    actions: [],
+    actions: ["thunderJolt", "windCutter", "galeBurst"],
   },
 };

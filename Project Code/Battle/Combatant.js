@@ -112,10 +112,10 @@ class Combatant {
   }
 
   getPostEvents() {
-    if (this.status?.type === "saucy") {
+    if (this.status?.type === "recover") {
       return [
-        { type: "textMessage", text: "Feelin' saucy!" },
-        { type: "stateChange", recover: 5, onCaster: true },
+        { type: "textMessage", text: `${this.name} is recovered some health!` },
+        { type: "stateChange", recover: 10, onCaster: true },
       ];
     }
     return [];
@@ -130,7 +130,7 @@ class Combatant {
         });
         return {
           type: "textMessage",
-          text: "Status expired!",
+          text: `${this.name}'s ${this.status.type} wore off!`,
         };
       }
     }

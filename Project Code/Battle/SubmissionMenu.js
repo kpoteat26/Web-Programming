@@ -3,11 +3,12 @@
 */
 
 class SubmissionMenu {
-  constructor({ caster, enemy, onComplete, items, replacements }) {
+  constructor({ caster, enemy, onComplete, items, replacements, battle }) {
     this.caster = caster;
     this.enemy = enemy;
     this.replacements = replacements;
     this.onComplete = onComplete;
+    this.battle = battle;
 
     let quantityMap = {};
     items.forEach((item) => {
@@ -42,7 +43,6 @@ class SubmissionMenu {
           label: "Attack",
           description: "Choose an attack",
           handler: () => {
-            // Do something when chosen...
             this.keyboardMenu.setOptions(this.getPages().attacks);
           },
         },
@@ -50,7 +50,6 @@ class SubmissionMenu {
           label: "Items",
           description: "Choose an item",
           handler: () => {
-            // Go to items page...
             this.keyboardMenu.setOptions(this.getPages().items);
           },
         },
@@ -58,22 +57,28 @@ class SubmissionMenu {
           label: "Swap",
           description: "Change to another Evolisk",
           handler: () => {
-            // See evolisk options
             this.keyboardMenu.setOptions(this.getPages().replacements);
           },
         },
       ],
       attacks: [
-        ...this.caster.actions.map((key) => {
-          const action = Actions[key];
-          return {
-            label: action.name,
-            description: action.description,
-            handler: () => {
-              this.menuSubmit(action);
-            },
-          };
-        }),
+        ...this.caster.actions
+          .filter((key) => {
+            if (key === "catchNet" && !this.battle.isWildEncounter) {
+              return false; // Hide "Catch Net" if it's not a wild battle
+            }
+            return true;
+          })
+          .map((key) => {
+            const action = Actions[key];
+            return {
+              label: action.name,
+              description: action.description,
+              handler: () => {
+                this.menuSubmit(action);
+              },
+            };
+          }),
         backOption,
       ],
       items: [
@@ -117,10 +122,12 @@ class SubmissionMenu {
 
   menuSubmit(action, instanceId = null) {
     this.keyboardMenu?.end();
-
+  
+    const target = action.targetType === "friendly" ? this.caster : this.enemy;
+  
     this.onComplete({
       action,
-      target: action.targetType === "friendly" ? this.caster : this.enemy,
+      target,
       instanceId,
     });
   }

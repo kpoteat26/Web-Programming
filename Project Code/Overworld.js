@@ -91,6 +91,17 @@ class Overworld {
     });
   }
 
+  // Binds the wild encounter check
+bindWildEncounterCheck() {
+  document.addEventListener("WildEncounter", async () => {
+    if (!this.map.isCutscenePlaying) {
+      this.map.startCutscene([
+        { type: "wildBattle" }
+      ]);
+    }
+  });
+}
+
   // Starts the map
   startMap(mapConfig, heroInitialState = null) {
     this.map = new OverworldMap(mapConfig);
@@ -144,6 +155,7 @@ class Overworld {
     // Create Controls
     this.bindActionInput();
     this.bindHeroPositionCheck();
+    this.bindWildEncounterCheck();
 
     this.directionInput = new DirectionInput();
     this.directionInput.init();

@@ -26,17 +26,32 @@ class BattleEvent {
   async stateChange(resolve) {
     const { caster, target, damage, recover, status, action } = this.event;
     let who = this.event.onCaster ? caster : target;
-
+  
+    // 🛡️ Dodge check
+    if (damage && target.status?.type === "evade") {
+      const dodgeMessage = new TextMessage({
+        text: `${target.name} dodged the attack!`,
+        onComplete: () => {
+          resolve();
+        }
+      });
+      dodgeMessage.init(this.battle.element);
+  
+      target.update({
+        status: null,
+      });
+  
+      return;
+    }
+  
     if (damage) {
-      // Modify the target to have less HP
       target.update({
         hp: target.hp - damage,
       });
-
-      // Start blinking
+  
       target.evoliskElement.classList.add("battle-damage-blink");
     }
-
+  
     if (recover) {
       let newHp = who.hp + recover;
       if (newHp > who.maxHp) {
@@ -46,7 +61,7 @@ class BattleEvent {
         hp: newHp,
       });
     }
-
+  
     if (status) {
       who.update({
         status: { ...status },
@@ -57,15 +72,12 @@ class BattleEvent {
         status: null,
       });
     }
-
-    // Wait a little bit
+  
     await utils.wait(600);
-
-    // Update Team Components
+  
     this.battle.playerTeam.update();
     this.battle.enemyTeam.update();
-
-    // Stop blinking
+  
     target.evoliskElement.classList.remove("battle-damage-blink");
     resolve();
   }
@@ -76,6 +88,7 @@ class BattleEvent {
       caster: caster,
       enemy: this.event.enemy,
       items: this.battle.items,
+      battle: this.battle,
       replacements: Object.values(this.battle.combatants).filter((c) => {
         return c.id !== caster.id && c.team === caster.team && c.hp > 0;
       }),
@@ -151,7 +164,92 @@ class BattleEvent {
     fn(this.event, resolve);
   }
 
+  attemptCatch(resolve) {
+    const enemyTeam = Object.keys(this.battle.activeCombatants).find(team => team !== "player");
+    const enemyId = this.battle.activeCombatants[enemyTeam];
+    const target = this.battle.combatants[enemyId];
+  
+    if (!target) {
+      console.error("Capture error: enemy target not found!", { enemyId, activeCombatants: this.battle.activeCombatants });
+      resolve();
+      return;
+    }
+  
+    const hpPercent = target.hp / target.maxHp;
+    let baseCatchChance = 1;
+  
+    if (hpPercent < 0.25) {
+      baseCatchChance = 0.9;
+    } else if (hpPercent < 0.5) {
+      baseCatchChance = 0.7;
+    } else if (hpPercent < 0.75) {
+      baseCatchChance = 0.5;
+    } else {
+      baseCatchChance = 0.3;
+    }
+  
+    const didCatch = Math.random() < baseCatchChance;
+  
+    if (didCatch) {
+      window.playerState.addEvolisk(target.evoliskId);
+      const message = new TextMessage({
+        text: `You captured ${target.name}!`,
+        onComplete: () => {
+          this.battle.turnCycle.onWinner("player"); 
+        },
+      });
+      message.init(this.battle.element);
+    } else {
+      const message = new TextMessage({
+        text: `Oh no! ${target.name} escaped!`,
+        onComplete: async () => {
+          const battleElement = this.battle.element;
+          battleElement.classList.add("battle-shake");
+  
+          await utils.wait(300);
+  
+          battleElement.classList.remove("battle-shake");
+          resolve();
+        },
+      });
+      message.init(this.battle.element);
+    }
+  }
+  
+
+  showCapturePopup(name, resolve) {
+    const container = document.querySelector(".game-container");
+  
+    const popup = document.createElement("div");
+    popup.classList.add("capture-popup");
+    popup.innerHTML = `
+      <div class="capture-popup-inner">
+        🎉 You caught <strong>${name}</strong>!
+      </div>
+    `;
+  
+    container.appendChild(popup);
+  
+    // Animate popup appearance
+    popup.classList.add("pop-in");
+  
+    setTimeout(() => {
+      popup.classList.add("pop-out");
+      popup.addEventListener("animationend", () => {
+        popup.remove();
+        resolve({ caught: true });
+      }, { once: true });
+    }, 1500); // Show for 1.5 seconds
+  }
+  
+  
+
   init(resolve) {
+    if (this.event.action?.type === "catch") {
+      this.attemptCatch(resolve);
+      return;
+    }
+  
     this[this.event.type](resolve);
   }
 }

@@ -9,6 +9,7 @@ class Team {
     this.combatants = [];
   }
 
+
   createElement() {
     this.element = document.createElement("div");
     this.element.classList.add("Team");
@@ -36,6 +37,10 @@ class Team {
     });
   }
 
+  getFirstAlive() {
+    return this.combatants.find(c => c.hp > 0)?.id;
+  }
+
   update() {
     this.combatants.forEach((c) => {
       const icon = this.element.querySelector(`[data-combatant="${c.id}"]`);
@@ -49,4 +54,6 @@ class Team {
     this.update();
     container.appendChild(this.element);
   }
+
+
 }
