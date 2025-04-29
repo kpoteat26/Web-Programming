@@ -204,6 +204,41 @@ window.OverworldMaps = {
         y: utils.withGrid(30),
       },
     },
+    walls: {
+
+    },
+    cutsceneSpaces: {
+
+      [utils.asGridCoord(53, 59)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "MushroomWild",
+              x: utils.withGrid(18),
+              y: utils.withGrid(1),
+              direction: "down",
+            },
+          ],
+        },
+      ],
+
+      [utils.asGridCoord(74, 42)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "CanyonWild",
+              x: utils.withGrid(1),
+              y: utils.withGrid(9),
+              direction: "right",
+            },
+          ],
+        },
+      ],
+
+    },
+
   },
 
 
@@ -468,6 +503,299 @@ window.OverworldMaps = {
       message: "You've been teleported to a healing area in the Mushroom Wild!",
       heal: "partial",  // Healing type ("full" or "partial")
     },
+
+  },
+
+
+  CanyonWild: {
+    id: "CanyonWild",
+    lowerSrc: "./images/maps/CanyonLower.png",
+    upperSrc: "./images/maps/CanyonUpper.png",
+    battleBackgroundSrc: "./images/maps/CanyonBattleMap.png",
+    gameObjects: {},
+    configObjects: {
+      //Create Hero & NPCs & Events
+      hero: {
+        type: "Person",
+        isPlayerControlled: true,
+        x: utils.withGrid(1),
+        y: utils.withGrid(9),
+      },
+      npcA: {
+        type: "Person",
+        x: utils.withGrid(7),
+        y: utils.withGrid(6),
+        src: "./images/characters/people/Froggert_Enemy.png",
+        behaviorLoop: [
+          { type: "stand", direction: "left", time: 800 },
+          { type: "stand", direction: "up", time: 800 },
+          { type: "stand", direction: "right", time: 1200 },
+          { type: "stand", direction: "up", time: 300 },
+        ],
+        talking: [
+          {
+            events: [ 
+              { type: "textMessage", text: "Hello!", faceHero: "npcA" }
+            ]
+          }
+        ]
+      }
+
+    },
+    //Walls & Objects
+    walls: {
+
+      //Left Wall
+      [utils.asGridCoord(0, 0)]: true,
+      [utils.asGridCoord(0, 1)]: true,
+      [utils.asGridCoord(0, 2)]: true,
+      [utils.asGridCoord(0, 3)]: true,
+      [utils.asGridCoord(0, 4)]: true,
+      [utils.asGridCoord(0, 5)]: true,
+      [utils.asGridCoord(0, 6)]: true,
+      [utils.asGridCoord(0, 7)]: true,
+      [utils.asGridCoord(0, 8)]: true,
+      [utils.asGridCoord(0, 9)]: true,
+      [utils.asGridCoord(0, 10)]: true,
+      [utils.asGridCoord(0, 11)]: true,
+      [utils.asGridCoord(0, 12)]: true,
+      [utils.asGridCoord(0, 13)]: true,
+      [utils.asGridCoord(0, 14)]: true,
+      [utils.asGridCoord(0, 15)]: true,
+      [utils.asGridCoord(0, 16)]: true,
+      [utils.asGridCoord(0, 17)]: true,
+      [utils.asGridCoord(0, 18)]: true,
+      [utils.asGridCoord(0, 19)]: true,
+      [utils.asGridCoord(0, 20)]: true,
+      [utils.asGridCoord(0, 21)]: true,
+      [utils.asGridCoord(0, 22)]: true,
+
+      //Top Wall
+      [utils.asGridCoord(1, 0)]: true,
+      [utils.asGridCoord(2, 0)]: true,
+      [utils.asGridCoord(3, 0)]: true,
+      [utils.asGridCoord(4, 0)]: true,
+      [utils.asGridCoord(5, 0)]: true,
+      [utils.asGridCoord(6, 0)]: true,
+      [utils.asGridCoord(7, 0)]: true,
+      [utils.asGridCoord(8, 0)]: true,
+      [utils.asGridCoord(9, 0)]: true,
+      [utils.asGridCoord(10, 0)]: true,
+      [utils.asGridCoord(11, 0)]: true,
+      [utils.asGridCoord(12, 0)]: true,
+      [utils.asGridCoord(13, 0)]: true,
+      [utils.asGridCoord(14, 0)]: true,
+      [utils.asGridCoord(15, 0)]: true,
+      [utils.asGridCoord(16, 0)]: true,
+      [utils.asGridCoord(17, 0)]: true,
+      [utils.asGridCoord(18, 0)]: true,
+      [utils.asGridCoord(19, 0)]: true,
+      [utils.asGridCoord(20, 0)]: true,
+      [utils.asGridCoord(21, 0)]: true,
+      [utils.asGridCoord(22, 0)]: true,
+      [utils.asGridCoord(23, 0)]: true,
+      [utils.asGridCoord(24, 0)]: true,
+
+      //Right Wall
+      [utils.asGridCoord(25, 0)]: true,
+      [utils.asGridCoord(25, 1)]: true,
+      [utils.asGridCoord(25, 2)]: true,
+      [utils.asGridCoord(25, 3)]: true,
+      [utils.asGridCoord(25, 4)]: true,
+      [utils.asGridCoord(25, 5)]: true,
+      [utils.asGridCoord(25, 6)]: true,
+      [utils.asGridCoord(25, 7)]: true,
+      [utils.asGridCoord(25, 8)]: true,
+      [utils.asGridCoord(25, 9)]: true,
+      [utils.asGridCoord(25, 10)]: true,
+      [utils.asGridCoord(25, 11)]: true,
+      [utils.asGridCoord(25, 12)]: true,
+      [utils.asGridCoord(25, 13)]: true,
+      [utils.asGridCoord(25, 14)]: true,
+      [utils.asGridCoord(25, 15)]: true,
+      [utils.asGridCoord(25, 16)]: true,
+      [utils.asGridCoord(25, 17)]: true,
+      [utils.asGridCoord(25, 18)]: true,
+      [utils.asGridCoord(25, 19)]: true,
+      [utils.asGridCoord(25, 20)]: true,
+      [utils.asGridCoord(25, 21)]: true,
+      [utils.asGridCoord(25, 22)]: true,
+
+      //Bottom Wall
+      [utils.asGridCoord(1, 23)]: true,
+      [utils.asGridCoord(2, 23)]: true,
+      [utils.asGridCoord(3, 23)]: true,
+      [utils.asGridCoord(4, 23)]: true,
+      [utils.asGridCoord(5, 23)]: true,
+      [utils.asGridCoord(6, 23)]: true,
+      [utils.asGridCoord(7, 23)]: true,
+      [utils.asGridCoord(8, 23)]: true,
+      [utils.asGridCoord(9, 23)]: true,
+      [utils.asGridCoord(10, 23)]: true,
+      [utils.asGridCoord(11, 23)]: true,
+      [utils.asGridCoord(12, 23)]: true,
+      [utils.asGridCoord(13, 23)]: true,
+      [utils.asGridCoord(14, 23)]: true,
+      [utils.asGridCoord(15, 23)]: true,
+      [utils.asGridCoord(16, 23)]: true,
+      [utils.asGridCoord(17, 23)]: true,
+      [utils.asGridCoord(18, 23)]: true,
+      [utils.asGridCoord(19, 23)]: true,
+      [utils.asGridCoord(20, 23)]: true,
+      [utils.asGridCoord(21, 23)]: true,
+      [utils.asGridCoord(22, 23)]: true,
+      [utils.asGridCoord(23, 23)]: true,
+      [utils.asGridCoord(24, 23)]: true,
+
+      //River
+      [utils.asGridCoord(1, 5)]: true,
+      [utils.asGridCoord(2, 5)]: true,
+      [utils.asGridCoord(3, 5)]: true,
+      [utils.asGridCoord(3, 6)]: true,
+      [utils.asGridCoord(4, 6)]: true,
+      [utils.asGridCoord(5, 6)]: true,
+      [utils.asGridCoord(5, 7)]: true,
+      [utils.asGridCoord(6, 7)]: true,
+      [utils.asGridCoord(6, 8)]: true,
+      [utils.asGridCoord(6, 10)]: true,
+      [utils.asGridCoord(6, 11)]: true,
+      [utils.asGridCoord(6, 12)]: true,
+      [utils.asGridCoord(6, 13)]: true,
+
+      [utils.asGridCoord(7, 13)]: true,
+      [utils.asGridCoord(8, 13)]: true,
+      [utils.asGridCoord(9, 13)]: true,
+      [utils.asGridCoord(10, 13)]: true,
+      [utils.asGridCoord(11, 13)]: true,
+      [utils.asGridCoord(12, 13)]: true,
+      [utils.asGridCoord(13, 13)]: true,
+      [utils.asGridCoord(14, 13)]: true,
+      [utils.asGridCoord(15, 13)]: true,
+      [utils.asGridCoord(16, 13)]: true,
+      [utils.asGridCoord(17, 13)]: true,
+
+      [utils.asGridCoord(19, 13)]: true,
+      [utils.asGridCoord(20, 13)]: true,
+      [utils.asGridCoord(21, 13)]: true,
+      [utils.asGridCoord(22, 13)]: true,
+      [utils.asGridCoord(23, 13)]: true,
+      [utils.asGridCoord(24, 13)]: true,
+  
+
+      //Skull
+      [utils.asGridCoord(8, 10)]: true,
+      [utils.asGridCoord(8, 11)]: true,
+      [utils.asGridCoord(8, 12)]: true,
+
+      //Bushes
+      [utils.asGridCoord(3, 8)]: true,
+      [utils.asGridCoord(4, 11)]: true,
+      [utils.asGridCoord(10, 7)]: true,
+      [utils.asGridCoord(13, 11)]: true,
+      [utils.asGridCoord(21, 11)]: true,
+      [utils.asGridCoord(5, 2)]: true,
+      [utils.asGridCoord(12, 2)]: true,
+      [utils.asGridCoord(23, 7)]: true,
+      [utils.asGridCoord(23, 6)]: true,
+      [utils.asGridCoord(21, 19)]: true,
+      [utils.asGridCoord(21, 20)]: true,
+      [utils.asGridCoord(9, 15)]: true,
+      [utils.asGridCoord(9, 16)]: true,
+      [utils.asGridCoord(5, 19)]: true,
+      [utils.asGridCoord(5, 20)]: true,
+
+      //Canyon Walls
+      [utils.asGridCoord(1, 3)]: true,
+      [utils.asGridCoord(2, 3)]: true,
+      [utils.asGridCoord(3, 3)]: true,
+
+      [utils.asGridCoord(4, 4)]: true,
+      [utils.asGridCoord(5, 4)]: true,
+      [utils.asGridCoord(6, 4)]: true,
+
+      [utils.asGridCoord(7, 5)]: true,
+
+      [utils.asGridCoord(9, 5)]: true,
+      [utils.asGridCoord(10, 5)]: true,
+      [utils.asGridCoord(11, 5)]: true,
+      [utils.asGridCoord(12, 5)]: true,
+
+      [utils.asGridCoord(13, 4)]: true,
+      [utils.asGridCoord(14, 4)]: true,
+      [utils.asGridCoord(15, 4)]: true,
+      [utils.asGridCoord(16, 4)]: true,
+      [utils.asGridCoord(17, 4)]: true,
+
+      [utils.asGridCoord(18, 3)]: true,
+      [utils.asGridCoord(19, 3)]: true,
+      [utils.asGridCoord(20, 3)]: true,
+
+      [utils.asGridCoord(21, 4)]: true,
+      [utils.asGridCoord(22, 4)]: true,
+
+      [utils.asGridCoord(23, 3)]: true,
+      [utils.asGridCoord(24, 3)]: true,
+
+      //Rocks
+      [utils.asGridCoord(2, 11)]: true,
+
+      [utils.asGridCoord(10, 9)]: true,
+
+      [utils.asGridCoord(13, 3)]: true,
+
+      [utils.asGridCoord(20, 2)]: true,
+
+      [utils.asGridCoord(16, 11)]: true,
+
+      [utils.asGridCoord(19, 7)]: true,
+
+      [utils.asGridCoord(15, 16)]: true,
+
+      [utils.asGridCoord(6, 16)]: true,
+
+      //Trees
+      [utils.asGridCoord(13, 9)]: true,
+
+      [utils.asGridCoord(21, 17)]: true,
+
+      [utils.asGridCoord(12, 19)]: true,
+      [utils.asGridCoord(12, 20)]: true,
+
+      [utils.asGridCoord(3, 1)]: true,
+      [utils.asGridCoord(3, 2)]: true,
+
+    },
+
+    cutsceneSpaces: {
+
+      [utils.asGridCoord(1, 9)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "ForestVillage",
+              x: utils.withGrid(74),
+              y: utils.withGrid(42),
+              direction: "left",
+            },
+          ],
+        },
+      ],
+
+    },
+
+      
+    wildEncounterAreas: [
+
+      // Excluded Area (around Froggert at 7,6)
+      { xMin: 5, xMax: 9, yMin: 4, yMax: 8, exclude: true },
+      
+      // Full Encounter Zone (whole map)
+      { xMin: 1, xMax: 24, yMin: 1, yMax: 22 },
+    
+      
+    ],
+
 
   },
 
