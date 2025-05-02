@@ -9,12 +9,10 @@ class OverworldMap {
     this.gameObjects = {}; // Live Objects are in here
     this.configObjects = config.configObjects; //Configuration content
     this.wildEncounterAreas = config.wildEncounterAreas || []; //Encounter Tiles
-    this.healingSpot = config.healingSpot
-
+    this.healingSpot = config.healingSpot;
 
     this.cutsceneSpaces = config.cutsceneSpaces || {};
     this.walls = config.walls || {};
-    
 
     // Load the images
     this.lowerImage = new Image();
@@ -146,51 +144,46 @@ class OverworldMap {
       x: 5,
       y: 5,
       message: "You feel mysteriously refreshed.",
-      heal: "full"
+      heal: "full",
     };
-  
+
     if (!this.gameObjects["hero"]) {
       console.error("Hero object not found!");
       return;
     }
-  
+
     this.gameObjects["hero"].x = healingSpot.x * 16;
     this.gameObjects["hero"].y = healingSpot.y * 16;
-  
+
     const healingMessage = new TextMessage({
       text: healingSpot.message,
       onComplete: () => {
         this.healPlayerEvolisks(healingSpot.heal);
       },
     });
-  
+
     healingMessage.init(document.querySelector(".game-container"));
   }
-  
-  
 
   healPlayerEvolisks(healType) {
     const playerState = window.playerState;
-  
+
     if (healType === "full") {
-      Object.values(playerState.evolisks).forEach(evolisk => {
+      Object.values(playerState.evolisks).forEach((evolisk) => {
         evolisk.hp = evolisk.maxHp;
       });
       console.log(" All Evolisks healed to full HP!");
-    }
-    else if (healType === "partial") {
-      Object.values(playerState.evolisks).forEach(evolisk => {
+    } else if (healType === "partial") {
+      Object.values(playerState.evolisks).forEach((evolisk) => {
         evolisk.hp = Math.floor(evolisk.maxHp / 2);
       });
       console.log(" All Evolisks healed to 50% HP!");
     }
   }
-
 }
 
 // Collection of overworld maps
 window.OverworldMaps = {
-  
   ForestVillage: {
     id: "ForestVillage",
     lowerSrc: "./images/maps/ForestLower.png",
@@ -205,10 +198,474 @@ window.OverworldMaps = {
       },
     },
     walls: {
+      // rocks
+      [utils.asGridCoord(24, 33)]: true,
+      [utils.asGridCoord(25, 33)]: true,
+      [utils.asGridCoord(22, 37)]: true,
+
+      // signs
+      [utils.asGridCoord(26, 40)]: true,
+      [utils.asGridCoord(51, 44)]: true,
+      [utils.asGridCoord(58, 40)]: true,
+      [utils.asGridCoord(45, 21)]: true,
+
+      // trees
+      [utils.asGridCoord(37, 25)]: true,
+      [utils.asGridCoord(38, 25)]: true,
+      [utils.asGridCoord(42, 27)]: true,
+      [utils.asGridCoord(43, 27)]: true,
+
+      // house 1
+      [utils.asGridCoord(21, 27)]: true,
+      [utils.asGridCoord(21, 26)]: true,
+      [utils.asGridCoord(21, 25)]: true,
+      [utils.asGridCoord(21, 24)]: true,
+      [utils.asGridCoord(22, 27)]: true,
+      [utils.asGridCoord(23, 27)]: true,
+      [utils.asGridCoord(24, 27)]: true,
+      [utils.asGridCoord(25, 27)]: true,
+      [utils.asGridCoord(25, 26)]: true,
+      [utils.asGridCoord(25, 25)]: true,
+      [utils.asGridCoord(25, 24)]: true,
+      [utils.asGridCoord(22, 24)]: true,
+      [utils.asGridCoord(23, 24)]: true,
+      [utils.asGridCoord(24, 24)]: true,
+
+      // house 2
+      [utils.asGridCoord(39, 37)]: true,
+      [utils.asGridCoord(40, 37)]: true,
+      [utils.asGridCoord(41, 37)]: true,
+      [utils.asGridCoord(42, 37)]: true,
+      [utils.asGridCoord(43, 37)]: true,
+
+      [utils.asGridCoord(39, 34)]: true,
+      [utils.asGridCoord(40, 34)]: true,
+      [utils.asGridCoord(41, 34)]: true,
+      [utils.asGridCoord(42, 34)]: true,
+      [utils.asGridCoord(43, 34)]: true,
+
+      [utils.asGridCoord(39, 35)]: true,
+      [utils.asGridCoord(39, 36)]: true,
+
+      [utils.asGridCoord(43, 35)]: true,
+      [utils.asGridCoord(43, 36)]: true,
+
+      // house 3
+      [utils.asGridCoord(51, 37)]: true,
+      [utils.asGridCoord(52, 37)]: true,
+      [utils.asGridCoord(53, 37)]: true,
+      [utils.asGridCoord(54, 37)]: true,
+      [utils.asGridCoord(55, 37)]: true,
+
+      [utils.asGridCoord(51, 34)]: true,
+      [utils.asGridCoord(52, 34)]: true,
+      [utils.asGridCoord(53, 34)]: true,
+      [utils.asGridCoord(54, 34)]: true,
+      [utils.asGridCoord(55, 34)]: true,
+
+      [utils.asGridCoord(51, 35)]: true,
+      [utils.asGridCoord(51, 36)]: true,
+
+      [utils.asGridCoord(55, 35)]: true,
+      [utils.asGridCoord(55, 36)]: true,
+
+      // house 4
+      [utils.asGridCoord(51, 25)]: true,
+      [utils.asGridCoord(52, 25)]: true,
+      [utils.asGridCoord(53, 25)]: true,
+      [utils.asGridCoord(54, 25)]: true,
+      [utils.asGridCoord(55, 25)]: true,
+
+      [utils.asGridCoord(51, 22)]: true,
+      [utils.asGridCoord(52, 22)]: true,
+      [utils.asGridCoord(53, 22)]: true,
+      [utils.asGridCoord(54, 22)]: true,
+      [utils.asGridCoord(55, 22)]: true,
+
+      [utils.asGridCoord(51, 24)]: true,
+      [utils.asGridCoord(51, 23)]: true,
+
+      [utils.asGridCoord(55, 24)]: true,
+      [utils.asGridCoord(55, 23)]: true,
+
+      // first area
+      // left wall
+      [utils.asGridCoord(16, 19)]: true,
+      [utils.asGridCoord(16, 20)]: true,
+      [utils.asGridCoord(16, 21)]: true,
+      [utils.asGridCoord(16, 22)]: true,
+      [utils.asGridCoord(16, 23)]: true,
+      [utils.asGridCoord(16, 24)]: true,
+      [utils.asGridCoord(16, 25)]: true,
+      [utils.asGridCoord(16, 26)]: true,
+      [utils.asGridCoord(16, 27)]: true,
+      [utils.asGridCoord(16, 28)]: true,
+      [utils.asGridCoord(16, 29)]: true,
+      [utils.asGridCoord(16, 30)]: true,
+      [utils.asGridCoord(16, 31)]: true,
+      [utils.asGridCoord(16, 32)]: true,
+      [utils.asGridCoord(16, 33)]: true,
+      [utils.asGridCoord(16, 34)]: true,
+      [utils.asGridCoord(16, 35)]: true,
+      [utils.asGridCoord(16, 36)]: true,
+      [utils.asGridCoord(16, 37)]: true,
+      [utils.asGridCoord(16, 38)]: true,
+      [utils.asGridCoord(16, 39)]: true,
+      [utils.asGridCoord(16, 40)]: true,
+      [utils.asGridCoord(16, 41)]: true,
+      [utils.asGridCoord(16, 42)]: true,
+      [utils.asGridCoord(16, 43)]: true,
+      [utils.asGridCoord(16, 44)]: true,
+      [utils.asGridCoord(16, 45)]: true,
+      [utils.asGridCoord(16, 46)]: true,
+
+      // upper wall
+      [utils.asGridCoord(17, 18)]: true,
+      [utils.asGridCoord(18, 18)]: true,
+      [utils.asGridCoord(19, 18)]: true,
+      [utils.asGridCoord(20, 18)]: true,
+      [utils.asGridCoord(21, 18)]: true,
+      [utils.asGridCoord(22, 18)]: true,
+      [utils.asGridCoord(23, 18)]: true,
+      [utils.asGridCoord(24, 18)]: true,
+      [utils.asGridCoord(25, 18)]: true,
+      [utils.asGridCoord(26, 18)]: true,
+      [utils.asGridCoord(27, 18)]: true,
+      [utils.asGridCoord(28, 18)]: true,
+      [utils.asGridCoord(29, 18)]: true,
+
+      // right wall
+      [utils.asGridCoord(30, 19)]: true,
+      [utils.asGridCoord(30, 20)]: true,
+      [utils.asGridCoord(30, 21)]: true,
+      [utils.asGridCoord(30, 22)]: true,
+      [utils.asGridCoord(30, 23)]: true,
+      [utils.asGridCoord(30, 24)]: true,
+      [utils.asGridCoord(30, 25)]: true,
+      [utils.asGridCoord(30, 26)]: true,
+      [utils.asGridCoord(30, 27)]: true,
+      [utils.asGridCoord(30, 28)]: true,
+      [utils.asGridCoord(30, 29)]: true,
+      [utils.asGridCoord(30, 30)]: true,
+      [utils.asGridCoord(30, 31)]: true,
+      [utils.asGridCoord(30, 32)]: true,
+      [utils.asGridCoord(30, 33)]: true,
+      [utils.asGridCoord(30, 34)]: true,
+      [utils.asGridCoord(30, 35)]: true,
+      [utils.asGridCoord(30, 36)]: true,
+      [utils.asGridCoord(30, 37)]: true,
+      [utils.asGridCoord(30, 38)]: true,
+      [utils.asGridCoord(30, 39)]: true,
+      [utils.asGridCoord(31, 39)]: true,
+      [utils.asGridCoord(32, 39)]: true,
+      [utils.asGridCoord(30, 45)]: true,
+      [utils.asGridCoord(31, 45)]: true,
+      [utils.asGridCoord(32, 45)]: true,
+      [utils.asGridCoord(30, 46)]: true,
+
+      // bottom wall
+      [utils.asGridCoord(17, 47)]: true,
+      [utils.asGridCoord(18, 47)]: true,
+      [utils.asGridCoord(19, 47)]: true,
+      [utils.asGridCoord(20, 47)]: true,
+      [utils.asGridCoord(21, 47)]: true,
+      [utils.asGridCoord(22, 47)]: true,
+      [utils.asGridCoord(23, 47)]: true,
+      [utils.asGridCoord(24, 47)]: true,
+      [utils.asGridCoord(25, 47)]: true,
+      [utils.asGridCoord(26, 47)]: true,
+      [utils.asGridCoord(27, 47)]: true,
+      [utils.asGridCoord(28, 47)]: true,
+      [utils.asGridCoord(29, 47)]: true,
+
+      // main area
+      // left wall
+      [utils.asGridCoord(32, 19)]: true,
+      [utils.asGridCoord(32, 20)]: true,
+      [utils.asGridCoord(32, 21)]: true,
+      [utils.asGridCoord(32, 22)]: true,
+      [utils.asGridCoord(32, 23)]: true,
+      [utils.asGridCoord(32, 24)]: true,
+      [utils.asGridCoord(32, 25)]: true,
+      [utils.asGridCoord(32, 26)]: true,
+      [utils.asGridCoord(32, 27)]: true,
+      [utils.asGridCoord(32, 28)]: true,
+      [utils.asGridCoord(32, 29)]: true,
+      [utils.asGridCoord(32, 30)]: true,
+      [utils.asGridCoord(32, 31)]: true,
+      [utils.asGridCoord(32, 32)]: true,
+      [utils.asGridCoord(32, 33)]: true,
+      [utils.asGridCoord(32, 34)]: true,
+      [utils.asGridCoord(32, 35)]: true,
+      [utils.asGridCoord(32, 36)]: true,
+      [utils.asGridCoord(32, 37)]: true,
+      [utils.asGridCoord(32, 38)]: true,
+      [utils.asGridCoord(32, 46)]: true,
+
+      // upper wall
+      [utils.asGridCoord(33, 18)]: true,
+      [utils.asGridCoord(34, 18)]: true,
+      [utils.asGridCoord(35, 18)]: true,
+      [utils.asGridCoord(36, 18)]: true,
+      [utils.asGridCoord(37, 18)]: true,
+      [utils.asGridCoord(38, 18)]: true,
+      [utils.asGridCoord(39, 18)]: true,
+      [utils.asGridCoord(40, 18)]: true,
+      [utils.asGridCoord(41, 18)]: true,
+      [utils.asGridCoord(42, 18)]: true,
+      [utils.asGridCoord(43, 18)]: true,
+      [utils.asGridCoord(44, 18)]: true,
+      [utils.asGridCoord(45, 18)]: true,
+      
+      [utils.asGridCoord(49, 18)]: true,
+      [utils.asGridCoord(50, 18)]: true,
+      [utils.asGridCoord(51, 18)]: true,
+      [utils.asGridCoord(52, 18)]: true,
+      [utils.asGridCoord(53, 18)]: true,
+      [utils.asGridCoord(54, 18)]: true,
+      [utils.asGridCoord(55, 18)]: true,
+      [utils.asGridCoord(56, 18)]: true,
+      [utils.asGridCoord(57, 18)]: true,
+      [utils.asGridCoord(58, 18)]: true,
+      [utils.asGridCoord(59, 18)]: true,
+      [utils.asGridCoord(60, 18)]: true,
+      [utils.asGridCoord(61, 18)]: true,
+
+      // right wall
+      [utils.asGridCoord(62, 19)]: true,
+      [utils.asGridCoord(62, 20)]: true,
+      [utils.asGridCoord(62, 21)]: true,
+      [utils.asGridCoord(62, 22)]: true,
+      [utils.asGridCoord(62, 23)]: true,
+      [utils.asGridCoord(62, 24)]: true,
+      [utils.asGridCoord(62, 25)]: true,
+      [utils.asGridCoord(62, 26)]: true,
+      [utils.asGridCoord(62, 27)]: true,
+      [utils.asGridCoord(62, 28)]: true,
+      [utils.asGridCoord(62, 29)]: true,
+      [utils.asGridCoord(62, 30)]: true,
+      [utils.asGridCoord(62, 31)]: true,
+      [utils.asGridCoord(62, 32)]: true,
+      [utils.asGridCoord(62, 33)]: true,
+      [utils.asGridCoord(62, 34)]: true,
+      [utils.asGridCoord(62, 35)]: true,
+      [utils.asGridCoord(62, 36)]: true,
+      [utils.asGridCoord(62, 37)]: true,
+      [utils.asGridCoord(62, 38)]: true,
+      [utils.asGridCoord(62, 39)]: true,
+      [utils.asGridCoord(63, 39)]: true,
+      [utils.asGridCoord(64, 39)]: true,
+      [utils.asGridCoord(62, 45)]: true,
+      [utils.asGridCoord(63, 45)]: true,
+      [utils.asGridCoord(64, 45)]: true,
+      [utils.asGridCoord(62, 46)]: true,
+
+      // lower wall
+      [utils.asGridCoord(33, 47)]: true,
+      [utils.asGridCoord(34, 47)]: true,
+      [utils.asGridCoord(35, 47)]: true,
+      [utils.asGridCoord(36, 47)]: true,
+      [utils.asGridCoord(37, 47)]: true,
+      [utils.asGridCoord(38, 47)]: true,
+      [utils.asGridCoord(39, 47)]: true,
+      [utils.asGridCoord(40, 47)]: true,
+      [utils.asGridCoord(41, 47)]: true,
+      [utils.asGridCoord(42, 47)]: true,
+      [utils.asGridCoord(43, 47)]: true,
+      [utils.asGridCoord(44, 47)]: true,
+      [utils.asGridCoord(45, 47)]: true,
+      [utils.asGridCoord(46, 47)]: true,
+      [utils.asGridCoord(47, 47)]: true,
+      [utils.asGridCoord(48, 47)]: true,
+      [utils.asGridCoord(49, 47)]: true,
+      [utils.asGridCoord(50, 47)]: true,
+      [utils.asGridCoord(51, 47)]: true,
+      
+      [utils.asGridCoord(55, 47)]: true,
+      [utils.asGridCoord(56, 47)]: true,
+      [utils.asGridCoord(57, 47)]: true,
+      [utils.asGridCoord(58, 47)]: true,
+      [utils.asGridCoord(59, 47)]: true,
+      [utils.asGridCoord(60, 47)]: true,
+      [utils.asGridCoord(61, 47)]: true,
+
+      // lower cube
+      // hall
+      [utils.asGridCoord(51, 48)]: true,
+      [utils.asGridCoord(51, 49)]: true,
+      [utils.asGridCoord(51, 50)]: true,
+      [utils.asGridCoord(51, 51)]: true,
+      [utils.asGridCoord(50, 51)]: true,
+      [utils.asGridCoord(49, 51)]: true,
+
+      [utils.asGridCoord(55, 48)]: true,
+      [utils.asGridCoord(55, 49)]: true,
+      [utils.asGridCoord(55, 50)]: true,
+      [utils.asGridCoord(55, 51)]: true,
+      [utils.asGridCoord(56, 51)]: true,
+      [utils.asGridCoord(57, 51)]: true,
+
+      // left side
+      [utils.asGridCoord(48, 52)]: true,
+      [utils.asGridCoord(48, 53)]: true,
+      [utils.asGridCoord(48, 54)]: true,
+      [utils.asGridCoord(48, 55)]: true,
+      [utils.asGridCoord(48, 56)]: true,
+      [utils.asGridCoord(48, 57)]: true,
+      [utils.asGridCoord(48, 58)]: true,
+      [utils.asGridCoord(48, 59)]: true,
+
+      // right side
+      [utils.asGridCoord(58, 52)]: true,
+      [utils.asGridCoord(58, 53)]: true,
+      [utils.asGridCoord(58, 54)]: true,
+      [utils.asGridCoord(58, 55)]: true,
+      [utils.asGridCoord(58, 56)]: true,
+      [utils.asGridCoord(58, 57)]: true,
+      [utils.asGridCoord(58, 58)]: true,
+      [utils.asGridCoord(58, 59)]: true,
+
+      // back wall
+      [utils.asGridCoord(53, 60)]: true,
+
+      // right cube
+      // left wall
+      [utils.asGridCoord(64, 38)]: true,
+      [utils.asGridCoord(64, 46)]: true,
+
+      // bottom wall
+      [utils.asGridCoord(65, 47)]: true,
+      [utils.asGridCoord(66, 47)]: true,
+      [utils.asGridCoord(67, 47)]: true,
+      [utils.asGridCoord(68, 47)]: true,
+      [utils.asGridCoord(69, 47)]: true,
+      [utils.asGridCoord(70, 47)]: true,
+      [utils.asGridCoord(71, 47)]: true,
+      [utils.asGridCoord(72, 47)]: true,
+      [utils.asGridCoord(73, 47)]: true,
+
+      // top wall
+      [utils.asGridCoord(65, 37)]: true,
+      [utils.asGridCoord(66, 37)]: true,
+      [utils.asGridCoord(67, 37)]: true,
+      [utils.asGridCoord(68, 37)]: true,
+      [utils.asGridCoord(69, 37)]: true,
+      [utils.asGridCoord(70, 37)]: true,
+      [utils.asGridCoord(71, 37)]: true,
+      [utils.asGridCoord(72, 37)]: true,
+      [utils.asGridCoord(73, 37)]: true,
+
+      // back wall
+      [utils.asGridCoord(75, 42)]: true,
 
     },
     cutsceneSpaces: {
+      // houses
+      [utils.asGridCoord(23, 28)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "House1",
+              x: utils.withGrid(5),
+              y: utils.withGrid(10),
+              direction: "up",
+            },
+          ],
+        },
+      ],
+      [utils.asGridCoord(53, 26)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "House2",
+              x: utils.withGrid(5),
+              y: utils.withGrid(10),
+              direction: "up",
+            },
+          ],
+        },
+      ],
+      [utils.asGridCoord(41, 38)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "House3",
+              x: utils.withGrid(5),
+              y: utils.withGrid(10),
+              direction: "up",
+            },
+          ],
+        },
+      ],
+      [utils.asGridCoord(53, 38)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "House4",
+              x: utils.withGrid(5),
+              y: utils.withGrid(10),
+              direction: "up",
+            },
+          ],
+        },
+      ],
 
+      [utils.asGridCoord(57, 59)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "MushroomWild",
+              x: utils.withGrid(18),
+              y: utils.withGrid(1),
+              direction: "down",
+            },
+          ],
+        },
+      ],
+      [utils.asGridCoord(56, 59)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "MushroomWild",
+              x: utils.withGrid(18),
+              y: utils.withGrid(1),
+              direction: "down",
+            },
+          ],
+        },
+      ],
+      [utils.asGridCoord(55, 59)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "MushroomWild",
+              x: utils.withGrid(18),
+              y: utils.withGrid(1),
+              direction: "down",
+            },
+          ],
+        },
+      ],
+      [utils.asGridCoord(54, 59)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "MushroomWild",
+              x: utils.withGrid(18),
+              y: utils.withGrid(1),
+              direction: "down",
+            },
+          ],
+        },
+      ],
       [utils.asGridCoord(53, 59)]: [
         {
           events: [
@@ -222,7 +679,111 @@ window.OverworldMaps = {
           ],
         },
       ],
+      [utils.asGridCoord(52, 59)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "MushroomWild",
+              x: utils.withGrid(18),
+              y: utils.withGrid(1),
+              direction: "down",
+            },
+          ],
+        },
+      ],
+      [utils.asGridCoord(51, 59)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "MushroomWild",
+              x: utils.withGrid(18),
+              y: utils.withGrid(1),
+              direction: "down",
+            },
+          ],
+        },
+      ],
+      [utils.asGridCoord(50, 59)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "MushroomWild",
+              x: utils.withGrid(18),
+              y: utils.withGrid(1),
+              direction: "down",
+            },
+          ],
+        },
+      ],
+      [utils.asGridCoord(49, 59)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "MushroomWild",
+              x: utils.withGrid(18),
+              y: utils.withGrid(1),
+              direction: "down",
+            },
+          ],
+        },
+      ],
 
+      [utils.asGridCoord(74, 38)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "CanyonWild",
+              x: utils.withGrid(1),
+              y: utils.withGrid(9),
+              direction: "right",
+            },
+          ],
+        },
+      ],
+      [utils.asGridCoord(74, 39)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "CanyonWild",
+              x: utils.withGrid(1),
+              y: utils.withGrid(9),
+              direction: "right",
+            },
+          ],
+        },
+      ],
+      [utils.asGridCoord(74, 40)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "CanyonWild",
+              x: utils.withGrid(1),
+              y: utils.withGrid(9),
+              direction: "right",
+            },
+          ],
+        },
+      ],
+      [utils.asGridCoord(74, 41)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "CanyonWild",
+              x: utils.withGrid(1),
+              y: utils.withGrid(9),
+              direction: "right",
+            },
+          ],
+        },
+      ],
       [utils.asGridCoord(74, 42)]: [
         {
           events: [
@@ -236,11 +797,460 @@ window.OverworldMaps = {
           ],
         },
       ],
-
+      [utils.asGridCoord(74, 43)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "CanyonWild",
+              x: utils.withGrid(1),
+              y: utils.withGrid(9),
+              direction: "right",
+            },
+          ],
+        },
+      ],
+      [utils.asGridCoord(74, 44)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "CanyonWild",
+              x: utils.withGrid(1),
+              y: utils.withGrid(9),
+              direction: "right",
+            },
+          ],
+        },
+      ],
+      [utils.asGridCoord(74, 45)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "CanyonWild",
+              x: utils.withGrid(1),
+              y: utils.withGrid(9),
+              direction: "right",
+            },
+          ],
+        },
+      ],
+      [utils.asGridCoord(74, 46)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "CanyonWild",
+              x: utils.withGrid(1),
+              y: utils.withGrid(9),
+              direction: "right",
+            },
+          ],
+        },
+      ],
     },
-
   },
 
+  House1: {
+    id: "House1",
+    lowerSrc: "./images/maps/House1Lower.png",
+    upperSrc: "./images/maps/House1Upper.png",
+    gameObjects: {},
+    configObjects: {
+      hero: {
+        type: "Person",
+        isPlayerControlled: true,
+        x: utils.withGrid(5),
+        y: utils.withGrid(10),
+      },
+    },
+    walls: {
+      // tv
+      [utils.asGridCoord(7, 9)]: true,
+
+      // table
+      [utils.asGridCoord(4, 8)]: true,
+      [utils.asGridCoord(4, 7)]: true,
+      [utils.asGridCoord(3, 8)]: true,
+      [utils.asGridCoord(3, 7)]: true,
+      [utils.asGridCoord(2, 8)]: true,
+      [utils.asGridCoord(2, 7)]: true,
+
+      // couch
+      [utils.asGridCoord(6, 7)]: true,
+      [utils.asGridCoord(7, 7)]: true,
+      [utils.asGridCoord(8, 7)]: true,
+
+      // kitchen
+      [utils.asGridCoord(2, 5)]: true,
+      [utils.asGridCoord(2, 4)]: true,
+      [utils.asGridCoord(2, 3)]: true,
+
+      [utils.asGridCoord(4, 5)]: true,
+      [utils.asGridCoord(4, 4)]: true,
+      [utils.asGridCoord(4, 3)]: true,
+
+      [utils.asGridCoord(5, 5)]: true,
+      [utils.asGridCoord(5, 4)]: true,
+
+      // bed
+      [utils.asGridCoord(6, 3)]: true,
+      [utils.asGridCoord(7, 3)]: true,
+      [utils.asGridCoord(7, 4)]: true,
+      [utils.asGridCoord(8, 3)]: true,
+
+      // bottom wall
+      [utils.asGridCoord(2, 10)]: true,
+      [utils.asGridCoord(3, 10)]: true,
+      [utils.asGridCoord(4, 10)]: true,
+      [utils.asGridCoord(5, 11)]: true,
+      [utils.asGridCoord(6, 10)]: true,
+      [utils.asGridCoord(7, 10)]: true,
+      [utils.asGridCoord(8, 10)]: true,
+
+      // right wall
+      [utils.asGridCoord(9, 9)]: true,
+      [utils.asGridCoord(9, 8)]: true,
+      [utils.asGridCoord(9, 7)]: true,
+      [utils.asGridCoord(9, 6)]: true,
+      [utils.asGridCoord(9, 5)]: true,
+      [utils.asGridCoord(9, 4)]: true,
+      [utils.asGridCoord(9, 3)]: true,
+
+      // back wall
+      [utils.asGridCoord(8, 2)]: true,
+      [utils.asGridCoord(7, 2)]: true,
+      [utils.asGridCoord(6, 2)]: true,
+      [utils.asGridCoord(5, 2)]: true,
+      [utils.asGridCoord(4, 2)]: true,
+      [utils.asGridCoord(3, 2)]: true,
+      [utils.asGridCoord(2, 2)]: true,
+
+      // left wall
+      [utils.asGridCoord(1, 9)]: true,
+      [utils.asGridCoord(1, 8)]: true,
+      [utils.asGridCoord(1, 7)]: true,
+      [utils.asGridCoord(1, 6)]: true,
+      [utils.asGridCoord(1, 5)]: true,
+      [utils.asGridCoord(1, 4)]: true,
+      [utils.asGridCoord(1, 3)]: true,
+    },
+    cutsceneSpaces: {
+      [utils.asGridCoord(5, 10)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "ForestVillage",
+              x: utils.withGrid(23),
+              y: utils.withGrid(28),
+              direction: "down",
+            },
+          ],
+        },
+      ],
+    },
+  },
+
+  House2: {
+    id: "House2",
+    lowerSrc: "./images/maps/House2Lower.png",
+    upperSrc: "./images/maps/House2Upper.png",
+    gameObjects: {},
+    configObjects: {
+      hero: {
+        type: "Person",
+        isPlayerControlled: true,
+        x: utils.withGrid(5),
+        y: utils.withGrid(10),
+      },
+    },
+    walls: {
+      // table
+      [utils.asGridCoord(4, 8)]: true,
+      [utils.asGridCoord(4, 7)]: true,
+      [utils.asGridCoord(3, 8)]: true,
+      [utils.asGridCoord(3, 7)]: true,
+      [utils.asGridCoord(2, 8)]: true,
+      [utils.asGridCoord(2, 7)]: true,
+
+      // couch
+      [utils.asGridCoord(6, 7)]: true,
+      [utils.asGridCoord(7, 7)]: true,
+      [utils.asGridCoord(8, 7)]: true,
+
+      // kitchen
+      [utils.asGridCoord(2, 5)]: true,
+      [utils.asGridCoord(2, 4)]: true,
+      [utils.asGridCoord(2, 3)]: true,
+
+      [utils.asGridCoord(4, 5)]: true,
+      [utils.asGridCoord(4, 4)]: true,
+      [utils.asGridCoord(4, 3)]: true,
+
+      [utils.asGridCoord(5, 5)]: true,
+      [utils.asGridCoord(5, 4)]: true,
+
+      // bed
+      [utils.asGridCoord(6, 3)]: true,
+      [utils.asGridCoord(7, 3)]: true,
+      [utils.asGridCoord(7, 4)]: true,
+      [utils.asGridCoord(8, 3)]: true,
+
+      // bottom wall
+      [utils.asGridCoord(2, 10)]: true,
+      [utils.asGridCoord(3, 10)]: true,
+      [utils.asGridCoord(4, 10)]: true,
+      [utils.asGridCoord(5, 11)]: true,
+      [utils.asGridCoord(6, 10)]: true,
+      [utils.asGridCoord(7, 10)]: true,
+      [utils.asGridCoord(8, 10)]: true,
+
+      // right wall
+      [utils.asGridCoord(9, 9)]: true,
+      [utils.asGridCoord(9, 8)]: true,
+      [utils.asGridCoord(9, 7)]: true,
+      [utils.asGridCoord(9, 6)]: true,
+      [utils.asGridCoord(9, 5)]: true,
+      [utils.asGridCoord(9, 4)]: true,
+      [utils.asGridCoord(9, 3)]: true,
+
+      // back wall
+      [utils.asGridCoord(8, 2)]: true,
+      [utils.asGridCoord(7, 2)]: true,
+      [utils.asGridCoord(6, 2)]: true,
+      [utils.asGridCoord(5, 2)]: true,
+      [utils.asGridCoord(4, 2)]: true,
+      [utils.asGridCoord(3, 2)]: true,
+      [utils.asGridCoord(2, 2)]: true,
+
+      // left wall
+      [utils.asGridCoord(1, 9)]: true,
+      [utils.asGridCoord(1, 8)]: true,
+      [utils.asGridCoord(1, 7)]: true,
+      [utils.asGridCoord(1, 6)]: true,
+      [utils.asGridCoord(1, 5)]: true,
+      [utils.asGridCoord(1, 4)]: true,
+      [utils.asGridCoord(1, 3)]: true,
+    },
+    cutsceneSpaces: {
+      [utils.asGridCoord(5, 10)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "ForestVillage",
+              x: utils.withGrid(53),
+              y: utils.withGrid(26),
+              direction: "down",
+            },
+          ],
+        },
+      ],
+    },
+  },
+
+  House3: {
+    id: "House3",
+    lowerSrc: "./images/maps/House3Lower.png",
+    upperSrc: "./images/maps/House3Upper.png",
+    gameObjects: {},
+    configObjects: {
+      hero: {
+        type: "Person",
+        isPlayerControlled: true,
+        x: utils.withGrid(5),
+        y: utils.withGrid(10),
+      },
+    },
+    walls: {
+      // tv
+      [utils.asGridCoord(3, 9)]: true,
+
+      // table
+      [utils.asGridCoord(6, 8)]: true,
+      [utils.asGridCoord(6, 7)]: true,
+      [utils.asGridCoord(7, 8)]: true,
+      [utils.asGridCoord(7, 7)]: true,
+      [utils.asGridCoord(8, 8)]: true,
+      [utils.asGridCoord(8, 7)]: true,
+
+      // couch
+      [utils.asGridCoord(4, 7)]: true,
+      [utils.asGridCoord(3, 7)]: true,
+      [utils.asGridCoord(2, 7)]: true,
+
+      // kitchen
+      [utils.asGridCoord(8, 5)]: true,
+      [utils.asGridCoord(8, 4)]: true,
+      [utils.asGridCoord(8, 3)]: true,
+
+      [utils.asGridCoord(6, 5)]: true,
+      [utils.asGridCoord(6, 4)]: true,
+      [utils.asGridCoord(6, 3)]: true,
+
+      [utils.asGridCoord(5, 5)]: true,
+      [utils.asGridCoord(5, 4)]: true,
+
+      // bed
+      [utils.asGridCoord(4, 3)]: true,
+      [utils.asGridCoord(3, 3)]: true,
+      [utils.asGridCoord(3, 4)]: true,
+      [utils.asGridCoord(2, 3)]: true,
+
+      // bottom wall
+      [utils.asGridCoord(2, 10)]: true,
+      [utils.asGridCoord(3, 10)]: true,
+      [utils.asGridCoord(4, 10)]: true,
+      [utils.asGridCoord(5, 11)]: true,
+      [utils.asGridCoord(6, 10)]: true,
+      [utils.asGridCoord(7, 10)]: true,
+      [utils.asGridCoord(8, 10)]: true,
+
+      // right wall
+      [utils.asGridCoord(9, 9)]: true,
+      [utils.asGridCoord(9, 8)]: true,
+      [utils.asGridCoord(9, 7)]: true,
+      [utils.asGridCoord(9, 6)]: true,
+      [utils.asGridCoord(9, 5)]: true,
+      [utils.asGridCoord(9, 4)]: true,
+      [utils.asGridCoord(9, 3)]: true,
+
+      // back wall
+      [utils.asGridCoord(8, 2)]: true,
+      [utils.asGridCoord(7, 2)]: true,
+      [utils.asGridCoord(6, 2)]: true,
+      [utils.asGridCoord(5, 2)]: true,
+      [utils.asGridCoord(4, 2)]: true,
+      [utils.asGridCoord(3, 2)]: true,
+      [utils.asGridCoord(2, 2)]: true,
+
+      // left wall
+      [utils.asGridCoord(1, 9)]: true,
+      [utils.asGridCoord(1, 8)]: true,
+      [utils.asGridCoord(1, 7)]: true,
+      [utils.asGridCoord(1, 6)]: true,
+      [utils.asGridCoord(1, 5)]: true,
+      [utils.asGridCoord(1, 4)]: true,
+      [utils.asGridCoord(1, 3)]: true,
+    },
+    cutsceneSpaces: {
+      [utils.asGridCoord(5, 10)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "ForestVillage",
+              x: utils.withGrid(41),
+              y: utils.withGrid(38),
+              direction: "down",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  House4: {
+    id: "House4",
+    lowerSrc: "./images/maps/House4Lower.png",
+    upperSrc: "./images/maps/House4Upper.png",
+    gameObjects: {},
+    configObjects: {
+      hero: {
+        type: "Person",
+        isPlayerControlled: true,
+        x: utils.withGrid(5),
+        y: utils.withGrid(10),
+      },
+    },
+    walls: {
+      // tv
+      [utils.asGridCoord(3, 9)]: true,
+
+      // table
+      [utils.asGridCoord(6, 8)]: true,
+      [utils.asGridCoord(6, 7)]: true,
+      [utils.asGridCoord(7, 8)]: true,
+      [utils.asGridCoord(7, 7)]: true,
+      [utils.asGridCoord(8, 8)]: true,
+      [utils.asGridCoord(8, 7)]: true,
+
+      // couch
+      [utils.asGridCoord(4, 7)]: true,
+      [utils.asGridCoord(3, 7)]: true,
+      [utils.asGridCoord(2, 7)]: true,
+
+      // kitchen
+      [utils.asGridCoord(8, 5)]: true,
+      [utils.asGridCoord(8, 4)]: true,
+      [utils.asGridCoord(8, 3)]: true,
+
+      [utils.asGridCoord(6, 5)]: true,
+      [utils.asGridCoord(6, 4)]: true,
+      [utils.asGridCoord(6, 3)]: true,
+
+      [utils.asGridCoord(5, 5)]: true,
+      [utils.asGridCoord(5, 4)]: true,
+
+      // bed
+      [utils.asGridCoord(4, 3)]: true,
+      [utils.asGridCoord(3, 3)]: true,
+      [utils.asGridCoord(3, 4)]: true,
+      [utils.asGridCoord(2, 3)]: true,
+
+      // bottom wall
+      [utils.asGridCoord(2, 10)]: true,
+      [utils.asGridCoord(3, 10)]: true,
+      [utils.asGridCoord(4, 10)]: true,
+      [utils.asGridCoord(5, 11)]: true,
+      [utils.asGridCoord(6, 10)]: true,
+      [utils.asGridCoord(7, 10)]: true,
+      [utils.asGridCoord(8, 10)]: true,
+
+      // right wall
+      [utils.asGridCoord(9, 9)]: true,
+      [utils.asGridCoord(9, 8)]: true,
+      [utils.asGridCoord(9, 7)]: true,
+      [utils.asGridCoord(9, 6)]: true,
+      [utils.asGridCoord(9, 5)]: true,
+      [utils.asGridCoord(9, 4)]: true,
+      [utils.asGridCoord(9, 3)]: true,
+
+      // back wall
+      [utils.asGridCoord(8, 2)]: true,
+      [utils.asGridCoord(7, 2)]: true,
+      [utils.asGridCoord(6, 2)]: true,
+      [utils.asGridCoord(5, 2)]: true,
+      [utils.asGridCoord(4, 2)]: true,
+      [utils.asGridCoord(3, 2)]: true,
+      [utils.asGridCoord(2, 2)]: true,
+
+      // left wall
+      [utils.asGridCoord(1, 9)]: true,
+      [utils.asGridCoord(1, 8)]: true,
+      [utils.asGridCoord(1, 7)]: true,
+      [utils.asGridCoord(1, 6)]: true,
+      [utils.asGridCoord(1, 5)]: true,
+      [utils.asGridCoord(1, 4)]: true,
+      [utils.asGridCoord(1, 3)]: true,
+    },
+    cutsceneSpaces: {
+      [utils.asGridCoord(5, 10)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "ForestVillage",
+              x: utils.withGrid(53),
+              y: utils.withGrid(38),
+              direction: "down",
+            },
+          ],
+        },
+      ],
+    },
+  },
 
   MushroomWild: {
     id: "MushroomWild",
@@ -251,7 +1261,6 @@ window.OverworldMaps = {
 
     //Configure Objects in Map
     configObjects: {
-
       //Create Hero & NPCs
       hero: {
         type: "Person",
@@ -260,22 +1269,19 @@ window.OverworldMaps = {
         y: utils.withGrid(1),
       },
       npcA: {
-        type:"Person",
+        type: "Person",
         x: utils.withGrid(12),
         y: utils.withGrid(11),
         src: "./images/characters/people/Squelchy_NPC.png",
         talking: [
           {
-            events: [
-              {type: "textMessage", text: "Hello!", faceHero: "npcA"},
-            ]
-          }
-        ]
-      },      
+            events: [{ type: "textMessage", text: "Hello!", faceHero: "npcA" }],
+          },
+        ],
+      },
     },
     //Create Walls
     walls: {
-
       //Mushrooms
       [utils.asGridCoord(16, 1)]: true,
 
@@ -342,7 +1348,6 @@ window.OverworldMaps = {
       [utils.asGridCoord(22, 20)]: true,
       [utils.asGridCoord(23, 20)]: true,
 
-
       //Rocks
       [utils.asGridCoord(3, 4)]: true,
       [utils.asGridCoord(3, 4)]: true,
@@ -354,7 +1359,6 @@ window.OverworldMaps = {
       [utils.asGridCoord(19, 18)]: true,
       [utils.asGridCoord(20, 17)]: true,
       [utils.asGridCoord(20, 18)]: true,
-
 
       //Left Wall
       [utils.asGridCoord(0, 0)]: true,
@@ -438,7 +1442,6 @@ window.OverworldMaps = {
       [utils.asGridCoord(24, 23)]: true,
       [utils.asGridCoord(25, 23)]: true,
       [utils.asGridCoord(26, 23)]: true,
-   
 
       //Right Wall
       [utils.asGridCoord(25, 0)]: true,
@@ -466,12 +1469,8 @@ window.OverworldMaps = {
       [utils.asGridCoord(25, 22)]: true,
       [utils.asGridCoord(25, 23)]: true,
       [utils.asGridCoord(25, 24)]: true,
-    
-  
-  
     },
     cutsceneSpaces: {
-
       [utils.asGridCoord(18, 1)]: [
         {
           events: [
@@ -485,27 +1484,24 @@ window.OverworldMaps = {
           ],
         },
       ],
-
     },
 
     wildEncounterAreas: [
       // Full encounter area from (1,1) to (24,22)
       { xMin: 1, xMax: 24, yMin: 1, yMax: 22 },
-      
+
       // Excluded area from (11,1) to (24,13)
       // This won't be a valid encounter area
       { xMin: 11, xMax: 24, yMin: 1, yMax: 13, exclude: true },
     ],
 
     healingSpot: {
-      x: 23,  // Healing area X-coordinate
-      y: 11,  // Healing area Y-coordinate
+      x: 23, // Healing area X-coordinate
+      y: 11, // Healing area Y-coordinate
       message: "You've been teleported to a healing area in the Mushroom Wild!",
-      heal: "partial",  // Healing type ("full" or "partial")
+      heal: "partial", // Healing type ("full" or "partial")
     },
-
   },
-
 
   CanyonWild: {
     id: "CanyonWild",
@@ -534,17 +1530,13 @@ window.OverworldMaps = {
         ],
         talking: [
           {
-            events: [ 
-              { type: "textMessage", text: "Hello!", faceHero: "npcA" }
-            ]
-          }
-        ]
-      }
-
+            events: [{ type: "textMessage", text: "Hello!", faceHero: "npcA" }],
+          },
+        ],
+      },
     },
     //Walls & Objects
     walls: {
-
       //Left Wall
       [utils.asGridCoord(0, 0)]: true,
       [utils.asGridCoord(0, 1)]: true,
@@ -680,7 +1672,6 @@ window.OverworldMaps = {
       [utils.asGridCoord(22, 13)]: true,
       [utils.asGridCoord(23, 13)]: true,
       [utils.asGridCoord(24, 13)]: true,
-  
 
       //Skull
       [utils.asGridCoord(8, 10)]: true,
@@ -763,11 +1754,9 @@ window.OverworldMaps = {
 
       [utils.asGridCoord(3, 1)]: true,
       [utils.asGridCoord(3, 2)]: true,
-
     },
 
     cutsceneSpaces: {
-
       [utils.asGridCoord(1, 9)]: [
         {
           events: [
@@ -781,22 +1770,15 @@ window.OverworldMaps = {
           ],
         },
       ],
-
     },
 
-      
     wildEncounterAreas: [
-
       // Excluded Area (around Froggert at 7,6)
       { xMin: 5, xMax: 9, yMin: 4, yMax: 8, exclude: true },
-      
+
       // Full Encounter Zone (whole map)
       { xMin: 1, xMax: 24, yMin: 1, yMax: 22 },
-    
-      
     ],
-
-
   },
 
   DemoRoom: {
@@ -888,7 +1870,6 @@ window.OverworldMaps = {
         yMax: utils.withGrid(10),
       },
     ],
-
   },
 
   AlchemyRoom: {
@@ -1047,9 +2028,5 @@ window.OverworldMaps = {
       [utils.asGridCoord(11, 10)]: true,
       [utils.asGridCoord(12, 10)]: true,
     },
-
-
   },
-
-
 };
