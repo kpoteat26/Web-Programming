@@ -196,6 +196,23 @@ window.OverworldMaps = {
         x: utils.withGrid(23),
         y: utils.withGrid(30),
       },
+      elder_beetle: {
+        type: "Person",
+        x: utils.withGrid(40),
+        y: utils.withGrid(26),
+        src: "./images/characters/people/Elder_Beetle.png",
+        talking: [
+          {
+            events: [
+              {
+                type: "textMessage",
+                text: "Hello!",
+                faceHero: "elder_beetle",
+              },
+            ],
+          },
+        ],
+      },
     },
     walls: {
       // rocks
@@ -849,6 +866,19 @@ window.OverworldMaps = {
           ],
         },
       ],
+      [utils.asGridCoord(47, 5)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "ObservatoryExterior",
+              x: utils.withGrid(29),
+              y: utils.withGrid(56),
+              direction: "up",
+            },
+          ],
+        },
+      ],
     },
   },
 
@@ -1063,6 +1093,26 @@ window.OverworldMaps = {
         x: utils.withGrid(5),
         y: utils.withGrid(10),
       },
+      mr_beetle: {
+        type: "Person",
+        x: utils.withGrid(7),
+        y: utils.withGrid(4),
+        src: "./images/characters/people/Mr_Beetle.png",
+        behaviorLoop: [
+          { type: "stand", direction: "left", time: 1000 },
+        ],
+        talking: [
+          {
+            events: [
+              {
+                type: "textMessage",
+                text: "Hello!",
+                faceHero: "mr_beetle",
+              },
+            ],
+          },
+        ],
+      },
     },
     walls: {
       // tv
@@ -1162,6 +1212,27 @@ window.OverworldMaps = {
         isPlayerControlled: true,
         x: utils.withGrid(5),
         y: utils.withGrid(10),
+      },
+      
+      mr_beetle_2: {
+        type: "Person",
+        x: utils.withGrid(3),
+        y: utils.withGrid(8),
+        src: "./images/characters/people/Mr_Beetle_2.png",
+        behaviorLoop: [
+          { type: "stand", direction: "down", time: 1000 },
+        ],
+        talking: [
+          {
+            events: [
+              {
+                type: "textMessage",
+                text: "Hello!",
+                faceHero: "mr_beetle_2",
+              },
+            ],
+          },
+        ],
       },
     },
     walls: {
@@ -1779,6 +1850,103 @@ window.OverworldMaps = {
       // Full Encounter Zone (whole map)
       { xMin: 1, xMax: 24, yMin: 1, yMax: 22 },
     ],
+  },
+
+  ObservatoryExterior: {
+    id: "ObservatoryExterior",
+    lowerSrc: "./images/maps/ObservatoryExteriorLower.png",
+    upperSrc: "./images/maps/ObservatoryExteriorUpper.png",
+    gameObjects: {},
+    configObjects: {
+      hero: {
+        type: "Person",
+        isPlayerControlled: true,
+        x: utils.withGrid(5),
+        y: utils.withGrid(10),
+      },
+    },
+    walls: {
+    },
+    cutsceneSpaces: {
+      [utils.asGridCoord(29, 56)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "ForestVillage",
+              x: utils.withGrid(47),
+              y: utils.withGrid(5),
+              direction: "down",
+            },
+          ],
+        },
+      ],
+      [utils.asGridCoord(29, 27)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "ObservatoryInterior",
+              x: utils.withGrid(32),
+              y: utils.withGrid(55),
+              direction: "up",
+            },
+          ],
+        },
+      ],
+    },
+  },
+
+  ObservatoryInterior: {
+    id: "ObservatoryInterior",
+    lowerSrc: "./images/maps/ObservatoryLower.png",
+    upperSrc: "./images/maps/ObservatoryUpper.png",
+    gameObjects: {},
+    configObjects: {
+      hero: {
+        type: "Person",
+        isPlayerControlled: true,
+        x: utils.withGrid(5),
+        y: utils.withGrid(10),
+      },
+      kairo_boss: {
+        type: "Person",
+        x: utils.withGrid(32),
+        y: utils.withGrid(23),
+        src: "./images/characters/people/Kairo_Final_Boss.png",
+        behaviorLoop: [
+          { type: "stand", direction: "up", time: 100 },
+        ],
+        talking: [
+          {
+            events: [
+              {
+                type: "textMessage",
+                text: "Hello!",
+                faceHero: "kairo_boss",
+              },
+            ],
+          },
+        ],
+      },
+    },
+    walls: {
+    },
+    cutsceneSpaces: {
+      [utils.asGridCoord(32, 55)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "ObservatoryExterior",
+              x: utils.withGrid(29),
+              y: utils.withGrid(27),
+              direction: "down",
+            },
+          ],
+        },
+      ],
+    },
   },
 
   DemoRoom: {
