@@ -122,15 +122,16 @@ class Combatant {
   }
 
   decrementStatus() {
-    if (this.status?.expiresIn > 0) {
+    if (this.status && this.status.expiresIn > 0) {
       this.status.expiresIn -= 1;
       if (this.status.expiresIn === 0) {
+        const expiredStatus = this.status.type; // Save the status type before clearing
         this.update({
           status: null,
         });
         return {
           type: "textMessage",
-          text: `${this.name}'s ${this.status.type} wore off!`,
+          text: `${this.name}'s ${expiredStatus} wore off!`,
         };
       }
     }
