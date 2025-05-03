@@ -206,9 +206,10 @@ window.OverworldMaps = {
             events: [
               {
                 type: "textMessage",
-                text: "Hello!",
+                text: "Forest Complete!",
                 faceHero: "elder_beetle",
               },
+              { type: "addStoryFlag", flag: "FOREST_COMPLETE" },
             ],
           },
         ],
@@ -394,8 +395,8 @@ window.OverworldMaps = {
       [utils.asGridCoord(27, 47)]: true,
       [utils.asGridCoord(28, 47)]: true,
       [utils.asGridCoord(29, 47)]: true,
-
       // main area
+
       // left wall
       [utils.asGridCoord(32, 19)]: true,
       [utils.asGridCoord(32, 20)]: true,
@@ -433,7 +434,7 @@ window.OverworldMaps = {
       [utils.asGridCoord(43, 18)]: true,
       [utils.asGridCoord(44, 18)]: true,
       [utils.asGridCoord(45, 18)]: true,
-      
+
       [utils.asGridCoord(49, 18)]: true,
       [utils.asGridCoord(50, 18)]: true,
       [utils.asGridCoord(51, 18)]: true,
@@ -497,7 +498,7 @@ window.OverworldMaps = {
       [utils.asGridCoord(49, 47)]: true,
       [utils.asGridCoord(50, 47)]: true,
       [utils.asGridCoord(51, 47)]: true,
-      
+
       [utils.asGridCoord(55, 47)]: true,
       [utils.asGridCoord(56, 47)]: true,
       [utils.asGridCoord(57, 47)]: true,
@@ -575,6 +576,51 @@ window.OverworldMaps = {
       // back wall
       [utils.asGridCoord(75, 42)]: true,
 
+      // upper cube
+      // back wall
+      [utils.asGridCoord(45, 17)]: true,
+      [utils.asGridCoord(45, 16)]: true,
+      [utils.asGridCoord(45, 15)]: true,
+      [utils.asGridCoord(45, 14)]: true,
+      [utils.asGridCoord(44, 14)]: true,
+      [utils.asGridCoord(43, 14)]: true,
+      [utils.asGridCoord(49, 17)]: true,
+      [utils.asGridCoord(49, 16)]: true,
+      [utils.asGridCoord(49, 15)]: true,
+      [utils.asGridCoord(49, 14)]: true,
+      [utils.asGridCoord(50, 14)]: true,
+      [utils.asGridCoord(51, 14)]: true,
+
+      // right wall
+      [utils.asGridCoord(52, 13)]: true,
+      [utils.asGridCoord(52, 12)]: true,
+      [utils.asGridCoord(52, 11)]: true,
+      [utils.asGridCoord(52, 10)]: true,
+      [utils.asGridCoord(52, 9)]: true,
+      [utils.asGridCoord(52, 8)]: true,
+      [utils.asGridCoord(52, 7)]: true,
+
+      // left wall
+      [utils.asGridCoord(42, 13)]: true,
+      [utils.asGridCoord(42, 12)]: true,
+      [utils.asGridCoord(42, 11)]: true,
+      [utils.asGridCoord(42, 10)]: true,
+      [utils.asGridCoord(42, 9)]: true,
+      [utils.asGridCoord(42, 8)]: true,
+      [utils.asGridCoord(42, 7)]: true,
+
+      // top wall
+      [utils.asGridCoord(43, 6)]: true,
+      [utils.asGridCoord(44, 6)]: true,
+      [utils.asGridCoord(45, 6)]: true,
+      [utils.asGridCoord(45, 5)]: true,
+      [utils.asGridCoord(46, 4)]: true,
+      [utils.asGridCoord(47, 4)]: true,
+      [utils.asGridCoord(48, 4)]: true,
+      [utils.asGridCoord(49, 5)]: true,
+      [utils.asGridCoord(49, 6)]: true,
+      [utils.asGridCoord(50, 6)]: true,
+      [utils.asGridCoord(51, 6)]: true,
     },
     cutsceneSpaces: {
       // houses
@@ -633,6 +679,7 @@ window.OverworldMaps = {
 
       [utils.asGridCoord(57, 59)]: [
         {
+          required: ["FOREST_COMPLETE"],
           events: [
             {
               type: "changeMap",
@@ -640,12 +687,22 @@ window.OverworldMaps = {
               x: utils.withGrid(18),
               y: utils.withGrid(1),
               direction: "down",
+            },
+          ],
+        },
+        {
+          // This one plays if FOREST_COMPLETE is NOT set
+          events: [
+            {
+              type: "textMessage",
+              text: "The path is blocked. You should speak with the elder first.",
             },
           ],
         },
       ],
       [utils.asGridCoord(56, 59)]: [
         {
+          required: ["FOREST_COMPLETE"],
           events: [
             {
               type: "changeMap",
@@ -653,12 +710,22 @@ window.OverworldMaps = {
               x: utils.withGrid(18),
               y: utils.withGrid(1),
               direction: "down",
+            },
+          ],
+        },
+        {
+          // This one plays if FOREST_COMPLETE is NOT set
+          events: [
+            {
+              type: "textMessage",
+              text: "The path is blocked. You should speak with the elder first.",
             },
           ],
         },
       ],
       [utils.asGridCoord(55, 59)]: [
         {
+          required: ["FOREST_COMPLETE"],
           events: [
             {
               type: "changeMap",
@@ -666,12 +733,22 @@ window.OverworldMaps = {
               x: utils.withGrid(18),
               y: utils.withGrid(1),
               direction: "down",
+            },
+          ],
+        },
+        {
+          // This one plays if FOREST_COMPLETE is NOT set
+          events: [
+            {
+              type: "textMessage",
+              text: "The path is blocked. You should speak with the elder first.",
             },
           ],
         },
       ],
       [utils.asGridCoord(54, 59)]: [
         {
+          required: ["FOREST_COMPLETE"],
           events: [
             {
               type: "changeMap",
@@ -679,12 +756,22 @@ window.OverworldMaps = {
               x: utils.withGrid(18),
               y: utils.withGrid(1),
               direction: "down",
+            },
+          ],
+        },
+        {
+          // This one plays if FOREST_COMPLETE is NOT set
+          events: [
+            {
+              type: "textMessage",
+              text: "The path is blocked. You should speak with the elder first.",
             },
           ],
         },
       ],
       [utils.asGridCoord(53, 59)]: [
         {
+          required: ["FOREST_COMPLETE"],
           events: [
             {
               type: "changeMap",
@@ -692,12 +779,22 @@ window.OverworldMaps = {
               x: utils.withGrid(18),
               y: utils.withGrid(1),
               direction: "down",
+            },
+          ],
+        },
+        {
+          // This one plays if FOREST_COMPLETE is NOT set
+          events: [
+            {
+              type: "textMessage",
+              text: "The path is blocked. You should speak with the elder first.",
             },
           ],
         },
       ],
       [utils.asGridCoord(52, 59)]: [
         {
+          required: ["FOREST_COMPLETE"],
           events: [
             {
               type: "changeMap",
@@ -705,12 +802,22 @@ window.OverworldMaps = {
               x: utils.withGrid(18),
               y: utils.withGrid(1),
               direction: "down",
+            },
+          ],
+        },
+        {
+          // This one plays if FOREST_COMPLETE is NOT set
+          events: [
+            {
+              type: "textMessage",
+              text: "The path is blocked. You should speak with the elder first.",
             },
           ],
         },
       ],
       [utils.asGridCoord(51, 59)]: [
         {
+          required: ["FOREST_COMPLETE"],
           events: [
             {
               type: "changeMap",
@@ -718,12 +825,22 @@ window.OverworldMaps = {
               x: utils.withGrid(18),
               y: utils.withGrid(1),
               direction: "down",
+            },
+          ],
+        },
+        {
+          // This one plays if FOREST_COMPLETE is NOT set
+          events: [
+            {
+              type: "textMessage",
+              text: "The path is blocked. You should speak with the elder first.",
             },
           ],
         },
       ],
       [utils.asGridCoord(50, 59)]: [
         {
+          required: ["FOREST_COMPLETE"],
           events: [
             {
               type: "changeMap",
@@ -734,9 +851,19 @@ window.OverworldMaps = {
             },
           ],
         },
+        {
+          // This one plays if FOREST_COMPLETE is NOT set
+          events: [
+            {
+              type: "textMessage",
+              text: "The path is blocked. You should speak with the elder first.",
+            },
+          ],
+        },
       ],
       [utils.asGridCoord(49, 59)]: [
         {
+          required: ["FOREST_COMPLETE"],
           events: [
             {
               type: "changeMap",
@@ -744,6 +871,15 @@ window.OverworldMaps = {
               x: utils.withGrid(18),
               y: utils.withGrid(1),
               direction: "down",
+            },
+          ],
+        },
+        {
+          // This one plays if FOREST_COMPLETE is NOT set
+          events: [
+            {
+              type: "textMessage",
+              text: "The path is blocked. You should speak with the elder first.",
             },
           ],
         },
@@ -866,6 +1002,19 @@ window.OverworldMaps = {
           ],
         },
       ],
+      [utils.asGridCoord(46, 5)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "ObservatoryExterior",
+              x: utils.withGrid(28),
+              y: utils.withGrid(56),
+              direction: "up",
+            },
+          ],
+        },
+      ],
       [utils.asGridCoord(47, 5)]: [
         {
           events: [
@@ -873,6 +1022,19 @@ window.OverworldMaps = {
               type: "changeMap",
               map: "ObservatoryExterior",
               x: utils.withGrid(29),
+              y: utils.withGrid(56),
+              direction: "up",
+            },
+          ],
+        },
+      ],
+      [utils.asGridCoord(48, 5)]: [
+        {
+          events: [
+            {
+              type: "changeMap",
+              map: "ObservatoryExterior",
+              x: utils.withGrid(30),
               y: utils.withGrid(56),
               direction: "up",
             },
@@ -1105,9 +1267,7 @@ window.OverworldMaps = {
         x: utils.withGrid(7),
         y: utils.withGrid(4),
         src: "./images/characters/people/Mr_Beetle.png",
-        behaviorLoop: [
-          { type: "stand", direction: "left", time: 1000 },
-        ],
+        behaviorLoop: [{ type: "stand", direction: "left", time: 1000 }],
         talking: [
           {
             events: [
@@ -1220,15 +1380,13 @@ window.OverworldMaps = {
         x: utils.withGrid(5),
         y: utils.withGrid(10),
       },
-      
+
       mr_beetle_2: {
         type: "Person",
         x: utils.withGrid(3),
         y: utils.withGrid(8),
         src: "./images/characters/people/Mr_Beetle_2.png",
-        behaviorLoop: [
-          { type: "stand", direction: "down", time: 1000 },
-        ],
+        behaviorLoop: [{ type: "stand", direction: "down", time: 1000 }],
         talking: [
           {
             events: [
@@ -1353,7 +1511,14 @@ window.OverworldMaps = {
         src: "./images/characters/people/Squelchy_NPC.png",
         talking: [
           {
-            events: [{ type: "textMessage", text: "Hello!", faceHero: "npcA" }],
+            events: [
+              {
+                type: "textMessage",
+                text: "Mushroom Complete!",
+                faceHero: "npcA",
+              },
+              { type: "addStoryFlag", flag: "MUSHROOM_COMPLETE" },
+            ],
           },
         ],
       },
@@ -1608,7 +1773,14 @@ window.OverworldMaps = {
         ],
         talking: [
           {
-            events: [{ type: "textMessage", text: "Hello!", faceHero: "npcA" }],
+            events: [
+              {
+                type: "textMessage",
+                text: "Canyon Complete!",
+                faceHero: "npcA",
+              },
+              { type: "addStoryFlag", flag: "CANYON_COMPLETE" },
+            ],
           },
         ],
       },
@@ -2019,7 +2191,6 @@ window.OverworldMaps = {
 
       [utils.asGridCoord(25, 44)]: true,
       [utils.asGridCoord(33, 44)]: true,
-
     },
     cutsceneSpaces: {
       [utils.asGridCoord(28, 56)]: [
@@ -2120,9 +2291,7 @@ window.OverworldMaps = {
         x: utils.withGrid(32),
         y: utils.withGrid(23),
         src: "./images/characters/people/Kairo_Final_Boss.png",
-        behaviorLoop: [
-          { type: "stand", direction: "up", time: 100 },
-        ],
+        behaviorLoop: [{ type: "stand", direction: "up", time: 100 }],
         talking: [
           {
             events: [
@@ -2300,7 +2469,6 @@ window.OverworldMaps = {
 
       [utils.asGridCoord(27, 32)]: true,
       [utils.asGridCoord(29, 32)]: true,
-
 
       [utils.asGridCoord(35, 25)]: true,
       [utils.asGridCoord(36, 25)]: true,
