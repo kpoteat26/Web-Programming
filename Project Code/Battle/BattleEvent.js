@@ -27,7 +27,7 @@ class BattleEvent {
     const { caster, target, damage, recover, status, action } = this.event;
     let who = this.event.onCaster ? caster : target;
   
-    // 🛡️ Dodge check
+    //  Dodge check
     if (damage && target.status?.type === "evade") {
       const dodgeMessage = new TextMessage({
         text: `${target.name} dodged the attack!`,
@@ -137,7 +137,7 @@ class BattleEvent {
   giveXP(resolve) {
     let amount = this.event.xp;
     const { combatant } = this.event;
-    const step = () => {
+    const step = async () => {
       if (amount > 0) {
         amount -= 1;
         combatant.xp += 1;
@@ -147,6 +147,31 @@ class BattleEvent {
           combatant.xp = 0;
           combatant.maxXp = 100;
           combatant.level += 1;
+          // Mutation chance (Set to 0 so that it wont interfere with code for now
+          if (!combatant.isMutated && Math.random() < 0 && combatant.mutatedSrc) {
+            combatant.isMutated = true;
+            combatant.src = combatant.mutatedSrc;
+          
+            // Log before updating the image
+            console.log("🧬 Mutating:", {
+              before: combatant.evoliskElement?.querySelector("img")?.src,
+              after: combatant.mutatedSrc
+            });
+            console.log("⛏ spriteImg test:", combatant.spriteImg);
+            combatant.update();
+          
+            await new Promise((innerResolve) => {
+              const mutationEvent = new BattleEvent(
+                {
+                  type: "textMessage",
+                  text: `${combatant.name} has mutated!`,
+                },
+                this.battle
+              );
+              mutationEvent.init(innerResolve);
+            });
+          }
+
         }
 
         combatant.update();

@@ -1348,12 +1348,42 @@ window.OverworldMaps = {
       },
       npcA: {
         type: "Person",
-        x: utils.withGrid(12),
-        y: utils.withGrid(11),
+        x: utils.withGrid(19),
+        y: utils.withGrid(3),
         src: "./images/characters/people/Squelchy_NPC.png",
         talking: [
           {
-            events: [{ type: "textMessage", text: "Hello!", faceHero: "npcA" }],
+            events: [{ type: "textMessage", text: "Hello! Welcome to the Mushroom Kingdom! We hope you have fun exploring!", faceHero: "npcA" }],
+          },
+        ],
+      },
+      npcB: {
+        type: "Person",
+        x: utils.withGrid(12),
+        y: utils.withGrid(11),
+        src: "./images/characters/people/Squelchy_NPC_2.png",
+        talking: [
+          {
+            events: [{ type: "textMessage", text: "Hey there! Be careful in the grass! I hear you might encounter wild evolisks!", faceHero: "npcB" }],
+          },
+        ],
+      },
+      npcC: {
+        type: "Person",
+        x: utils.withGrid(4),
+        y: utils.withGrid(8),
+        src: "./images/characters/people/Squelchy_NPC_3.png",
+        events: [
+          {
+            type: "textMessage",
+            text: "Hey man! Feel like testing your strength?",
+            faceHero: "npcC",
+          },
+          { type: "battle", enemyId: "Squishy" },
+          {
+            type: "textMessage",
+            text: "You defeated me!",
+            faceHero: "npcC",
           },
         ],
       },
@@ -1600,15 +1630,39 @@ window.OverworldMaps = {
         x: utils.withGrid(7),
         y: utils.withGrid(6),
         src: "./images/characters/people/Froggert_Enemy.png",
-        behaviorLoop: [
-          { type: "stand", direction: "left", time: 800 },
-          { type: "stand", direction: "up", time: 800 },
-          { type: "stand", direction: "right", time: 1200 },
-          { type: "stand", direction: "up", time: 300 },
-        ],
         talking: [
           {
-            events: [{ type: "textMessage", text: "Hello!", faceHero: "npcA" }],
+            events: [{ type: "textMessage", text: "Hello! Welcome to the Canyon! It's a bit tougher out here, best be careful!", faceHero: "npcA" }],
+          },
+        ],
+      },
+      npcB: {
+        type: "Person",
+        x: utils.withGrid(12),
+        y: utils.withGrid(4),
+        src: "./images/characters/people/Froggert_Enemy_2.png",
+        talking: [
+          {
+            events: [{ type: "textMessage", text: "Hey, did you hear that some weirdo took over the old Observatory?", faceHero: "npcB" }],
+          },
+        ],
+      },
+      npcC: {
+        type: "Person",
+        x: utils.withGrid(20),
+        y: utils.withGrid(18),
+        src: "./images/characters/people/Froggert_Enemy_3.png",
+        events: [
+          {
+            type: "textMessage",
+            text: "Hey! You shouldn't be here!",
+            faceHero: "npcC",
+          },
+          { type: "battle", enemyId: "Hoppins" },
+          {
+            type: "textMessage",
+            text: "Can't believe I lost.. if you're that strong, maybe you could do something about that guy up at the observatory!",
+            faceHero: "npcC",
           },
         ],
       },

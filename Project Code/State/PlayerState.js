@@ -6,10 +6,10 @@ class PlayerState {
   constructor() {
     this.evolisks = {
       e1: {
-        evoliskId: "ep003",
+        evoliskId: "ep005",
         hp: 50,
         maxHp: 50,
-        xp: 0,
+        xp: 90,
         maxXp: 100,
         level: 1,
         status: null,

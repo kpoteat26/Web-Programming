@@ -131,11 +131,28 @@ class SubmissionMenu {
       instanceId,
     });
   }
-
+  
   decide() {
-    // TODO: Enemies randomly decide what to do...
-    this.menuSubmit(Actions[this.caster.actions[0]]);
+    const actionKeys = this.caster.actions || [];
+    const availableActions = actionKeys.map(key => window.Actions[key]).filter(Boolean);
+  
+    const randomAction = availableActions[Math.floor(Math.random() * availableActions.length)];
+  
+    if (!randomAction) {
+      console.error("Enemy has no valid actions.");
+      this.onComplete(null);
+      return;
+    }
+  
+    const target = randomAction.targetType === "friendly" ? this.caster : this.enemy;
+  
+    this.onComplete({
+      action: randomAction,
+      target,
+      caster: this.caster,
+    });
   }
+  
 
   showMenu(container) {
     this.keyboardMenu = new KeyboardMenu();

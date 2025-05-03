@@ -21,7 +21,7 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
       { type: "animation", animation: "voidHowl" },
-      { type: "stateChange", damage: 30 },
+      { type: "stateChange", damage: 20 },
     ],
   },
   starShatter: {
@@ -54,7 +54,7 @@ window.Actions = {
       "The user channels their mythic abilities to bite the enemy from a distance dealing large amounts of damage.",
     success: [
       { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
-      { type: "stateChange", damage: 30 },
+      { type: "stateChange", damage: 20 },
     ],
   },
   paralyzingSpit: {
@@ -91,7 +91,7 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
       { type: "animation", animation: "spin" },
-      { type: "stateChange", damage: 30 },
+      { type: "stateChange", damage: 20 },
     ],
   },
   mesmerizingGaze: {
@@ -129,7 +129,7 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
       { type: "animation", animation: "shadowVanish" },
-      { type: "stateChange", status: { type: "evade", expiresIn: 1 } },
+      { type: "stateChange", status: { type: "evade", expiresIn: 1 }, onCaster: true },
       { type: "textMessage", text: "{CASTER} is ready to dodge the next attack!" },
     ],
   },
@@ -139,7 +139,7 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
       { type: "animation", animation: "windBlast" },
-      { type: "stateChange", damage: 20 },
+      { type: "stateChange", damage: 10 },
     ],
   },
   recoverPulse: {
@@ -147,7 +147,7 @@ window.Actions = {
     description: "The user surrounds themselves in healing energy, recovering some health over time.",
     success: [
       { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
-      { type: "stateChange", status: { type: "recover", expiresIn: 3 } },
+      { type: "stateChange", status: { type: "recover", expiresIn: 2 }, onCaster: true },
       { type: "textMessage", text: "{CASTER} will recover health for a while!" },
     ],
   },
@@ -156,7 +156,7 @@ window.Actions = {
     description: "The user invokes a greater healing aura, recovering large amounts of health over time.",
     success: [
       { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
-      { type: "stateChange", status: { type: "recover", expiresIn: 5 } },
+      { type: "stateChange", status: { type: "recover", expiresIn: 3 }, onCaster: true },
       { type: "textMessage", text: "{CASTER} will recover health for a long time!" },
     ],
   },
@@ -179,7 +179,7 @@ window.Actions = {
     targetType: "friendly",
     success: [
       { type: "textMessage", text: "{CASTER} drinks some {ACTION}!" },
-      { type: "stateChange", recover: 40 },
+      { type: "stateChange", recover: 30 },
       { type: "textMessage", text: "{CASTER} recovers health!" },
     ],
   },
