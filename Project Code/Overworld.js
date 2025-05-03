@@ -92,15 +92,13 @@ class Overworld {
   }
 
   // Binds the wild encounter check
-bindWildEncounterCheck() {
-  document.addEventListener("WildEncounter", async () => {
-    if (!this.map.isCutscenePlaying) {
-      this.map.startCutscene([
-        { type: "wildBattle" }
-      ]);
-    }
-  });
-}
+  bindWildEncounterCheck() {
+    document.addEventListener("WildEncounter", async () => {
+      if (!this.map.isCutscenePlaying) {
+        this.map.startCutscene([{ type: "wildBattle" }]);
+      }
+    });
+  }
 
   // Starts the map
   startMap(mapConfig, heroInitialState = null) {
@@ -163,11 +161,16 @@ bindWildEncounterCheck() {
     // Start The Game!!
     this.startGameLoop();
 
-    // // cutscenes to play immediately
-    // this.map.startCutscene([
-    //   { type: "battle", enemyId: "beth" },
-    //   // { type: "changeMap", map: "DemoRoom" },
-    //   // { type: "textMessage", text: "This is my very first message!" },
-    // ]);
+    // cutscenes to play immediately
+    this.map.startCutscene([
+      {
+        type: "textMessage",
+        text: "Welcome to the wonderful world of Evoltama!",
+      },
+      {
+        type: "textMessage",
+        text: "Start by using the arrow keys to explore the forest.",
+      },
+    ]);
   }
 }
