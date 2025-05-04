@@ -9,7 +9,7 @@ class PlayerState {
         evoliskId: "ep007",
         hp: 50,
         maxHp: 50,
-        xp: 90,
+        xp: 0,
         maxXp: 100,
         level: 1,
         status: null,
