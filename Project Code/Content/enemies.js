@@ -3,6 +3,17 @@
 */
 
 window.Enemies = {
+  Elder_Beetle: {
+    name: "Elder Beetle",
+    src: "./images/characters/people/Elder_Beetle.png",
+    evolisks: {
+      a: {
+        evoliskId: "ee007",
+        maxHp: 50,
+        level: 1,
+      },
+    },
+  },
   Froggert: {
     name: "Froggert",
     src: "./images/characters/people/Froggert_Enemy.png",
@@ -24,14 +35,9 @@ window.Enemies = {
     src: "./images/characters/people/Squelchy_NPC_3.png",
     evolisks: {
       a: {
-        evoliskId: "ee004",
-        maxHp: 50,
-        level: 1,
-      },
-      b: {
-        evoliskId: "ee007",
-        maxHp: 50,
-        level: 1,
+        evoliskId: "ee008",
+        maxHp: 100,
+        level: 2,
       },
     },
   },

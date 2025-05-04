@@ -6,7 +6,7 @@ class PlayerState {
   constructor() {
     this.evolisks = {
       e1: {
-        evoliskId: "ep005",
+        evoliskId: "ep007",
         hp: 50,
         maxHp: 50,
         xp: 90,

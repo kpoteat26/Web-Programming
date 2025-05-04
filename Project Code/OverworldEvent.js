@@ -72,6 +72,12 @@ class OverworldEvent {
     message.init(document.querySelector(".game-container"));
   }
 
+  removeWall(resolve) {
+    const coord = utils.asGridCoord(this.event.x, this.event.y);
+    delete this.map.walls[coord];
+    resolve();
+  }
+  
   // Change the current map
   changeMap(resolve) {
     // Deactivate Old Objects
