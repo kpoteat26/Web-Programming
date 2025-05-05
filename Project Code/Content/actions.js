@@ -179,7 +179,7 @@ window.Actions = {
     targetType: "friendly",
     success: [
       { type: "textMessage", text: "{CASTER} drinks some {ACTION}!" },
-      { type: "stateChange", recover: 30 },
+      { type: "stateChange", recover: 40 },
       { type: "textMessage", text: "{CASTER} recovers health!" },
     ],
   },

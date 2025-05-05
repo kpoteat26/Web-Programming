@@ -151,7 +151,7 @@ this.hudElement.appendChild(cropDiv);
     if (this.status?.type === "recover") {
       return [
         { type: "textMessage", text: `${this.name} is recovered some health!` },
-        { type: "stateChange", recover: 10, onCaster: true },
+        { type: "stateChange", recover: 5, onCaster: true },
       ];
     }
     return [];
