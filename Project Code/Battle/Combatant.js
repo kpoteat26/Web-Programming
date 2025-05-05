@@ -7,7 +7,12 @@ class Combatant {
     Object.keys(config).forEach((key) => {
       this[key] = config[key];
     });
-    this.hp = typeof this.hp === "undefined" ? this.maxHp : this.hp;
+    this.level = config.level || 1;
+
+      // Apply scaling to maxHp before setting hp
+      const baseHp = config.maxHp || 100;
+      this.maxHp = Math.floor(baseHp + (this.level - 1) * 5);
+      this.hp = typeof config.hp === "undefined" ? this.maxHp : config.hp;
     this.battle = battle;
     this.mutatedSrc = config.mutatedSrc || null;
     this.isMutated = false;

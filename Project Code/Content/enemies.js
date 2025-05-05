@@ -21,12 +21,12 @@ window.Enemies = {
       a: {
         evoliskId: "ee001",
         maxHp: 50,
-        level: 1,
+        level: 2,
       },
       b: {
         evoliskId: "ee002",
         maxHp: 50,
-        level: 1,
+        level: 2,
       },
     },
   },
@@ -48,12 +48,12 @@ window.Enemies = {
       a: {
         evoliskId: "ee005",
         maxHp: 30,
-        level: 2,
+        level: 3,
       },
       b: {
         evoliskId: "ee003",
         maxHp: 50,
-        level: 1,
+        level: 3,
       },
     },
   },
@@ -62,12 +62,21 @@ window.Enemies = {
     src: "./images/characters/people/Kairo_Final_Boss.png",
     evolisks: {
       a: {
-        evoliskId: "ee001",
+        evoliskId: "ee008",
         maxHp: 100,
-        level: 5,
+        level: 4,
+        isMutated: true,
+        mutatedSrc: "./images/characters/evolisks/GloomareBattleEnemy.png"
       },
-      b: {
-        evoliskId: "ee002",
+      c: {
+        evoliskId: "ee004",
+        maxHp: 100,
+        level: 4,
+        isMutated: true,
+        mutatedSrc: "./images/characters/evolisks/KingStratusBattleEnemy.png"
+      },
+      c: {
+        evoliskId: "ee001",
         maxHp: 100,
         level: 5,
       },

@@ -268,7 +268,7 @@ window.OverworldMaps = {
               },
               {
                 type: "textMessage",
-                text: "Go forth and explore!",
+                text: "I've given you some capture discs and potions to help you in your journey, use them wisely!",
                 faceHero: "elder_beetle",
               },
             ],
@@ -282,27 +282,42 @@ window.OverworldMaps = {
               },
               {
                 type: "textMessage",
-                text: "I would say I am doing well, but I am not.",
+                text: "I would like to tell you that all is well, but I'm afraid something is very wrong..",
                 faceHero: "elder_beetle",
               },
               {
                 type: "textMessage",
-                text: "Someone has broken into the observatory and is threatening our world!",
+                text: "One of our townspeople has been corrupted and gone mad. He has locked himself in the old observatory.",
                 faceHero: "elder_beetle",
               },
               {
                 type: "textMessage",
-                text: "I am afraid our village and the evolisks are in danger.",
+                text: "I fear that unless someone is able to stop him, he is going to destory us and all the evolisks!",
                 faceHero: "elder_beetle",
               },
               {
                 type: "textMessage",
-                text: "You'll save us? You're a life-saver Kairo!",
+                text: "No one is left in the village to help, except you, Kairo. You must help us!",
                 faceHero: "elder_beetle",
               },
               {
                 type: "textMessage",
-                text: "There is a magical stone in my house, it'll grant you an additional evolisk to aid you on your journey.",
+                text: "But you will not be enough on your own. You're going to need a partner!",
+                faceHero: "elder_beetle",
+              },
+              {
+                type: "textMessage",
+                text: "There is a magical stone in my house to the right, I will allow you to have one of my Evolisks.",
+                faceHero: "elder_beetle",
+              },
+              {
+                type: "textMessage",
+                text: "You must train them well if you want to save us! I will help guide you.",
+                faceHero: "elder_beetle",
+              },
+              {
+                type: "textMessage",
+                text: "Once you've chosen your new partner, return here to me.",
                 faceHero: "elder_beetle",
               },
             ],
@@ -320,7 +335,7 @@ window.OverworldMaps = {
             events: [
               {
                 type: "textMessage",
-                text: "Right this way, Kairo!",
+                text: "Good luck out there, Kairo!",
                 faceHero: "beetle_guard_1",
               },
               {
@@ -424,7 +439,12 @@ window.OverworldMaps = {
             events: [
               {
                 type: "textMessage",
-                text: "You defeated Hoppins? Head to the observatory and save us!",
+                text: "You defeated Hoppins? You must be ready!",
+                faceHero: "beetle_guard_3",
+              },
+              {
+                type: "textMessage",
+                text: "Head to the observatory and save us!",
                 faceHero: "beetle_guard_3",
               },
               {
@@ -440,7 +460,7 @@ window.OverworldMaps = {
             events: [
               {
                 type: "textMessage",
-                text: "I can't let you go to the observatory, you'll get destroyed!",
+                text: "I can't let you go to the observatory yet, you'll get destroyed!",
                 faceHero: "beetle_guard_3",
               },
             ],

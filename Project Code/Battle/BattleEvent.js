@@ -45,10 +45,17 @@ class BattleEvent {
     }
   
     if (damage) {
+      let scaledDamage = damage;
+    
+      // If caster exists and has a level, scale damage based on level
+      if (caster?.level) {
+        scaledDamage = Math.floor(damage + (caster.level - 1) * 2); 
+      }
+    
       target.update({
-        hp: target.hp - damage,
+        hp: target.hp - scaledDamage,
       });
-  
+    
       target.evoliskElement.classList.add("battle-damage-blink");
     }
   
