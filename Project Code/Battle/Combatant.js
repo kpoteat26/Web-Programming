@@ -166,10 +166,13 @@ this.hudElement.appendChild(cropDiv);
   }
 
   mutate() {
-    if (this.mutatedSrc && !this.isMutated) {
-      this.spriteImg.src = this.mutatedSrc;
-      this.evoliskElement.src = this.mutatedSrc;
-      this.isMutated = true;
+    mutate() {
+      // Only mutate if not already mutated AND mutatedSrc exists
+      if (!this.isMutated && this.mutatedSrc) {
+        this.src = this.mutatedSrc;
+        this.isMutated = true;
+        this.name += " (Mutated)";
+      }
     }
   }
 
