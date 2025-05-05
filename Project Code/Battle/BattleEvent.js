@@ -142,15 +142,7 @@ class BattleEvent {
   }
 
   giveXP(resolve) {
-           // Set XP amount based on current map
-          const areaXpMap = {
-          ForestVillage: 10,
-          MushroomWild: 20,
-           CanyonWild: 30,
-          };
-
-        const mapId = this.battle.map?.id;
-        let amount = areaXpMap[mapId] !== undefined ? areaXpMap[mapId] : (this.event.xp || 10);
+    let amount = this.event.xp;
     const { combatant } = this.event;
     const step = async () => {
       if (amount > 0) {
@@ -160,7 +152,7 @@ class BattleEvent {
         // Check if we've hit level up point
         if (combatant.xp === combatant.maxXp) {
           combatant.xp = 0;
-          combatant.maxXp = 40;
+          combatant.maxXp = 50;
           combatant.level += 1;
   
           // Show level up message
@@ -172,7 +164,7 @@ class BattleEvent {
             levelUpEvent.init(res);
           });
   
-          if (!combatant.isMutated && Math.random() < .3) {
+          if (combatant.canMutate && Math.random() < 1) {
             combatant.mutate();
           
             // Persist it to playerState
@@ -181,8 +173,6 @@ class BattleEvent {
               evoliskData.isMutated = true;
               evoliskData.src = combatant.mutatedSrc;
             }
-
-            
           
             await new Promise((res) => {
               const mutationEvent = new BattleEvent(

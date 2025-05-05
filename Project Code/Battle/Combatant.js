@@ -39,6 +39,15 @@ class Combatant {
     return this.level * 20;
   }
 
+
+  get canMutate() {
+    return (
+      !this.isMutated &&
+      typeof this.mutatedSrc === "string" &&
+      this.mutatedSrc.trim().endsWith(".png")
+    );
+  }
+
   // Create the element
   createElement() {
     // Draw the hud element
@@ -60,7 +69,7 @@ class Combatant {
             </svg>
             <p class="Combatant_status"></p>
         `;
-// ✅ Create the image manually and store it
+//  Create the image manually and store it
 this.spriteImg = document.createElement("img");
 this.spriteImg.classList.add("Combatant_character");
 this.spriteImg.alt = this.name;
@@ -70,7 +79,7 @@ const cropDiv = document.createElement("div");
 cropDiv.classList.add("Combatant_character_crop");
 cropDiv.appendChild(this.spriteImg);
 
-// ✅ Append cropDiv into this.hudElement
+//  Append cropDiv into this.hudElement
 this.hudElement.appendChild(cropDiv);
 
     // Draw the evolisk element
@@ -165,18 +174,29 @@ this.hudElement.appendChild(cropDiv);
     return null;
   }
 
+
+
   mutate() {
-    // Only mutate if not already mutated AND mutatedSrc is a valid string path
-    if (
-      !this.isMutated &&
-      typeof this.mutatedSrc === "string" &&
-      this.mutatedSrc.trim() !== "" &&
-      this.mutatedSrc.endsWith(".png")
-    ) {
-      this.src = this.mutatedSrc;
-      this.isMutated = true;
-      this.name += " (Mutated)";
+    if (!this.canMutate) {
+      console.warn(`${this.name} cannot mutate.`, {
+        isMutated: this.isMutated,
+        mutatedSrc: this.mutatedSrc,
+      });
+      return;
     }
+  
+    this.src = this.mutatedSrc;
+    this.isMutated = true;
+    this.name += " (Mutated)";
+  
+    // Persist mutation to playerState if it exists
+    const evoliskData = window.playerState?.evolisks?.[this.id];
+    if (evoliskData) {
+      evoliskData.isMutated = true;
+      evoliskData.src = this.mutatedSrc;
+    }
+  
+    this.update(); // force UI refresh
   }
   
 

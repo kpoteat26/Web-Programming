@@ -110,7 +110,7 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
       { type: "animation", animation: "electricZap" },
-      { type: "stateChange", damage: 25 },
+      { type: "stateChange", damage: 20 },
     ],
   },
   naturesGrasp: {
@@ -129,7 +129,7 @@ window.Actions = {
     success: [
       { type: "textMessage", text: "{CASTER} uses {ACTION}!" },
       { type: "animation", animation: "shadowVanish" },
-      { type: "stateChange", status: { type: "evade", expiresIn: 1 }, onCaster: true },
+      { type: "stateChange", status: { type: "evade", expiresIn: 2 }, onCaster: true },
       { type: "textMessage", text: "{CASTER} is ready to dodge the next attack!" },
     ],
   },

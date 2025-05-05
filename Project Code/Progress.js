@@ -45,5 +45,7 @@ class Progress {
         playerState[key] = file.playerState[key];
       });
     }
+
+    window.playerState.isNewGame = false;
   }
 }
