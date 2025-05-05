@@ -141,48 +141,54 @@ class BattleEvent {
       if (amount > 0) {
         amount -= 1;
         combatant.xp += 1;
-
+  
         // Check if we've hit level up point
         if (combatant.xp === combatant.maxXp) {
           combatant.xp = 0;
           combatant.maxXp = 100;
           combatant.level += 1;
-          // Mutation chance (Set to 0 so that it wont interfere with code for now
-          if (!combatant.isMutated && Math.random() < 0 && combatant.mutatedSrc) {
-            combatant.isMutated = true;
-            combatant.src = combatant.mutatedSrc;
+  
+          // Show level up message
+          await new Promise((res) => {
+            const levelUpEvent = new BattleEvent(
+              { type: "textMessage", text: `${combatant.name} leveled up!` },
+              this.battle
+            );
+            levelUpEvent.init(res);
+          });
+  
+          if (!combatant.isMutated && Math.random() < 1) {
+            combatant.mutate();
           
-            // Log before updating the image
-            console.log("🧬 Mutating:", {
-              before: combatant.evoliskElement?.querySelector("img")?.src,
-              after: combatant.mutatedSrc
-            });
-            console.log("⛏ spriteImg test:", combatant.spriteImg);
-            combatant.update();
+            // Persist it to playerState
+            const evoliskData = window.playerState.evolisks[combatant.id];
+            if (evoliskData) {
+              evoliskData.isMutated = true;
+              evoliskData.src = combatant.mutatedSrc;
+            }
+
+            
           
-            await new Promise((innerResolve) => {
+            await new Promise((res) => {
               const mutationEvent = new BattleEvent(
-                {
-                  type: "textMessage",
-                  text: `${combatant.name} has mutated!`,
-                },
+                { type: "textMessage", text: `${combatant.name} has mutated!` },
                 this.battle
               );
-              mutationEvent.init(innerResolve);
+              mutationEvent.init(res);
             });
           }
-
         }
-
+  
         combatant.update();
         requestAnimationFrame(step);
         return;
       }
-
+  
       resolve();
     };
     requestAnimationFrame(step);
   }
+  
 
   animation(resolve) {
     const fn = BattleAnimations[this.event.animation];

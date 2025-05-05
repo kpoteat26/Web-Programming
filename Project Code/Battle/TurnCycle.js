@@ -98,7 +98,6 @@ class TurnCycle {
       .every((combatant) => combatant.hp <= 0);
 
       if (allFainted) {
-        console.log(" All Evolisks fainted! Teleporting to healing area...");
       
         this.map.teleportToHealingArea();
         this.onWinner("enemy");
@@ -185,7 +184,6 @@ class TurnCycle {
       }
     });
 
-    console.log("💊 All Evolisks healed!");
   }
 
   nextTurn() {

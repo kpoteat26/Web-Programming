@@ -5,39 +5,17 @@
 class PlayerState {
   constructor() {
     this.evolisks = {
-      e1: {
-        evoliskId: "ep005",
-        hp: 50,
-        maxHp: 50,
-        xp: 90,
-        maxXp: 100,
-        level: 1,
-        status: null,
-      },
-      // "e2": {
-      //   evoliskId: "ep002",
-      //   hp: 50,
-      //   maxHp: 50,
-      //   xp: 75,
-      //   maxXp: 100,
-      //   level: 1,
-      //   status: null,
-      // },
-      // "e3": {
-      //   evoliskId: "ep002",
-      //   hp: 50,
-      //   maxHp: 100,
-      //   xp: 75,
-      //   maxXp: 100,
-      //   level: 1,
-      //   status: null,
-      //}
+      
     };
-    this.lineup = ["e1"];
+    this.lineup = [];
     this.items = [
       { actionId: "item_recoverHp", instanceId: "item1" },
       { actionId: "item_recoverHp", instanceId: "item2" },
       { actionId: "catchDisc", instanceId: "item3" },
+      { actionId: "catchDisc", instanceId: "item4" },
+      { actionId: "catchDisc", instanceId: "item5" },
+      { actionId: "catchDisc", instanceId: "item6" },
+      { actionId: "catchDisc", instanceId: "item7" },
     ];
     this.storyFlags = {};
   }
@@ -59,7 +37,6 @@ class PlayerState {
     }
 
     utils.emitEvent("LineupChanged");
-    console.log(this);
   }
 
   swapLineup(oldId, incomingId) {

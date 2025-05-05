@@ -53,6 +53,10 @@ class Battle {
     if (isTrainerEvolisk) {
       return; // Skip adding trainer's Evolisk
     }
+
+    if (config.isMutated && config.mutatedSrc) {
+      config.src = config.mutatedSrc;
+    }
   
     this.combatants[id] = new Combatant(
       {
@@ -113,8 +117,7 @@ class Battle {
       if (this.isWildEncounter && combatant.team === "enemy" && combatant.isPerson) {
         return;
       }
-  
-      console.log("[Battle] Mounting:", combatant.name || combatant.id, "isPerson:", combatant.isPerson, "team:", combatant.team);
+
   
       combatant.init(this.element, {
         team: combatant.team,

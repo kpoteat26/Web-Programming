@@ -94,7 +94,7 @@ class OverworldEvent {
 
   // Puts the game into battle mode
   battle(resolve) {
-    console.log("[OverworldEvent] Current Map battleBackgroundSrc:", this.map.battleBackgroundSrc);
+   
 
     const battle = new Battle({
       enemy: Enemies[this.event.enemyId],

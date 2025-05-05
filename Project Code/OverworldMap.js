@@ -102,7 +102,7 @@ class OverworldMap {
       }
     }
 
-    console.log("Cutscene finished! Enabling movement.");
+    
     this.isCutscenePlaying = false;
 
     // Reset NPCS to do their idle behavior
@@ -172,12 +172,10 @@ class OverworldMap {
       Object.values(playerState.evolisks).forEach((evolisk) => {
         evolisk.hp = evolisk.maxHp;
       });
-      console.log(" All Evolisks healed to full HP!");
     } else if (healType === "partial") {
       Object.values(playerState.evolisks).forEach((evolisk) => {
         evolisk.hp = Math.floor(evolisk.maxHp / 2);
       });
-      console.log(" All Evolisks healed to 50% HP!");
     }
   }
 }

@@ -41,7 +41,7 @@ window.Evolisks = {
     description:
       "A moth-like creature who senses the intentions of those around it.",
     type: EvoliskTypes.shadow,
-    src: "./images/characters/evolisks/GhobunBattleTamed.png",
+    src: "./images/characters/evolisks/GhobunBattleEnemy.png",
     icon: "./images/icons/Shadow.png",
     actions: ["phantomCharge", "recoverPulse", "shroudStep"],
   },
@@ -50,7 +50,7 @@ window.Evolisks = {
     description:
       "You're not entirely sure if this is an Evolisk or a fridge. But it does seem to have sentient thoughts, somehow.",
     type: EvoliskTypes.naturalist,
-    src: "./images/characters/evolisks/JuzafrigiBattleTamed.png",
+    src: "./images/characters/evolisks/JuzafrigiBattleEnemy.png",
     icon: "./images/icons/Naturalist.png",
     actions: ["naturesGrasp", "recoverPulse", "mesmerizingGaze"],
   },
@@ -59,7 +59,7 @@ window.Evolisks = {
     description:
       "This Evolisk resembles a jellyfish, using its electric tentacles to swiftly knock out its opponents.",
     type: EvoliskTypes.mythic,
-    src: "./images/characters/evolisks/JydiStormBattleTamed.png",
+    src: "./images/characters/evolisks/JydiStormBattleEnemy.png",
     icon: "./images/icons/Mythic.png",
     actions: ["mesmerizingGaze", "paralyzingDust", "thunderJolt"],
   },
@@ -68,7 +68,7 @@ window.Evolisks = {
     description:
       "While this may just look like a pile of leaves, it's actually an Evolisk! It uses fallen leaves and sticks it finds to disguise its weak and frail body.",
     type: EvoliskTypes.naturalist,
-    src: "./images/characters/evolisks/LeaflinBattleTamed.png",
+    src: "./images/characters/evolisks/LeaflinBattleEnemy.png",
     icon: "./images/icons/Naturalist.png",
     actions: ["grandRenewal", "naturesGrasp", "galeBurst"],
   },
@@ -77,7 +77,7 @@ window.Evolisks = {
     description:
       "This angry storm cloud is not to be messed with, but it can be quite cute when tamed! It is known to shoot lightning at those it dislikes.",
     type: EvoliskTypes.mythic,
-    src: "./images/characters/evolisks/NimbzBattleTamed.png",
+    src: "./images/characters/evolisks/NimbzBattleEnemy.png",
     icon: "./images/icons/Mythic.png",
     actions: ["thunderJolt", "windCutter", "galeBurst"],
   },

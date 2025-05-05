@@ -171,6 +171,10 @@ class Overworld {
         type: "textMessage",
         text: "Start by using the arrow keys to explore the forest.",
       },
+      {
+        type: "textMessage",
+        text: "I think Elder Beetle is looking for you! He should be in the main village, to the right.",
+      },
     ]);
   }
 }

@@ -188,6 +188,8 @@ window.BattleAnimations = {
     onComplete();
   },
 
+  
+
   async throwCaptureDisc(event, onComplete) {
     const { caster } = event;
     const container = document.querySelector(".Battle");

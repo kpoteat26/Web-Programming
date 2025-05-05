@@ -24,7 +24,7 @@ class Person extends GameObject {
   mount(map) {
     this.map = map;
     super.mount(map); // <--- call the parent GameObject's mount function too
-    console.log("mounting!");
+
   }
 
   // Updates the character's state
@@ -107,7 +107,6 @@ class Person extends GameObject {
       if (this.isPlayerControlled) {
         const heroTileX = Math.floor(this.x / 16);
         const heroTileY = Math.floor(this.y / 16);
-        console.log(`📍 Hero is at tile (${heroTileX}, ${heroTileY})`);
 
         this.checkForWildEncounter();
       }
@@ -132,7 +131,6 @@ class Person extends GameObject {
     const heroTileY = Math.floor(hero.y / 16);
   
     if (!this.map.wildEncounterAreas || this.map.wildEncounterAreas.length === 0) {
-      console.log("No encounter areas defined for this map.");
       return;
     }
   
@@ -148,7 +146,6 @@ class Person extends GameObject {
     });
   
     if (isExcluded) {
-      console.log("Player is in an exclusion zone. No encounter possible.");
       return; // Exit early if excluded
     }
   
@@ -164,16 +161,13 @@ class Person extends GameObject {
     });
   
     if (isInWildEncounterArea) {
-      console.log(`📍 Player is inside a valid encounter zone at tile (${heroTileX}, ${heroTileY})`);
   
       // Set encounter chance 
       const encounterChance = 0.05; // 5% chance
       if (Math.random() < encounterChance) {
-        console.log("⚡ Wild Encounter triggered!");
         utils.emitEvent("WildEncounter");
       }
     } else {
-      console.log(`Player is not inside any encounter zone.`);
     }
   }
   
