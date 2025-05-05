@@ -36,7 +36,7 @@ window.Enemies = {
     evolisks: {
       a: {
         evoliskId: "ee008",
-        maxHp: 100,
+        maxHp: 50,
         level: 2,
       },
     },
@@ -63,21 +63,21 @@ window.Enemies = {
     evolisks: {
       a: {
         evoliskId: "ee008",
-        maxHp: 100,
+        maxHp: 60,
         level: 4,
         isMutated: true,
         mutatedSrc: "./images/characters/evolisks/GloomareBattleEnemy.png"
       },
       c: {
         evoliskId: "ee004",
-        maxHp: 100,
+        maxHp: 60,
         level: 4,
         isMutated: true,
         mutatedSrc: "./images/characters/evolisks/KingStratusBattleEnemy.png"
       },
       c: {
         evoliskId: "ee001",
-        maxHp: 100,
+        maxHp: 60,
         level: 5,
       },
     },
