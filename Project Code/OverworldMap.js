@@ -2400,6 +2400,13 @@ window.OverworldMaps = {
       // Full Encounter Zone (whole map)
       { xMin: 1, xMax: 24, yMin: 1, yMax: 22 },
     ],
+
+    healingSpot: {
+      x: 3, // Healing area X-coordinate
+      y: 9, // Healing area Y-coordinate
+      message: "You've feel the need to try again for the sake of the world!",
+      heal: "full", // Healing type ("full" or "partial")
+    },
   },
 
   ObservatoryExterior: {
