@@ -61,7 +61,7 @@ window.Evolisks = {
     description:
       "This Evolisk resembles a jellyfish, using its electric tentacles to swiftly knock out its opponents.",
     type: EvoliskTypes.mythic,
-    src: "./images/characters/evolisks/JydiStormBattleEnemy.png",
+    src: "./images/characters/evolisks/JydistormBattleEnemy.png",
     icon: "./images/icons/Mythic.png",
     actions: ["mesmerizingGaze", "paralyzingDust", "thunderJolt"],
   },
@@ -137,7 +137,7 @@ window.Evolisks = {
     description:
       "This Evolisk resembles a jellyfish, using its electric tentacles to swiftly knock out its opponents.",
     type: EvoliskTypes.mythic,
-    src: "./images/characters/evolisks/JydiStormBattleTamed.png",
+    src: "./images/characters/evolisks/JydistormBattleTamed.png",
     icon: "./images/icons/Mythic.png",
     actions: ["mesmerizingGaze", "paralyzingDust", "thunderJolt"],
   },
