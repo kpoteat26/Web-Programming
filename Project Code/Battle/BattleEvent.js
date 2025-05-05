@@ -164,7 +164,7 @@ class BattleEvent {
             levelUpEvent.init(res);
           });
   
-          if (!combatant.isMutated && Math.random() < 1) {
+          if (!combatant.isMutated && Math.random() < .3) {
             combatant.mutate();
           
             // Persist it to playerState
