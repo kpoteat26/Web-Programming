@@ -166,15 +166,19 @@ this.hudElement.appendChild(cropDiv);
   }
 
   mutate() {
-    mutate() {
-      // Only mutate if not already mutated AND mutatedSrc exists
-      if (!this.isMutated && this.mutatedSrc) {
-        this.src = this.mutatedSrc;
-        this.isMutated = true;
-        this.name += " (Mutated)";
-      }
+    // Only mutate if not already mutated AND mutatedSrc is a valid string path
+    if (
+      !this.isMutated &&
+      typeof this.mutatedSrc === "string" &&
+      this.mutatedSrc.trim() !== "" &&
+      this.mutatedSrc.endsWith(".png")
+    ) {
+      this.src = this.mutatedSrc;
+      this.isMutated = true;
+      this.name += " (Mutated)";
     }
   }
+  
 
   // Calls class functions
   init(container) {

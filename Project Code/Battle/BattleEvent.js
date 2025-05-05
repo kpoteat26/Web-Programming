@@ -149,8 +149,8 @@ class BattleEvent {
            CanyonWild: 30,
           };
 
-const mapId = this.battle.map?.id;
-let amount = areaXpMap[mapId] !== undefined ? areaXpMap[mapId] : (this.event.xp || 10);
+        const mapId = this.battle.map?.id;
+        let amount = areaXpMap[mapId] !== undefined ? areaXpMap[mapId] : (this.event.xp || 10);
     const { combatant } = this.event;
     const step = async () => {
       if (amount > 0) {
@@ -160,7 +160,7 @@ let amount = areaXpMap[mapId] !== undefined ? areaXpMap[mapId] : (this.event.xp 
         // Check if we've hit level up point
         if (combatant.xp === combatant.maxXp) {
           combatant.xp = 0;
-          combatant.maxXp = 10 + combatant.level * 5;
+          combatant.maxXp = 40;
           combatant.level += 1;
   
           // Show level up message
