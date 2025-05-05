@@ -69,8 +69,13 @@ class Battle {
       this
     );
   
-    // Populate first active evolisk for each team
-    this.activeCombatants[team] = this.activeCombatants[team] || id;
+    if (!this.activeCombatants[team]) {
+      const firstHealthyId = Object.keys(this.combatants)
+        .filter(cid => this.combatants[cid].team === team && this.combatants[cid].hp > 0)[0];
+      if (firstHealthyId) {
+        this.activeCombatants[team] = firstHealthyId;
+      }
+    }
   }
   
 

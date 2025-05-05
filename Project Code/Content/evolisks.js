@@ -126,7 +126,7 @@ window.Evolisks = {
     src: "./images/characters/evolisks/JuzafrigiBattleTamed.png",
     mutatedSrc: "./images/characters/evolisks/FrigestBattleTamed.png",
     icon: "./images/icons/Naturalist.png",
-    actions: ["naturesGrasp", "recoverPulse", "mesmerizingGaze"],
+    actions: ["mesmerizingGaze", "recoverPulse", "naturesGraso"],
   },
   ep006: {
     name: "Jydistorm",

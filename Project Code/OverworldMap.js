@@ -2024,7 +2024,7 @@ window.OverworldMaps = {
       x: 23, // Healing area X-coordinate
       y: 11, // Healing area Y-coordinate
       message: "You've been teleported to a healing area in the Mushroom Wild!",
-      heal: "partial", // Healing type ("full" or "partial")
+      heal: "full", // Healing type ("full" or "partial")
     },
   },
 
@@ -2936,7 +2936,7 @@ window.OverworldMaps = {
       x: 32, // Healing area X-coordinate
       y: 54, // Healing area Y-coordinate
       message: "You've feel the need to try again for the sake of the world!",
-      heal: "partial", // Healing type ("full" or "partial")
+      heal: "full", // Healing type ("full" or "partial")
     },
   },
 

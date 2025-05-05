@@ -49,7 +49,7 @@ class BattleEvent {
     
       // If caster exists and has a level, scale damage based on level
       if (caster?.level) {
-        scaledDamage = Math.floor(damage + (caster.level - 1) * 2); 
+        scaledDamage = Math.floor(damage + (caster.level - 1) * 5); 
       }
     
       target.update({
@@ -142,7 +142,15 @@ class BattleEvent {
   }
 
   giveXP(resolve) {
-    let amount = this.event.xp;
+           // Set XP amount based on current map
+          const areaXpMap = {
+          ForestVillage: 10,
+          MushroomWild: 20,
+           CanyonWild: 30,
+          };
+
+const mapId = this.battle.map?.id;
+let amount = areaXpMap[mapId] !== undefined ? areaXpMap[mapId] : (this.event.xp || 10);
     const { combatant } = this.event;
     const step = async () => {
       if (amount > 0) {
@@ -152,7 +160,7 @@ class BattleEvent {
         // Check if we've hit level up point
         if (combatant.xp === combatant.maxXp) {
           combatant.xp = 0;
-          combatant.maxXp = 100;
+          combatant.maxXp = 10 + combatant.level * 5;
           combatant.level += 1;
   
           // Show level up message
