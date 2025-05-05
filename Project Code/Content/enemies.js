@@ -62,14 +62,14 @@ window.Enemies = {
     src: "./images/characters/people/Kairo_Final_Boss.png",
     evolisks: {
       a: {
-        evoliskId: "ee008",
+        evoliskId: "ee004",
         maxHp: 60,
         level: 4,
         isMutated: true,
         mutatedSrc: "./images/characters/evolisks/GloomareBattleEnemy.png"
       },
       c: {
-        evoliskId: "ee004",
+        evoliskId: "ee008",
         maxHp: 60,
         level: 4,
         isMutated: true,
