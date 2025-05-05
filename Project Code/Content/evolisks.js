@@ -111,7 +111,7 @@ window.Evolisks = {
   ep004: {
     name: "Ghobun",
     description:
-      "A moth-like creature who senses the intentions of those around it.",
+      "A friendly spirit from the shadow realm.",
     type: EvoliskTypes.shadow,
     src: "./images/characters/evolisks/GhobunBattleTamed.png",
     mutatedSrc: "./images/characters/evolisks/GloomareBattleTamed.png",

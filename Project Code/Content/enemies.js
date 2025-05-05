@@ -3,6 +3,17 @@
 */
 
 window.Enemies = {
+  Elder_Beetle: {
+    name: "Elder Beetle",
+    src: "./images/characters/people/Elder_Beetle.png",
+    evolisks: {
+      a: {
+        evoliskId: "ee007",
+        maxHp: 50,
+        level: 1,
+      },
+    },
+  },
   Froggert: {
     name: "Froggert",
     src: "./images/characters/people/Froggert_Enemy.png",
@@ -24,30 +35,41 @@ window.Enemies = {
     src: "./images/characters/people/Squelchy_NPC_3.png",
     evolisks: {
       a: {
-        evoliskId: "ee004",
-        maxHp: 50,
-        level: 1,
-      },
-      b: {
-        evoliskId: "ee007",
-        maxHp: 50,
-        level: 1,
+        evoliskId: "ee008",
+        maxHp: 100,
+        level: 2,
       },
     },
   },
   Hoppins: {
     name: "Hoppins",
-    src: "./images/characters/people/Froggert_Enemey_3.png",
+    src: "./images/characters/people/Froggert_Enemy_3.png",
     evolisks: {
       a: {
         evoliskId: "ee005",
         maxHp: 30,
-        level: 1,
+        level: 2,
       },
       b: {
         evoliskId: "ee003",
         maxHp: 50,
         level: 1,
+      },
+    },
+  },
+  Kiera: {
+    name: "Kiera",
+    src: "./images/characters/people/Kairo_Final_Boss.png",
+    evolisks: {
+      a: {
+        evoliskId: "ee001",
+        maxHp: 100,
+        level: 5,
+      },
+      b: {
+        evoliskId: "ee002",
+        maxHp: 100,
+        level: 5,
       },
     },
   },
